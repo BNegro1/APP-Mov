@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <!-- Existencia de 2 headers:
+      El primero es el principal al cargar la pagina.
+      El segundo se encuentra dekltro del contenido, estpa diseñado para contraerse.
+      --> 
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Inicio de sesión</ion-card-title>
+        <ion-card-subtitle>Bien básico jeje</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Introduzca sus datos
+      </ion-card-content>
+          <ion-list>
+            <!-- Nombre input -->
+            <ion-item>
+              <ion-input label="Nombre" labelPlacement="fixed" placeholder="Juanito Pérez"></ion-input>
+            </ion-item>
+          
+            <!-- Email input -->
+            <ion-item>
+              <ion-input label="Email" labelPlacement="fixed" placeholder="email@dominio.xx"></ion-input>
+            </ion-item>
+          
+            <!-- Contraseña input -->
+            <ion-item>
+              <ion-input label="Contraseña" labelPlacement="fixed"></ion-input>
+            </ion-item>
+
+          </ion-list>
+    
+      <ion-button fill="clear">Iniciar</ion-button>
+
+    </ion-card>
+  
+  </div>
+</ion-content>
