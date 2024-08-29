@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Ejemplo Semana 2
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-title>
+  <ion-label><h1>Bienvenido</h1></ion-label>
+</ion-title>
+<b class="ion-text-center">
+  <h4>Información Adicional</h4>
+</b>
+<ion-item>
+  <ion-input label="Nombre" labelPlacement="floating" [(ngModel)]="data.nombre"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-input label="Apellido" labelPlacement="floating"  [(ngModel)]="data.apellido" ></ion-input>
+</ion-item>
+<ion-item>
+  <ion-select label="Nivel Educacional" label-placement="stacked">
+    <ion-select placeholder="Seleccione nivel" [(ngModel)]="data.education">
+      <ion-select-option *ngFor="let niv of niveles" [value]="niv.id">{{niv.nivel}}</ion-select-option>
+    </ion-select>
+  </ion-select>
+</ion-item>
+<ion-item>
+  <ion-input label="Fecha de Nacimiento" labelPlacement="floating" type="date"></ion-input>
+</ion-item>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6>
+      <ion-button shape="block" (click)="limpiar()">Limpiar</ion-button>
+    </ion-col>
+    <ion-col col-6>
+      <ion-button shape="block" (click)="mostrar()">Mostrar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

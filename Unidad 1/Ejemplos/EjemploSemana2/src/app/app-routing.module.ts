@@ -4,12 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '', /* La ruta "base", donde se redireccionará si no hay nada en la URL  */
-    redirectTo: 'home', /* Cuando la ruta raíz es seleccionada (path:'') la aplicación redirige a 'home'. */
-    pathMatch: 'full' /*Modo de coincidencia para la ruta ('')*/
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
 ];
 

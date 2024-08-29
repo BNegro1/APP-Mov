@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inicio de Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <img alt="Login" src="https://www.drupal.org/files/project-images/Disable%20Login%20Page-Icon.png" />
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>      
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="login.usuario" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Password" labelPlacement="floating" type="password" [(ngModel)]="login.password" ></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="ingresar()">Iniciar Sesión</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
