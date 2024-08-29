@@ -1,19 +1,5 @@
 <ion-header [translucent]="true">
-
 </ion-header>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -24,21 +10,21 @@
     </ion-toolbar>
   </ion-header>
 
+
+  
   <div id="container">
     <ion-item>
       <ion-input label="Ingrese su email:" 
       type="email" 
-      placeholder="ju.perezl@duocuc.c"></ion-input>
+      placeholder="ju.perezl@duocuc.cl"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input label="Ingrese su contraseña" 
       type="password" 
-      value="password"></ion-input>
+      placeholder=""></ion-input>
     </ion-item>
-
     <ion-button [routerLink]="['/home']" expand="block" color="primary">Ingresar</ion-button> <!-- Botón con routerLink para la vista home (al presionar "Ingresar")-->
     <ion-button [routerLink]="['/registro']" expand="block" color="danger">Olvidé mi contraseña</ion-button>
   </div>
-  
-  
+
 </ion-content>

@@ -8,14 +8,14 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login', /** Ruta estándar al abrir la página **/
     pathMatch: 'full'
   },
-  /* Path del login (al apretar el botón) */
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
+  },   /* Aplicar uso de botón "Ingresar" (al apretar el botón) */
+
 
 ];
 
