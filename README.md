@@ -9,3 +9,6 @@ Este proyecto fue generado utilizando el framework **Angular** a través de Ioni
 - **Plantilla de inicio**: Blank (plantilla básica sin componentes adicionales)
 - **Tipo de componentes**: NgModules (estructuración tradicional de Angular)
 - **Git**: Repositorio git existente, las operaciones git están deshabilitadas.
+
+Entrega No. 1:
+- Items usados: Cards, formularios, animaciones, transferencia de datos entre pages y navegación.
