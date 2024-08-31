@@ -1,28 +1,43 @@
 
-
-.wrapper{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
+ion-content {
+  --background: #eeeeee; /* Fondo Duoc UC */
 }
 
-ion-grid {
-  --ion-grid-width: 50%;
-
-  --ion-grid-width-xs: 50%;
-  --ion-grid-width-sm: 288px;
-  --ion-grid-width-md: 384px;
-  --ion-grid-width-lg: 480px;
-  --ion-grid-width-xl: 570px;
+.login-card {
+  max-width: 400px;
+  margin: auto;
+    margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-ion-col {
-  background-color: #135d54;
-  border: solid 1px #fff;
-  color: #fff;
-  text-align: center;
+ion-img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
 }
 
+.ion-input {
+  font-family: 'Lato';
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.ion-card-title{
+  font-family: 'Lato', serif;
+  font-size: x-large;
+}
+
+.ion-button {
+  margin-top: 1rem;
+}
+
+.botonLogin {
+  --background: #FFB800;
+  --color: #1A1A1A;
+}
+
+.botonOlvidar {
+  --background: #D50032;
+  --color: #FFFFFF;
+}
