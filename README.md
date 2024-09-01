@@ -12,6 +12,9 @@ Este proyecto fue generado utilizando el framework **Angular** a través de Ioni
 
 Entrega No. 1:
 - Items usados: Cards, formularios, animaciones, transferencia de datos entre pages y navegación.
+# Importante
+
+- ionic serve
 
 
 La lógica de la solución sería la siguiente:
@@ -23,3 +26,7 @@ un código QR.
 5. Se despliega la cámara del dispositivo móvil.
 6. El código es leído y a su vez, registrado.
 7. La asistencia queda registrada con su día y hora correctamente.
+
+## Documentación de colores Duoc:
+
+https://www.duoc.cl/wp-content/uploads/2021/06/MANUAL-IMAGEN-CORPORATIVA-DUOCUC.pdf
