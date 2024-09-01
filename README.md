@@ -12,7 +12,10 @@ Este proyecto fue generado utilizando el framework **Angular** a través de Ioni
 
 Entrega No. 1:
 - Items usados: Cards, formularios, animaciones, transferencia de datos entre pages y navegación.
-
+# Importante
+- ng add @angular/material
+- ionic serve
+  
 
 La lógica de la solución sería la siguiente:
 1. Docente ingresa a sistema web con sus credenciales de acceso.
