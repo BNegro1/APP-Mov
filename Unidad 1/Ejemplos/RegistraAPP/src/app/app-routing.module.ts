@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },   /* Aplicar uso de botón "Ingresar" (al apretar el botón) */
+  },   {
+    path: 'reset-password',
+    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  /* Aplicar uso de botón "Ingresar" (al apretar el botón) */
 
 
 ];

@@ -1,59 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Inicio card -->
-  <ion-card class="login-card">
     <ion-card-header>
-      <ion-card-title class="ion-text-center">Bienvenido/a a RegistrAPP</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-grid class="wrapper">
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-img
-              src="../../assets/logo.jpg"
-              alt="Logo"
-            ></ion-img>
+      <ion-grid class="wrapper" style="max-width: 400px; margin: auto;">
+        <!-- Logo Duoc -->
+        <ion-row style="flex-wrap: nowrap;">
+          <ion-col style="text-align: center;">
+            <ion-img src="../../assets/logo-duoc.svg" alt="Logo" style="width: 300px; height: 300px;"></ion-img> 
           </ion-col>
         </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-input label="Ingrese su email:" 
-              type="email" 
-              placeholder="ju.perezl@duocuc.cl"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input label="Ingrese su contraseña" 
-              type="password" 
-              placeholder=""></ion-input>
-            </ion-item>   
+        <!-- Fin Logo Duoc -->
+         
+        <!-- Inputs -->
+        <ion-row style="flex-wrap: nowrap;">
+          <ion-col style="width: 100%;">
+              <!-- Aquí se usa animación de "outline" para el input del correo.-->
+              <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Enter text" type="email"></ion-input>
+            <br >
+              <!-- Aquí se usa animación de "outline" para el input de password.-->
+              <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Enter text" type="password"></ion-input>
           </ion-col>
         </ion-row>
+        <!-- FinInputs -->
 
-        <ion-row>
-          <ion-col>
-            <ion-button [routerLink]="['/home']" class="botonLogin" expand="block" (click)="showToast()">Ingresar</ion-button>
-            <ion-button [routerLink]="['/registro']" class="botonOlvidar" expand="block">Olvidé mi contraseña</ion-button>
-          </ion-col>
+        <!-- Inicio de botónes -->
+        <ion-row style="flex-wrap: nowrap;">
+          <ion-col style="width: 100%;">
+            <ion-button [routerLink]="['/home']" class="botonLogin" expand="block" style="width: 100%;" (click)="showToast()">Ingresar</ion-button>
+            <ion-button [routerLink]="['/registro']" class="botonOlvidar" expand="block" style="width: 100%;">Olvidé mi contraseña</ion-button>
+          </ion-col>        
         </ion-row>
+        <!-- Fin botónes -->
 
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-button color="FFFFFF" fill="clear" [routerLink]="['/ayuda']">
-              ¿Necesitas ayuda?
-            </ion-button>
+        <ion-row style="flex-wrap: nowrap;">
+          <ion-col style="text-align: center;"> 
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
-  </ion-card>
 </ion-content>
-
-
