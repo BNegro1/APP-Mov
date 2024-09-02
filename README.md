@@ -1,4 +1,4 @@
-# Proyecto: **RetgistrAPP**
+# Proyecto: **RegistrAPP**
 
 ## Descripción
 Este proyecto fue generado utilizando el framework **Angular** a través de Ionic. A continuación, se detallan las opciones seleccionadas durante su creación.
