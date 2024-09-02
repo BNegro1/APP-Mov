@@ -5,6 +5,9 @@
   ],
   "files.exclude": {
     "**/typings": true,
-    "**/typings.*": true
+    "**/typings.*": true,
+    ".angular\\cache\\18.2.1": true,
+    ".angular": true,
+    ".vscode": true
   }
 }

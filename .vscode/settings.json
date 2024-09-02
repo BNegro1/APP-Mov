@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "RegistraAPP\\.angular": true,
+    ".vscode": true,
+    "RegistraAPP\\.vscode": true,
+    "RegistraAPP\\node_modules": true,
+    ".gitattributes": true,
+    "README.md": true
+  }
+}

@@ -1,4 +1,9 @@
-<ion-header [translucent]="true"></ion-header>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inicio de Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Inicio card -->
@@ -19,22 +24,22 @@
         <ion-row style="flex-wrap: nowrap;">
           <ion-col style="width: 100%;">
               <!-- Aquí se usa animación de "outline" para el input del correo.-->
-              <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Enter text" type="email"></ion-input>
+              <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Enter text" type="email" [(ngModel)]="login.email"></ion-input>
             <br >
               <!-- Aquí se usa animación de "outline" para el input de password.-->
-              <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Enter text" type="password"></ion-input>
+              <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Enter text" type="password" [(ngModel)]="login.password" ></ion-input>
           </ion-col>
         </ion-row>
         <!-- FinInputs -->
 
-        <!-- Inicio de botónes -->
+        <!-- Inicio de botones (El [routerLink] se eliminó, ya que dentro de login.page.ts está definido mediante el método "ingresar()")-->
         <ion-row style="flex-wrap: nowrap;">
           <ion-col style="width: 100%;">
-            <ion-button [routerLink]="['/home']" class="botonLogin" expand="block" style="width: 100%;" (click)="showToast()">Ingresar</ion-button>
+            <ion-button class="botonLogin" expand="block" style="width: 100%;" (click)="ingresar()">Ingresar</ion-button>
             <ion-button [routerLink]="['/registro']" class="botonOlvidar" expand="block" style="width: 100%;">Olvidé mi contraseña</ion-button>
           </ion-col>        
         </ion-row>
-        <!-- Fin botónes -->
+        <!-- Fin botones -->
 
         <ion-row style="flex-wrap: nowrap;">
           <ion-col style="text-align: center;"> 
