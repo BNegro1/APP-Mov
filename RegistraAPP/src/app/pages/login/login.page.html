@@ -4,47 +4,51 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Inicio card -->
-    <ion-card-header>
-    </ion-card-header>
+  <ion-card-header></ion-card-header>
 
-    <ion-card-content>
-      <ion-grid class="wrapper" style="max-width: 400px; margin: auto;">
-        <!-- Logo Duoc -->
-        <ion-row style="flex-wrap: nowrap;">
-          <ion-col style="text-align: center;">
-            <ion-img src="../../assets/logo-duoc.svg" alt="Logo" style="width: 300px; height: 300px;"></ion-img> 
-          </ion-col>
-        </ion-row>
-        <!-- Fin Logo Duoc -->
-         
+  <ion-card-content>
+    <ion-grid class="wrapper" style="max-width: 400px; margin: auto;">
+      <!-- Logo Duoc -->
+      <ion-row style="flex-wrap: nowrap;">
+        <ion-col style="text-align: center;">
+          <ion-img src="../../assets/logo-duoc.svg" alt="Logo" style="width: 300px; height: 300px;"></ion-img>
+        </ion-col>
+      </ion-row>
+      <!-- Fin Logo Duoc -->
+      
+      <!-- Formulario de Inicio de Sesión -->
+      <form (ngSubmit)="ingresar()">
+        <!-- 
+          ngSubmit llama a la función ingresar() cuando el formulario es enviado.
+          El [(ngModel)] enlaza cada input con los datos del modelo 'login', manteniendo sincronizados el formulario y el componente.
+        -->
         <!-- Inputs -->
         <ion-row style="flex-wrap: nowrap;">
           <ion-col style="width: 100%;">
-              <!-- Aquí se usa animación de "outline" para el input del correo.-->
-              <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Enter text" type="email" [(ngModel)]="login.email"></ion-input>
-            <br >
-              <!-- Aquí se usa animación de "outline" para el input de password.-->
-              <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Enter text" type="password" [(ngModel)]="login.password" ></ion-input>
+            <!-- Input para el correo -->
+            <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Ingresa tu correo" type="email" [(ngModel)]="login.email" name="email" required></ion-input>
+            <br>
+            <!-- Input para la contraseña -->
+            <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingresa tu contraseña" type="password" [(ngModel)]="login.contrasenna" name="contrasenna" required></ion-input>
           </ion-col>
         </ion-row>
-        <!-- FinInputs -->
+        <!-- Fin Inputs -->
 
-        <!-- Inicio de botones (El [routerLink] se eliminó, ya que dentro de login.page.ts está definido mediante el método "ingresar()")-->
+        <!-- Inicio de botones -->
         <ion-row style="flex-wrap: nowrap;">
           <ion-col style="width: 100%;">
-            <ion-button class="botonLogin" expand="block" style="width: 100%;" (click)="ingresar()">Ingresar</ion-button>
+            <ion-button type="submit" class="botonLogin" expand="block" style="width: 100%;">Ingresar</ion-button>
             <ion-button [routerLink]="['/registro']" class="botonOlvidar" expand="block" style="width: 100%;">Olvidé mi contraseña</ion-button>
-          </ion-col>        
-        </ion-row>
-        <!-- Fin botones -->
-
-        <ion-row style="flex-wrap: nowrap;">
-          <ion-col style="text-align: center;"> 
           </ion-col>
         </ion-row>
-      </ion-grid>
-    </ion-card-content>
+        <!-- Fin botones -->
+      </form>
+
+      <ion-row style="flex-wrap: nowrap;">
+        <ion-col style="text-align: center;"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
 </ion-content>

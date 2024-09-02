@@ -1,48 +1,50 @@
-<ion-header></ion-header>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro de asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content class="ion-padding">
   <ion-card class="login-card">
     <ion-card-header>
-      <ion-card-title class="ion-text-center">Bienvenido/a de nuevo</ion-card-title>
+      <ion-card-title class="ion-card-title">Bienvenido/a</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-grid>
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" size-md="6" style="text-align: center;">
-            <ion-img src="../../assets/logo-duoc.svg" alt="Logo" style="width: 300px; height: 300px;"></ion-img>
+            <ion-img src="../../assets/usuario-home.svg" alt="Foto usuario" style="width: 300px; height: 300px;"></ion-img>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
           <ion-col size="12">
             <p class="welcome-message ion-text-center">
-              Escanea el código QR para registrar tu asistencia
+              Escanea el código QR para registrar tu asistencia.
             </p>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col size="12">
-            <ion-item button class="qr-scan-button" lines="none">
-              <ion-icon name="qr-code" slot="start"></ion-icon>
-              <ion-label>Escanear QR</ion-label>
-            </ion-item>
+            <ion-button [routerLink]="['/codigo-qr']" expand="block" class="botonQr" fill="outline">Escanear QR</ion-button>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col size="12">
-            <ion-button expand="block" class="botonLogin">Iniciar Clase</ion-button>
+            <ion-button [routerLink]="['/asistencia']" expand="block" class="botonAsistencia" fill="outline">Ver asistencia</ion-button>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col size="12">
-            <ion-button expand="block" class="botonOlvidar" fill="outline">Cerrar Sesión</ion-button>
+            <ion-button [routerLink]="['/login']" expand="block" class="botonOlvidar" fill="outline">Cerrar Sesión</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
+

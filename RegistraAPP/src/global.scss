@@ -35,8 +35,64 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
-.toast-background {
-    --background: rgb(249,214,218,255)
 
+:root
 
-}
+  .toast-alerta {
+      --background: rgb(249,214,218,255)
+  }
+
+  .toast-correcto {
+      --background: rgb(213,237,219,255)
+  }
+
+  ion-content {
+      --background: #00183C; 
+    }
+    
+  
+  ion-img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+  }
+  
+  .ion-input {
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  .texto{
+    font-size: large;
+    
+  }
+  .ion-card-title{
+    font-size: x-large;
+    text-align: center;
+
+  }
+  
+  .ion-button {
+    margin-top: 1rem;
+  }
+  
+  .botonLogin {
+    --background: #FFB800;
+    --color: #1A1A1A;
+  }
+  
+  .botonQr{
+    --background: #FFB800;
+    --color: #1A1A1A;
+  }
+  
+  .botonOlvidar {
+    --background: #D50032;
+    --color: #FFFFFF;
+  }
+  
+  .botonAsistencia{
+    --background: #088454;
+    --color: #FFFFFF;
+
+  }
