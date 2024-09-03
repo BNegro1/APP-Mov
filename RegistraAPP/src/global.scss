@@ -48,8 +48,8 @@
 
   ion-content {
       --background: #00183C; 
-    }
-    
+  }
+  
   
   ion-img {
     width: 100px;
@@ -75,6 +75,10 @@
   .ion-button {
     margin-top: 1rem;
   }
+
+  .cardAsistencia {
+    --background: #FFB800;
+  }
   
   .botonLogin {
     --background: #FFB800;
@@ -95,4 +99,23 @@
     --background: #088454;
     --color: #FFFFFF;
 
+  }
+  .h1 {
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .h2 {
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .nombreDisplay{
+    color: #ffffffe8;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  ion-item{
+    --background: #fff;
+    color: #00183C;
+    
   }

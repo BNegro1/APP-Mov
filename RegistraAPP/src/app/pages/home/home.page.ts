@@ -1,36 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { add } from 'ionicons/icons'
+import { add } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-
-// Documentación de infinite scroll
-// https://ionicframework.com/docs/api/infinite-scroll
-
 export class HomePage implements OnInit {
-  items = [];
+  userEmail: string = '';
+
+  constructor( // Constructor para iniciar el pass de datos dentro de la page de login a la page home,
+               // En este caso es respecto al usuario que se ha logeado.
+    private route: ActivatedRoute, 
+    private router: Router
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.userEmail = this.router.getCurrentNavigation()?.extras.state?.['userEmail'];
+      }
+    });
+    addIcons({ add });
+  }
 
   ngOnInit() {
-    for (let i = 1; i < 51; i++) {
-    }
-  }
-}
-
-// DOCUMENTACIÓN BOTÓN ADD: https://ionicframework.com/docs/api/fab
-export class ExampleComponent {
-  constructor() {
-    /**
-     * Any icons you want to use in your application
-     * can be registered in app.component.ts and then
-     * referenced by name anywhere in your application.
-     * 
-     * DOCUMENTACIÓN : https://ionicframework.com/docs/api/fab
-     */
-    addIcons({ add });
   }
 }
