@@ -12,7 +12,6 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
-
 /.sourcemaps
 /.versions
 /coverage
@@ -52,15 +51,24 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-
-# Miscellaneous
+# Angular related
 /.angular
 /.angular/cache
+/.angular/cli
+/.angular/material
+/ncc_build
+.cache/
+
+# Capacitor specific
+/.capacitor
+/android/
+/ios/
+
+# Miscellaneous
 .sass-cache/
 /.nx
 /.nx/cache
 /connect.lock
-/coverage
 /libpeerconnection.log
 testem.log
 /typings
@@ -68,3 +76,32 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# JetBrains
+/.idea
+/.idea_modules/
+.idea/
+/*.iml
+/out/
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Windows
+$Recycle.Bin/
+
+# Temp files
+*.bak
+*.backup
+*.tmp
+
+# npm/Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+/coverage/
