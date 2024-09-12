@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'asistencia',
     loadChildren: () => import('./pages/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+  },  {
+    path: 'resetpass',
+    loadChildren: () => import('./resetpass/resetpass.module').then( m => m.ResetpassPageModule)
   },
+
 
   /* Aplicar uso de botón "Ingresar" (al apretar el botón) */
 
