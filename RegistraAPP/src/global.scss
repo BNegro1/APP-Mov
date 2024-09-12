@@ -52,28 +52,30 @@
   
   
   ion-img {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1rem;
+    width:fit-content;
+    height:fit-content;
+    margin: 0 auto 1%;
   }
   
-  .ion-input {
+  ion-input {
     font-weight: 400;
     font-size: 1rem;
     margin-top: 5px;
   }
+
   .texto{
     font-size: large;
     
   }
-  .ion-card-title{
+  
+  ion-card-title{
     font-size: x-large;
     text-align: center;
 
   }
   
-  .ion-button {
-    margin-top: 1rem;
+  ion-button {
+    margin-top: 1%;
   }
 
   .cardAsistencia {
@@ -100,14 +102,17 @@
     --color: #FFFFFF;
 
   }
-  .h1 {
-    color: #FFFFFF;
+  
+  h1 {
+    color: #ffffff;
     text-align: center;
   }
-  .h2 {
-    color: #FFFFFF;
+  
+  h2 {
+    color: #ffffff;
     text-align: center;
   }
+
   .nombreDisplay{
     color: #ffffffe8;
     text-align: center;
