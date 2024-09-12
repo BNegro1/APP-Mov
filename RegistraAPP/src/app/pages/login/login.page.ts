@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
     if (this.validarDatos(this.login)) {
       // Creación de parámetros, misma forma: "{ state: {login: this.login} };"
       let navigationExtras: NavigationExtras = { state: { userEmail: this.login.email }  }; // Rescatamos el email para guardarlo y mostrarlo en page home.
-      this.router.navigate(['/home'], navigationExtras);
+      this.router.navigate(['/reestablecido'], navigationExtras);
 
       // Mostrar el toast correcto al loguearse (Creado en global.scss)
       this.mostrarToast("middle", "Bienvenido", 5000, 'toast-correcto');
@@ -41,6 +41,9 @@ export class LoginPage implements OnInit {
     }
   }
   
+  reestablecer(){
+    this.router.navigate(['/reestablecido'])
+  }
 
   /**
    * validarDatos para validar el ingreso de algo en los

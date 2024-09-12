@@ -18,10 +18,15 @@ const routes: Routes = [
   {
     path: 'asistencia',
     loadChildren: () => import('./pages/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
-  },  {
-    path: 'resetpass',
-    loadChildren: () => import('./resetpass/resetpass.module').then( m => m.ResetpassPageModule)
   },
+  {
+    path: 'resetpass',
+    loadChildren: () => import('./pages/resetpass/resetpass.module').then( m => m.ResetpassPageModule)
+  },  {
+    path: 'reestablecido',
+    loadChildren: () => import('./pages/reestablecido/reestablecido.module').then( m => m.ReestablecidoPageModule)
+  },
+
 
 
   /* Aplicar uso de botón "Ingresar" (al apretar el botón) */

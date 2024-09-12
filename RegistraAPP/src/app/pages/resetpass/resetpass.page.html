@@ -5,9 +5,49 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">resetpass</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-card-content>
+  <ion-grid class="wrapper" style="max-width: 400px; margin: auto;">
+    <!-- Logo Duoc -->
+    <ion-row style="flex-wrap: nowrap;">
+      <ion-col style="text-align: center;">
+        <ion-img src="../../assets/logo-duoc.svg" alt="Logo" style="width: 300px; height: 300px;"></ion-img>
+      </ion-col>
+    </ion-row>
+    <!-- Fin Logo Duoc -->
+    <!-- Texto Inicio Sesiòn-->
+    <ion-row>
+      <h1 style="text-align: center; flex-wrap: nowrap;">
+        Reestablece tu contraseña
+      </h1>
+    </ion-row>
+    <!-- Fin Texto Inicio sesión-->
+    <!-- Formulario de Inicio de Sesión -->
+    <form (ngSubmit)="ingresar()">
+      <!-- 
+        ngSubmit llama a la función ingresar() cuando el formulario es enviado.
+        El [(ngModel)] enlaza cada input con los datos del modelo 'login', manteniendo sincronizados el formulario y el componente.
+      -->
+      <!-- Inputs -->
+      <ion-row style="flex-wrap: nowrap;">
+        <ion-col style="width: 100%;">
+          <!-- Input para el correo -->
+          <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Ingresa tu correo" type="email" [(ngModel)]="login.email" name="email" required></ion-input>
+        </ion-col>
+      </ion-row>
+      <!-- Fin Inputs -->
+
+      <!-- Inicio de botones -->
+      <ion-row style="flex-wrap: nowrap;">
+        <ion-col style="width: 100%;">
+          <ion-button type="submit" class="botonLogin" expand="block" style="width: 100%;">Ingresar</ion-button>
+        </ion-col>
+      </ion-row>
+      <!-- Fin botones -->
+    </form>
+
+    <ion-row style="flex-wrap: nowrap;">
+      <ion-col style="text-align: center;"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card-content>
 </ion-content>
