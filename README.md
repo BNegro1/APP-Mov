@@ -1,41 +1,60 @@
 # Proyecto: **RegistrAPP**
 
-## Descripción
-Este proyecto fue generado utilizando el framework **Angular** a través de Ionic. A continuación, se detallan las opciones seleccionadas durante su creación.
+## 📋 Descripción
 
-Instalar Angular CLI:
-npm install -g @angular/cli
+Este proyecto fue creado utilizando el framework **Angular** a través de **Ionic**. A continuación, se detallan las opciones seleccionadas durante su creación.
 
-Version:
-ng version
+### 🚀 Instalación y Versiones
 
-Instalar Angular Materiasl
-ng add @angular/material
+- **Instalar Angular CLI:**
+    ```bash
+    npm install -g @angular/cli
+    ```
 
-## Configuración inicial
+- **Verificar versión de Angular:**
+    ```bash
+    ng version
+    ```
+
+- **Instalar Angular Material:**
+    ```bash
+    ng add @angular/material
+    ```
+
+## ⚙️ Configuración Inicial
 
 - **Framework**: Angular
 - **Plantilla de inicio**: Blank (plantilla básica sin componentes adicionales)
 - **Tipo de componentes**: NgModules (estructuración tradicional de Angular)
 - **Git**: Repositorio git existente, las operaciones git están deshabilitadas.
 
-Entrega No. 1:
-- Items usados: Cards, formularios, animaciones, transferencia de datos entre pages y navegación.
-# Importante
+## 📦 Entrega No. 1
 
-- ionic serve
+- **Items usados**: 
+    - Cards
+    - Formularios
+    - Animaciones
+    - Transferencia de datos entre pages
+    - Navegación
 
+## 🔑 Importante
 
-La lógica de la solución sería la siguiente:
-1. Docente ingresa a sistema web con sus credenciales de acceso.
-2. Docente comienza proceso de Asistencia en Línea, haciendo clic en un botón que genere
-un código QR.
-3. Este código QR se despliega en el proyector de cada aula.
-4. Los alumnos ingresan a la App ingresando sus credenciales de acceso.
-5. Se despliega la cámara del dispositivo móvil.
-6. El código es leído y a su vez, registrado.
-7. La asistencia queda registrada con su día y hora correctamente.
+Para iniciar el servidor de desarrollo:
+```bash
+ionic serve
+```
 
-## Documentación de colores Duoc:
+## 🧩 Lógica de la Solución
 
-https://www.duoc.cl/wp-content/uploads/2021/06/MANUAL-IMAGEN-CORPORATIVA-DUOCUC.pdf
+1. 👨‍🏫 Docente ingresa al sistema web con sus credenciales de acceso.
+2. 🖱️ Docente comienza el proceso de Asistencia en Línea, haciendo clic en un botón que genera un código QR.
+3. 📽️ Este código QR se despliega en el proyector de cada aula.
+4. 📱 Los alumnos ingresan a la App con sus credenciales de acceso.
+5. 📸 Se despliega la cámara del dispositivo móvil.
+6. 📷 El código es leído y registrado.
+7. 🕒 La asistencia queda registrada con su día y hora correctamente.
+
+## 🎨 Documentación de Colores Duoc
+
+[Manual de Imagen Corporativa DuocUC](https://www.duoc.cl/wp-content/uploads/2021/06/MANUAL-IMAGEN-CORPORATIVA-DUOCUC.pdf)
+
