@@ -3,6 +3,15 @@
 ## Descripción
 Este proyecto fue generado utilizando el framework **Angular** a través de Ionic. A continuación, se detallan las opciones seleccionadas durante su creación.
 
+Instalar Angular CLI:
+npm install -g @angular/cli
+
+Version:
+ng version
+
+Instalar Angular Materiasl
+ng add @angular/material
+
 ## Configuración inicial
 
 - **Framework**: Angular
