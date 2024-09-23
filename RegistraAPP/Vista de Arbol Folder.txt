@@ -73,3 +73,35 @@
   │  └─ tsconfig.spec.json
   ├─ .gitattributes
   └─ README.md
+
+
+
+Requisitos en texto:
+
+
+
+
+Desarrollar los siguientes aspectos:
+
+Codificar las páginas de:
+• Ingreso de usuario
+• Componentes necesarios para el nombre de usuario
+• Componentes necesarios para la contraseña del usuario
+• Componentes necesarios para enviar el formulario
+• Componentes necesarios para restablecer la contraseña
+
+• Restablecer contraseña
+• Componentes necesarios para el nombre de usuario
+• Componentes necesarios para enviar el formulario
+
+• Página de Inicio
+• Componentes necesarios para dar la bienvenida al usuario
+• Componentes a elección en relación con el caso
+
+a) Es importante mencionar, que los direccionamientos de una página a otra NO deben ser validados a través de Base de Datos. Esto será considerado en futuras Evaluaciones
+
+b) Aplicar la sintaxis básica y componentes del framework para la creación de aplicaciones móviles híbridas.
+
+c) Manejar state y datos que cambian en el tiempo para la solución.
+
+d) Implementar animaciones en componentes para una mejor solución.[]
