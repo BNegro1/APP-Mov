@@ -7,8 +7,17 @@ import {
   style,
   animate,
   transition,
-} from '@angular/animations'; // Importar animaciones
+} from '@angular/animations'; // Importar librerias de animaciones/fxs desde Angular Animations.
 
+// Casos de prueba
+// Email (string):
+//    Valido: Contener '@' y 'duocuc.cl'.
+//    Invalido: "usuarioduocuc.cl", "@duocuc.cl"
+// Contraseña (string):
+//    Valido: 'admin' o '123'
+//    Invalido: '', 'password', '12345'
+
+// Decorador de Angular
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -24,6 +33,8 @@ import {
     ]),
   ],
 })
+
+// Strings vacios para ingreso de datos (!!! Lo ideal es cambiarlo para lograr buena practica de manejo de tipo de datos !!!)
 export class LoginPage implements OnInit {
   login: any = {
     email: '',
@@ -84,6 +95,8 @@ export class LoginPage implements OnInit {
     return true;
   }
 
+  // Implementación del toast a partir de los valores de "global.scss"
+  // 
   async mostrarToast(
     position: 'top' | 'middle' | 'bottom',
     msg: string,
