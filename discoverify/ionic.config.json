@@ -1,7 +1,0 @@
-{
-  "name": "discoverify",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
