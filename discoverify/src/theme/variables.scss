@@ -1,2 +1,16 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+
+/* MODIFICAR ESTÉTICA */
+:root {
+    --ion-background-color: #ffffff;
+    --ion-text-color: #000000;
+
+    /* Estilos de la barra de navegación */
+    --ion-toolbar-background: #000000;
+    --ion-toolbar-color: #ffffff;
+
+    /* Cards */
+    --ion-card-background: #f0f0f0;
+}

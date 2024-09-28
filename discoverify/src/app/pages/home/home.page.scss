@@ -25,3 +25,16 @@
 #container a {
   text-decoration: none;
 }
+
+ion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.album-cover {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+}
