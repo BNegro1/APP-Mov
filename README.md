@@ -1,5 +1,7 @@
 # Proyecto: **RegistrAPP**
 
+## !!! Branch Dev-Discoverify actual!!!
+
 ## 📋 Descripción
 
 Este proyecto fue creado utilizando el framework **Angular** a través de **Ionic**. A continuación, se detallan las opciones seleccionadas durante su creación.
