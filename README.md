@@ -1,62 +1,47 @@
-# Proyecto: **RegistrAPP**
-
-## !!! Branch Dev-Discoverify actual!!!
+# Proyecto: **Discoverify**
 
 ## 📋 Descripción
 
-Este proyecto fue creado utilizando el framework **Angular** a través de **Ionic**. A continuación, se detallan las opciones seleccionadas durante su creación.
+**Discoverify** permite a los usuarios descubrir álbumes musicales a través de un *infinite scroll*, además de aportar, reseñar, y calificar álbumes.
 
-### 🚀 Instalación y Versiones
+---
 
-- **Instalar Angular CLI:**
-    ```bash
-    npm install -g @angular/cli
-    ```
+## 📦 Funcionalidades del Proyecto
 
-- **Verificar versión de Angular:**
-    ```bash
-    ng version
-    ```
+### 1. **Infinite Scroll de Álbumes**
+El fin es explorar álbumes que se cargan automáticamente mientras hacen *scroll* hacia abajo.Cada álbum se muestra en una card que incluye:
 
-- **Instalar Angular Material:**
-    ```bash
-    ng add @angular/material
-    ```
+- Portada del álbum
+- Nombre del artista y álbum
+- Fecha de lanzamiento
+- Género musical
+ 
+*Nota: Se podrías modificar y agregar algunas características a futuro.*
 
-## ⚙️ Configuración Inicial
+### 2. **Aportes de Usuarios**
+Los usuarios pueden aportar nuevos álbumes utilizando un formulario. La app les permite:
+- Ingresar el nombre del álbum, artista, fecha de lanzamiento y género.
+- Subir una imagen del álbum utilizando la cámara del dispositivo o seleccionando desde la galería.
 
-- **Framework**: Angular
-- **Plantilla de inicio**: Blank (plantilla básica sin componentes adicionales)
-- **Tipo de componentes**: NgModules (estructuración tradicional de Angular)
-- **Git**: Repositorio git existente, las operaciones git están deshabilitadas.
+---
 
-## 📦 Entrega No. 1
+## 🔧 Plugins Nativos
+Los plugins nativos estarán ajustados respecto a las necesidades del producto con el usuario:
 
-- **Items usados**: 
-    - Cards
-    - Formularios
-    - Animaciones
-    - Transferencia de datos entre pages
-    - Navegación
+1. Capacitor Storage
+Lo ideal es utilizarlo para guardar datos locales, como álbumes favoritos y reseñas sin conexión. Esto permite a los usuarios acceder a su contenido sin depender de una conexión a Internet. Sin embargo, estará en evaluación para investigar alguna otra alternativa.
 
-## 🔑 Importante
-
-Para iniciar el servidor de desarrollo:
-```bash
-ionic serve
-```
+2. Capacitor Camera
+Esto permitirá que usuario pueda tomar fotos o seleccionar imágenes desde la galería para agregar a sus aportes de álbumes, mejorando la interacción y el contenido visual en la app.
 
 ## 🧩 Lógica de la Solución
 
-1. 👨‍🏫 Docente ingresa al sistema web con sus credenciales de acceso.
-2. 🖱️ Docente comienza el proceso de Asistencia en Línea, haciendo clic en un botón que genera un código QR.
-3. 📽️ Este código QR se despliega en el proyector de cada aula.
-4. 📱 Los alumnos ingresan a la App con sus credenciales de acceso.
-5. 📸 Se despliega la cámara del dispositivo móvil.
-6. 📷 El código es leído y registrado.
-7. 🕒 La asistencia queda registrada con su día y hora correctamente.
+1. El usuario abre la aplicación y ve un *infinite scroll* de álbumes.
+2. Los álbumes se cargan a medida que el usuario navega por la página.
+3. Desde el menú, el usuario puede acceder a un formulario para subir álbumes.
+4. El usuario puede tomar una foto del álbum usando la cámara del dispositivo.
+5. Los álbumes favoritos se almacenan localmente usando **Capacitor Storage**.
+6. Los usuarios pueden compartir álbumes o reseñas en redes sociales (futuro desarrollo).
 
-## 🎨 Documentación de Colores Duoc
-
-[Manual de Imagen Corporativa DuocUC](https://www.duoc.cl/wp-content/uploads/2021/06/MANUAL-IMAGEN-CORPORATIVA-DUOCUC.pdf)
-
+---
+## ❗❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
