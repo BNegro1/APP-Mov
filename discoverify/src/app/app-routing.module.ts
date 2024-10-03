@@ -10,12 +10,17 @@ const routes: Routes = [
       import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
-    path: 'contribute', // Ruta para el módulo 'contribute'
+    path: 'contribute', // Ruta para 'contribute'
     loadChildren: () =>
       import('./pages/contribute/contribute.module').then(
         (m) => m.ContributePageModule
       ),
   },
+  {
+    path: 'errorview',
+    loadChildren: () => import('./pages/errorview/errorview.module').then( m => m.ErrorviewPageModule)
+  },
+
 ];
 
 @NgModule({
