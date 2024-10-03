@@ -1,6 +1,7 @@
 # Proyecto: **Discoverify**
 
 ## ❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
+### npm i angular-spotify -> Investigar (posible implementación??)
 
 ## 📋 Descripción
 
