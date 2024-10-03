@@ -1,6 +1,6 @@
 # Proyecto: **Discoverify**
 
-## Nota: ❗❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
+## ❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
 
 ## 📋 Descripción
 
