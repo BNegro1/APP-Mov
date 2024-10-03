@@ -1,5 +1,7 @@
 # Proyecto: **Discoverify**
 
+## Nota: ❗❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
+
 ## 📋 Descripción
 
 **Discoverify** permite a los usuarios descubrir álbumes musicales a través de un *infinite scroll*, además de aportar, reseñar, y calificar álbumes.
@@ -42,6 +44,3 @@ Esto permitirá que usuario pueda tomar fotos o seleccionar imágenes desde la g
 4. El usuario puede tomar una foto del álbum usando la cámara del dispositivo.
 5. Los álbumes favoritos se almacenan localmente usando **Capacitor Storage**.
 6. Los usuarios pueden compartir álbumes o reseñas en redes sociales (futuro desarrollo).
-
----
-## ❗❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
