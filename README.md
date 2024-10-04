@@ -1,7 +1,10 @@
 # Proyecto: **Discoverify**
 
+# Instalar dependencias dentro de: "discoverify/src"
 ## ❗❗ Utilizar branch *Dev-Discoverify* ❗❗❗
+## Ver dependencias: npm list --depth=0 
 ### npm i angular-spotify -> Investigar (posible implementación??)
+### Last.fm -> Buscar API
 
 ## 📋 Descripción
 
