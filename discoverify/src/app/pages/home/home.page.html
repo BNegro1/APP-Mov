@@ -1,34 +1,46 @@
-<ion-header>
-  <!-- Barra de herramientas del encabezado -->
-  <ion-toolbar>
-    <!-- Título centrado del encabezado -->
-  </ion-toolbar>
-</ion-header>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">Insertar botones a (para el ruteo)</ion-content>
+</ion-menu>
 
-<ion-content>
-  <!-- Lista de elementos -->
-  <ion-list>
-    <!-- Tarjeta que se repite para cada álbum en el array 'albums' -->
-    <ion-card *ngFor="let album of albums" [@fadeIn] class="ion-margin-auto ion-text-center">
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title style="justify-content: right;">Discoverify</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-      <img [src]="album.cover" class="album-cover" /> <!-- Portada del álbum -->
+  <ion-content>
+    <!-- Lista de elementos -->
+    <ion-list>
+      <!-- Tarjeta que se repite para cada álbum en el array 'albums' -->
+      <ion-card *ngFor="let album of albums" [@fadeIn] class="ion-margin-auto ion-text-center">
 
-      <ion-card-header>
+        <img [src]="album.cover" class="album-cover" /> <!-- Portada del álbum -->
 
-        <ion-card-title>{{ album.title }}</ion-card-title> <!-- Tiotulo del álbum -->
-        <ion-card-subtitle>{{ album.artist }}</ion-card-subtitle> <!-- Nombre del artista -->
-      </ion-card-header>
-      <ion-card-content>
-        <p>Género: {{ album.genre }}</p> <!-- Género del álbum -->
-        <p>Lanzamiento: {{ album.releaseDate }}</p> <!-- Fecha de lanzamiento del álbum -->
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+        <ion-card-header>
+          <ion-card-title>{{ album.title }}</ion-card-title> <!-- Título del álbum -->
+          <ion-card-subtitle>{{ album.artist }}</ion-card-subtitle> <!-- Nombre del artista -->
+        </ion-card-header>
+        <ion-card-content>
+          <p>Género: {{ album.genre }}</p> <!-- Género del álbum -->
+          <p>Lanzamiento: {{ album.releaseDate }}</p> <!-- Fecha de lanzamiento del álbum -->
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
 
-  <!-- Componente de scroll infinito para cargar más álbumes -->
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-    <!-- Contenido del scroll infinito con un spinner de carga -->
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más álbumes...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content>
+    <!-- Componente de scroll infinito para cargar más álbumes -->
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <!-- Contenido del scroll infinito con un spinner de carga -->
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más álbumes...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</div>

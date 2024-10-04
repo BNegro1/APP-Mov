@@ -35,3 +35,15 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+:root
+ {
+    ion-header {
+      ion-title {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        text-align: right;
+    
+      }
+    }
+  }
