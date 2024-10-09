@@ -7,6 +7,7 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  
   // Modelo completo para el registro: User y Password.
   register: any = {
     email: '',

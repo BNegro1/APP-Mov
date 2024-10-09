@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { } from 'ionicons/icons';
 
 interface Album {
   title: string;
@@ -34,6 +36,10 @@ export class HomePage implements OnInit {
 
   ingresar() {
     this.router.navigate(['/login']);
+  }
+
+  registrar() {
+    this.router.navigate(['/register']);
   }
 
   loadInitialAlbums() {

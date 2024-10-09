@@ -1,39 +1,76 @@
-<ion-menu contentId="main-content">
-  <ion-header>
-  </ion-header>
-  <ion-content class="ion-padding">
-      <ion-button expand="block" (click)="ingresar()">Iniciar Sesión</ion-button>
-  </ion-content>
-</ion-menu>
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <!-- Menú lateral -->
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list>
+          <ion-list-header>Discoverify</ion-list-header>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerLink="/" routerDirection="root">
+              <!-- routerDirection permite, luego de realizar la acción, volver al root-->
+              <ion-icon slot="start" name="home-outline"></ion-icon>
+              <ion-label>Inicio</ion-label>
+            </ion-item>
+            <ion-item routerLink="/contribute" routerDirection="root">
+              <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+              <ion-label>Realizar aporte</ion-label>
+            </ion-item>
+            <ion-item routerLink="/" routerDirection="root">
+              <ion-icon slot="start" name="home-outline"></ion-icon>
+              <ion-label>Iniciar sesión</ion-label>
+            </ion-item>
+            <ion-item routerLink="/" routerDirection="root">
+              <ion-icon slot="start" name="home-outline"></ion-icon>
+              <ion-label>Registrarse</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
 
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-        <ion-title style="text-align: right;">Discoverify</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Scroll de álbumes (Contenido principal) -->
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar color="dark">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Discoverify</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-  <ion-content>
-    <ion-list>
-      <ion-card *ngFor="let album of albums" [@fadeIn] class="ion-margin-auto ion-text-center">
-        <img [src]="album.cover" class="album-cover" />
-        <ion-card-header>
-          <ion-card-title>{{ album.title }}</ion-card-title>
-          <ion-card-subtitle>{{ album.artist }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <p>Género: {{ album.genre }}</p>
-          <p>Lanzamiento: {{ album.releaseDate }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-list>
+      <ion-content class="ion-padding" color="dark">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2">
+              <ion-card *ngFor="let album of albums" color="medium">
+                <img
+                  [src]="album.cover"
+                  [alt]="album.title + ' - ' + album.artist"
+                  class="album-cover"
+                />
+                <ion-card-header>
+                  <ion-card-title
+                    >{{ album.artist }} - {{ album.title }}</ion-card-title
+                  >
+                </ion-card-header>
+                <ion-card-content>
+                  <p>Fecha de lanzamiento: {{ album.releaseDate }}</p>
+                  <p>Género: {{ album.genre }}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más álbumes...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </ion-content>
-</div>
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+          <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Cargando más álbumes..."
+          >
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-content>
+    </div>
+  </ion-split-pane>
+</ion-app>
