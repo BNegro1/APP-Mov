@@ -1,13 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card-content class="card-content">
+    <ion-grid class="wrapper">
+      <ion-row>
+        <h1 class="title">
+          Regístrate
+        </h1>
+      </ion-row>
+      <form (ngSubmit)="registrar()">
+        <ion-row>
+          <ion-col>
+            <!-- Input para el correo -->
+            <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Ingresa tu correo" type="email" [(ngModel)]="register.email" name="email" required></ion-input>
+            <br>
+            <!-- Input para la contraseña -->
+            <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingresa tu contraseña" type="password" [(ngModel)]="register.contrasenna" name="contrasenna" required></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" class="botonRegistro" expand="block">Registrar</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-grid>
+  </ion-card-content>
 </ion-content>

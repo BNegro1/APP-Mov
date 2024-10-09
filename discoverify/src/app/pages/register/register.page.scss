@@ -1,0 +1,30 @@
+.card-content {
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.wrapper {
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        padding: 0 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .wrapper {
+        padding: 0 40px;
+    }
+}
