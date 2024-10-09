@@ -1,10 +1,10 @@
-# \Proyecto: Discoverify\
+# Proyecto: Discoverify
 
 ### Plataforma para descubrir, reseñar y calificar álbumes de música.
 ### *Aplicación desarrollada para asignatura Prog. App. Móviles - 2024-02*
 ---
 
-## \_Índice\_
+## Índice
 
 1. [Descripción](#descripción)
 2. [Tecnologías Utilizadas](#tecnologías-utilizadas)
@@ -17,13 +17,13 @@
 
 ---
 
-## \_Descripción\_
+## Descripción
 
 **Discoverify** es una aplicación construida con **Angular** que permite a los usuarios explorar una vasta colección de álbumes musicales a través de un *infinite scroll*. Además, los usuarios pueden contribuir subiendo nuevos álbumes, reseñar sus favoritos y calificarlos.
 
 ---
 
-## \_Tecnologías Utilizadas\_
+## Tecnologías Utilizadas
 
 - **Angular**: Framework para desarrollar aplicaciones web dinámicas.
 - **Capacitor**: Integra funcionalidades nativas para mejorar la experiencia móvil.
@@ -31,7 +31,7 @@
 
 ---
 
-## \_Instalación\_
+## Instalación
 
 Para configurar y ejecutar:
 
@@ -64,7 +64,7 @@ Para configurar y ejecutar:
 
 ---
 
-## \_Funcionalidades Principales\_
+## Funcionalidades Principales
 
 1. **Explorar Álbumes**  
    Los álbumes se cargan automáticamente con *infinite scroll*. Cada tarjeta de álbum muestra:
@@ -80,7 +80,7 @@ Para configurar y ejecutar:
 
 ---
 
-## \_Plugins Nativos Utilizados\_
+## Plugins Nativos Utilizados
 
 1. **Capacitor Storage**  
    Almacena los álbumes favoritos y reseñas localmente, permitiendo acceso sin conexión.
@@ -90,7 +90,7 @@ Para configurar y ejecutar:
 
 ---
 
-## \_Notas Adicionales\_
+## Notas Adicionales
 
 1. **Recordar siempre verificar e instalar dependencias dentro de**: `discoverify/src`
 2. **Recomendado**: Usar [Angular Snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2) de Visual Studio Code.
