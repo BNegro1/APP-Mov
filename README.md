@@ -11,9 +11,7 @@
 3. [Instalación](#instalación)
 4. [Funcionalidades Principales](#funcionalidades-principales)
 5. [Plugins Nativos Utilizados](#plugins-nativos-utilizados)
-6. [Contribuciones](#contribuciones)
-7. [Licencia](#licencia)
-8. [Notas Adicionales](#notas-adicionales)
+6. [Notas Adicionales](#notas-adicionales)
 
 ---
 
