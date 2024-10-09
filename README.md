@@ -1,4 +1,4 @@
-# \_Proyecto: Discoverify\_
+# \Proyecto: Discoverify\
 
 ### Plataforma para descubrir, reseñar y calificar álbumes de música.
 ### *Aplicación desarrollada para asignatura Prog. App. Móviles - 2024-02*
