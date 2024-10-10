@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http'; // Emplear para conexi√
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule, // Importar el m√≥dulo HttpClientModule
     BrowserAnimationsModule,
   ],
     providers: [

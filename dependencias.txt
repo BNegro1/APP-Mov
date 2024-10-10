@@ -22,6 +22,8 @@ npm i -g native-run
 -- EJECUTAR
 npx cap open android
 
+-- ACTUALIZAR APK
+ionic capacitor build android
 
 -- Links de referencia
 https://stackoverflow.com/questions/42711120/how-do-i-run-an-ionic-app-in-android-studio-emulator
