@@ -43,7 +43,11 @@ const routes: Routes = [
       import('./pages/register/register.module').then(
         (m) => m.RegisterPageModule
       ),
+  },  {
+    path: 'header',
+    loadChildren: () => import('./components/header/header.module').then( m => m.HeaderPageModule)
   },
+
 ];
 
 @NgModule({
