@@ -2,6 +2,7 @@
 
 ### Plataforma para descubrir, reseñar y calificar álbumes de música.
 ### *Aplicación desarrollada para asignatura Prog. App. Móviles - 2024-02*
+#### npx cap open android !!!
 ---
 
 ## Índice
@@ -35,7 +36,7 @@ Para configurar y ejecutar:
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone [https://github.com/BN/Discoverify.git](https://github.com/BNegro1/APP-Mov.git)
+   git clone https://github.com/BN/Discoverify.git
    ```
 
 2. **Cambiar a la rama de desarrollo**:
@@ -56,10 +57,8 @@ Para configurar y ejecutar:
 
 5. **Iniciar la aplicación en modo desarrollo**:
    ```bash
-   ng serve
+   ionic serve
    ```
-   Accede a `http://localhost:4200/` para ver la aplicación en funcionamiento.
-
 ---
 
 ## Funcionalidades Principales
@@ -91,7 +90,7 @@ Para configurar y ejecutar:
 ## Notas Adicionales
 
 1. **Recordar siempre verificar e instalar dependencias dentro de**: `discoverify/src`
-2. **Recomendado**: Usar [Angular Snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2) de Visual Studio Code.
+2. **Recomendado**: Angular Snippets (https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)
 3. **Utilizar la rama** `Dev-Discoverify` para desarrollo (_Solo para cambios masivos_).
 4. **Ver dependencias**:
    ```bash
@@ -100,3 +99,5 @@ Para configurar y ejecutar:
 5. **Explorar posibles implementaciones**:
    - Investigar `npm i angular-spotify` para integración con Spotify.
    - Buscar API de **Last.fm** para obtener información de álbumes.
+
+# Estar pendiente de "dependencias.txt"!!!
