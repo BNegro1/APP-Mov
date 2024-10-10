@@ -35,36 +35,32 @@ export class DbService {
         })
         .then((db: SQLiteObject) => {
           this.database = db;
-          this.presentToast('Base de datos creada');
           this.crearTablas();
         })
         .catch((error) =>
-          this.presentToast('Error creando la base de datos: ' + error)
+          console.error('Error creando la base de datos: ' + error)
         );
     });
   }
 
-  //  que crea la tabla de usuarios SI NO EXISTE.
+  // Crear la tabla de usuarios si no existe
   async crearTablas() {
     try {
       await this.database.executeSql(this.tblUsuarios, []);
-      this.presentToast('Tabla de usuarios creada');
       this.cargarUsuarios();
       this.isDbReady.next(true);
     } catch (error) {
-      this.presentToast('Error en Crear Tabla: ' + error);
+      console.error('Error en Crear Tabla: ' + error);
     }
   }
 
-  //  para cargar todos los usuarios de la tabla
+  // Cargar todos los usuarios de la tabla
   cargarUsuarios() {
     let usuarios: any[] = [];
     this.database
       .executeSql('SELECT * FROM usuarios', [])
       .then((res) => {
-
         if (res.rows.length > 0) {
-
           for (let i = 0; i < res.rows.length; i++) {
             usuarios.push({
               id: res.rows.item(i).id,
@@ -72,14 +68,11 @@ export class DbService {
               password: res.rows.item(i).password,
             });
           }
-
-
         }
         this.listaUsuarios.next(usuarios);
       })
-      .catch((error) => this.presentToast('Error cargando usuarios: ' + error));
+      .catch((error) => console.error('Error cargando usuarios: ' + error));
   }
-
 
   // Insertar un nuevo usuario
   async addUser(email: string, password: string) {
@@ -89,7 +82,7 @@ export class DbService {
         'INSERT INTO usuarios (email, password) VALUES (?, ?)',
         data
       );
-      this.presentToast('Usuario agregado');
+      this.presentToast(`Bienvenido, ${email}`); // Mensaje de bienvenida personalizado
       this.cargarUsuarios();
     } catch (error) {
       this.presentToast('Error insertando usuario: ' + error);
@@ -101,13 +94,20 @@ export class DbService {
     const query = `SELECT * FROM usuarios WHERE email = ? AND password = ?`;
     try {
       const result = await this.database.executeSql(query, [email, password]);
-      return result.rows.length > 0;
+      const isValidUser = result.rows.length > 0;
+
+      if (isValidUser) {
+        this.presentToast(`Bienvenido, ${email}`); // Mensaje al loguear
+      }
+
+      return isValidUser;
     } catch (error) {
       console.error('Error validando usuario: ', error);
       return false;
     }
   }
-  // dbservice.service.ts -> verificar si el correo ya existe
+
+  // Verificar si el correo ya existe
   async userExists(email: string): Promise<boolean> {
     const query = `SELECT * FROM usuarios WHERE email = ?`;
     try {
@@ -128,34 +128,28 @@ export class DbService {
         'UPDATE usuarios SET email=?, password=? WHERE id=?',
         data
       );
-      this.presentToast('Usuario actualizado');
       this.cargarUsuarios();
-    } 
-    
-    catch (error) {
-      this.presentToast('Error actualizando usuario: ' + error);
+    } catch (error) {
+      console.error('Error actualizando usuario: ' + error);
     }
   }
 
-
-  // Eliminar un usuario por !! ID !!
+  // Eliminar un usuario por ID
   async deleteUser(id: number) {
     try {
       await this.database.executeSql('DELETE FROM usuarios WHERE id=?', [id]);
-      this.presentToast('Usuario eliminado');
       this.cargarUsuarios();
     } catch (error) {
-      this.presentToast('Error eliminando usuario: ' + error);
+      console.error('Error eliminando usuario: ' + error);
     }
   }
 
-  // Observador -> aquí verificamos el estado de la BD
+  // Observador para verificar el estado de la BD
   dbState(): Observable<boolean> {
     return this.isDbReady.asObservable();
   }
 
-
-  // Mostrar mensajes mediante toast
+  // Mostrar mensajes mediante toast (solo se usa para login y registro)
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
