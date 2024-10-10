@@ -36,7 +36,7 @@ Para configurar y ejecutar:
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone [https://github.com/BN/Discoverify.git](https://github.com/BNegro1/APP-Mov.git)
+   git clone https://github.com/BN/Discoverify.git
    ```
 
 2. **Cambiar a la rama de desarrollo**:
@@ -57,10 +57,8 @@ Para configurar y ejecutar:
 
 5. **Iniciar la aplicación en modo desarrollo**:
    ```bash
-   ng serve
+   ionic serve
    ```
-   Accede a `http://localhost:4200/` para ver la aplicación en funcionamiento.
-
 ---
 
 ## Funcionalidades Principales
