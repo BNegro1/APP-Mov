@@ -21,7 +21,7 @@
               [(ngModel)]="formData.email"
               name="email"
               required
-            ></ion-input> // NOTA: Se cambia el tipo de input a email !!!!!!
+            ></ion-input> 
           </ion-item>
           <ion-text color="danger" *ngIf="campoCorreo">{{ campoCorreo }}</ion-text>
 
@@ -33,14 +33,14 @@
               [(ngModel)]="formData.password"
               name="password"
               required
-            ></ion-input> // Se agrega la directiva [type] para mostrar u ocultar la contraseña
+            ></ion-input> 
             <ion-icon
               slot="end"
               [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
               (click)="toggleShowPassword()"
-            ></ion-icon> // Se agrega un icono para mostrar u ocultar la contraseña
+            ></ion-icon>
           </ion-item> 
-          <ion-text color="danger" *ngIf="campoContrasenna">{{ campoContrasenna }}</ion-text> // Se agrega un mensaje de error si la contraseña no cumple con los requisitos
+          <ion-text color="danger" *ngIf="campoContrasenna">{{ campoContrasenna }}</ion-text> 
 
           <!-- Botón de registro -->
           <ion-button
