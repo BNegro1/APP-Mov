@@ -1,33 +1,58 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-card-content class="card-content">
-    <ion-grid class="wrapper">
-      <ion-row>
-        <h1 class="title">
-          Regístrate
-        </h1>
-      </ion-row>
-      <form (ngSubmit)="registrar()">
-        <ion-row>
-          <ion-col>
-            <!-- Input para el correo -->
-            <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Ingresa tu correo" type="email" [(ngModel)]="register.email" name="email" required></ion-input>
-            <br>
-            <!-- Input para la contraseña -->
-            <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingresa tu contraseña" type="password" [(ngModel)]="register.contrasenna" name="contrasenna" required></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button type="submit" class="botonRegistro" expand="block">Registrar</ion-button>
-          </ion-col>
-        </ion-row>
-      </form>
-    </ion-grid>
-  </ion-card-content>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <div class="form-container">
+    <ion-card class="card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Registro</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (submit)="registrar()">
+          <!-- Nombre de usuario -->
+          <ion-item>
+            <ion-label position="floating">Correo electrónico</ion-label>
+            <ion-input
+              type="email"
+              [(ngModel)]="formData.email"
+              name="email"
+              required
+            ></ion-input> // NOTA: Se cambia el tipo de input a email !!!!!!
+          </ion-item>
+          <ion-text color="danger" *ngIf="campoCorreo">{{ campoCorreo }}</ion-text>
+
+          <!-- Contraseña -->
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input
+              [type]="showPassword ? 'text' : 'password'" 
+              [(ngModel)]="formData.password"
+              name="password"
+              required
+            ></ion-input> // Se agrega la directiva [type] para mostrar u ocultar la contraseña
+            <ion-icon
+              slot="end"
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+              (click)="toggleShowPassword()"
+            ></ion-icon> // Se agrega un icono para mostrar u ocultar la contraseña
+          </ion-item> 
+          <ion-text color="danger" *ngIf="campoContrasenna">{{ campoContrasenna }}</ion-text> // Se agrega un mensaje de error si la contraseña no cumple con los requisitos
+
+          <!-- Botón de registro -->
+          <ion-button
+            expand="block"
+            type="submit"
+            class="ion-margin-top"
+            color="primary"
+          >
+            Registrarse
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -7,14 +7,14 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  
-  // Modelo completo para el registro: User y Password.
-  register: any = {
+
+  formData: any = {
     email: '',
-    contrasenna: '',
+    password: '',
   };
 
-  // Variables para ambos inputs cuando estén vacios.
+  showPassword: boolean = false; // Mostrar contraseña 
+
   campoCorreo: string = '';
   campoContrasenna: string = '';
 
@@ -22,47 +22,38 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {}
 
+
+  toggleShowPassword() { // Alternar visivbilidad de contraseña
+    this.showPassword = !this.showPassword;
+  }
+
   registrar() {
-    if (this.validarDatos(this.register)) {
-      // Creación de parámetros, misma forma: "{ state: {register: this.register} };"
+    if (this.validarDatos(this.formData)) {
       let navigationExtras: NavigationExtras = {
-        state: { userEmail: this.register.email },
-      }; // Rescatamos el email para guardarlo y mostrarlo en page home.
+        state: { userEmail: this.formData.email },
+      };
       this.router.navigate(['/home'], navigationExtras);
     }
   }
 
-  /**
-   * validarDatos para validar el ingreso de algo en los
-   * campos de mi html mediante el modelo register
-   */
   validarDatos(model: any): boolean {
-    // Validación del correo electrónico
-    const emailArroba = '@';
-    const emailDuoc = 'duocuc.cl';
-
-    if (
-      !model.email ||
-      !model.email.includes(emailArroba) ||
-      !model.email.includes(emailDuoc)
-    ) {
-      this.campoCorreo = 'email';
-      return false;
-    }
-
-    // Validación de la contrasenna (Contraseña)
-    // !!! La contraseña debe ser "admin" o "123" !!!
-    if (
-      !model.contrasenna ||
-      !(model.contrasenna === 'admin' || model.contrasenna === '123')
-    ) {
-      this.campoContrasenna = 'contrasenna';
-      return false;
-    }
-
-    // Reinicio de errores.
     this.campoCorreo = '';
     this.campoContrasenna = '';
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // !!! TENER EN CUENTA EL PATRÓN DE CARACTERES !!!
+    if (!model.email || !emailPattern.test(model.email)) {
+      this.campoCorreo = 'Por favor ingrese un correo electrónico válido.';
+      return false;
+    }
+
+    // Validación de la contraseña (mínimo 6 caracteres, al menos una letra y un número)
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // !!! TENER EN CUENTA EL PATRÓN DE CARACTERES !!!
+    if (!model.password || !passwordPattern.test(model.password)) {
+      this.campoContrasenna =
+        'Contraseña erronea: La contraseña debe tener al menos 6 caracteres, e incluir una letra y un número.';
+      return false;
+    }
+
     return true;
   }
 }
