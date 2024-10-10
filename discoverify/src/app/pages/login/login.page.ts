@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { DbService } from 'src/app/services/dbservice.service'; // Importamos el servicio de BD
 
 @Component({
   selector: 'app-login',
@@ -7,57 +8,57 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  // Modelo completo para el login: User y Password.
-  login: any = {
+  login = {
     email: '',
     contrasenna: '',
   };
 
-  // Variables para ambos inputs cuando estén vacios.
-  campoCorreo: string = '';
-  campoContrasenna: string = '';
+  campoCorreo = '';
+  campoContrasenna = '';
+  showPassword = false; // Variable para mostrar/ocultar la contraseña en el formulario
 
-  constructor(public router: Router) {}
+  constructor(private dbService: DbService, private router: Router) {}
 
   ngOnInit() {}
-  ingresar() {
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  async ingresar() {
     if (this.validarDatos(this.login)) {
-      // Creación de parámetros, misma forma: "{ state: {login: this.login} };"
-      let navigationExtras: NavigationExtras = {
-        state: { userEmail: this.login.email },
-      }; // Rescatamos el email para guardarlo y mostrarlo en page home.
-      this.router.navigate(['/home'], navigationExtras);
-     
+      const isValidUser = await this.dbService.validateUser( // validateUser para validar email y contraseña
+        this.login.email,
+        this.login.contrasenna
+      );
+
+      if (isValidUser) {
+        let navigationExtras: NavigationExtras = {
+          state: { userEmail: this.login.email },
+        };
+        this.router.navigate(['/home'], navigationExtras); // Ingreso exitoso.
+      } else {
+        this.campoCorreo = 'El correo o la contraseña son incorrectos.';
+      }
     }
   }
-  
-  /**
-   * validarDatos para validar el ingreso de algo en los
-   * campos de mi html mediante el modelo login
-   */
+
   validarDatos(model: any): boolean {
+    this.campoCorreo = '';
+    this.campoContrasenna = '';
 
     // Validación del correo electrónico
-    const emailArroba = '@';
-    const emailDuoc = 'duocuc.cl';
-
-    if (!model.email || !model.email.includes(emailArroba) || !model.email.includes(emailDuoc)) {
-      this.campoCorreo = "email";
+    if (!model.email || !model.email.includes('@')) {
+      this.campoCorreo = 'Por favor ingrese un correo electrónico válido.';
       return false;
     }
 
-    // Validación de la contrasenna (Contraseña)
-    // !!! La contraseña debe ser "admin" o "123" !!!
-    if (!model.contrasenna || !(model.contrasenna === 'admin' || model.contrasenna === '123')) {
-      this.campoContrasenna = "contrasenna";
+    // Validación de la contraseña (mínimo 6 caracteres)
+    if (!model.contrasenna || model.contrasenna.length < 6) {
+      this.campoContrasenna = 'La contraseña debe tener al menos 6 caracteres.';
       return false;
     }
 
-    // Reinicio de errores.
-    this.campoCorreo = "";
-    this.campoContrasenna = "";
     return true;
   }
-
 }
-

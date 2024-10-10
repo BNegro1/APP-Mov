@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { DbService } from 'src/app/services/dbservice.service'; // Importamos el servicio de BD
 
 @Component({
   selector: 'app-register',
@@ -7,50 +8,58 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-
-  formData: any = {
+  formData = {
     email: '',
     password: '',
   };
 
-  showPassword: boolean = false; // Mostrar contraseña 
+  campoCorreo = '';
+  campoContrasenna = '';
+  showPassword = false; // False para ocultar la contraseña en el formulario
 
-  campoCorreo: string = '';
-  campoContrasenna: string = '';
-
-  constructor(public router: Router) {}
+  constructor(private dbService: DbService, private router: Router) {}
 
   ngOnInit() {}
 
-
-  toggleShowPassword() { // Alternar visivbilidad de contraseña
+  // Alterna la visibilidad de la contraseña
+  toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
 
-  registrar() {
+  // Método de registro
+  async registrar() {
     if (this.validarDatos(this.formData)) {
-      let navigationExtras: NavigationExtras = {
-        state: { userEmail: this.formData.email },
-      };
-      this.router.navigate(['/home'], navigationExtras);
+      const userExists = await this.dbService.userExists(this.formData.email); // Verificamos si el correo ya está registrado
+      if (userExists) {
+        this.campoCorreo =
+          'Este correo ya está registrado. Por favor, use otro.';
+      } else {
+        await this.dbService.addUser(
+          this.formData.email,
+          this.formData.password
+        ); // Agregamo nuevo usuario a la base de datos
+        let navigationExtras: NavigationExtras = {
+          state: { userEmail: this.formData.email },
+        };
+        this.router.navigate(['/home'], navigationExtras); // Ir a la página de inicio tras registro realizado correctamente.
+      }
     }
   }
 
+  // Validar datos del formulario
   validarDatos(model: any): boolean {
     this.campoCorreo = '';
     this.campoContrasenna = '';
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // !!! TENER EN CUENTA EL PATRÓN DE CARACTERES !!!
-    if (!model.email || !emailPattern.test(model.email)) {
+    // Validación del correo electrónico (debe contener "@")
+    if (!model.email || !model.email.includes('@')) {
       this.campoCorreo = 'Por favor ingrese un correo electrónico válido.';
       return false;
     }
 
-    // Validación de la contraseña (mínimo 6 caracteres, al menos una letra y un número)
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // !!! TENER EN CUENTA EL PATRÓN DE CARACTERES !!!
-    if (!model.password || !passwordPattern.test(model.password)) {
-      this.campoContrasenna =
-        'Contraseña erronea: La contraseña debe tener al menos 6 caracteres, e incluir una letra y un número.';
+    // Validación de la contraseña (mínimo 3 caracteres)
+    if (!model.password || model.password.length <= 2) {
+      this.campoContrasenna = 'La contraseña debe tener más de 2 caracteres.';
       return false;
     }
 

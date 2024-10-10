@@ -1,44 +1,62 @@
 <ion-header [translucent]="true">
-
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-card-content class="card-content">
     <ion-grid class="wrapper">
-      <!-- Logo Duoc -->
-      <ion-row class="logo-row">
-          <!--
-          !!! CAMBIAR !!! 
-          <ion-col class="logo-col">
-            <ion-img src="../../assets/logo-duoc.svg" alt="Logo" class="logo-img"></ion-img>
-          </ion-col>
-          -->
-      </ion-row>
       <ion-row>
-        <h1 class="title">
-          Inicia Sesión
-        </h1>
+        <h1 class="title">Inicia Sesión</h1>
       </ion-row>
+      
       <form (ngSubmit)="ingresar()">
         <ion-row>
           <ion-col>
             <!-- Input para el correo -->
-            <ion-input label="Correo" label-placement="floating" fill="outline" placeholder="Ingresa tu correo" type="email" [(ngModel)]="login.email" name="email" required></ion-input>
-            <br>
-            <!-- Input para la contraseña -->
-            <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingresa tu contraseña" type="password" [(ngModel)]="login.contrasenna" name="contrasenna" required></ion-input>
+            <ion-item>
+              <ion-label position="floating">Correo</ion-label>
+              <ion-input
+                type="email"
+                [(ngModel)]="login.email"
+                name="email"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="campoCorreo">{{ campoCorreo }}</ion-text>
           </ion-col>
         </ion-row>
+
+        <!-- Input para la contraseña -->
         <ion-row>
           <ion-col>
-            <ion-button type="submit" class="botonLogin" expand="block">Ingresar</ion-button>
-            <ion-button [routerLink]="['/registro']" class="botonOlvidar" expand="block">Olvidé mi contraseña</ion-button>
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input
+                [type]="showPassword ? 'text' : 'password'"
+                [(ngModel)]="login.contrasenna"
+                name="contrasenna"
+                required
+              ></ion-input>
+              <ion-icon
+                slot="end"
+                [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+                (click)="toggleShowPassword()"
+              ></ion-icon>
+            </ion-item>
+            <ion-text color="danger" *ngIf="campoContrasenna">{{ campoContrasenna }}</ion-text>
+          </ion-col>
+        </ion-row>
+
+        <!-- Botones de ingreso y register (implementar 'olvide mi contraseña') -->
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" expand="block">Ingresar</ion-button> <!-- Fix!!! -->
+            <ion-button [routerLink]="['/register']" expand="block" color="light">Registrar</ion-button>
           </ion-col>
         </ion-row>
       </form>
-      <ion-row>
-        <ion-col style="text-align: center;"></ion-col>
-      </ion-row>
     </ion-grid>
   </ion-card-content>
 </ion-content>

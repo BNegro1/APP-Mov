@@ -18,6 +18,7 @@ const routes: Routes = [
       import('./pages/contribute/contribute.module').then(
         (m) => m.ContributePageModule
       ),
+      
   },
   {
     path: 'errorview',

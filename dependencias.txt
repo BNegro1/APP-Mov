@@ -1,1 +1,27 @@
 ng add @angular/common/http
+
+-- Instalar dependencias NO incluidas.
+npm install
+
+
+-- SQLIte y plugins necesario:
+
+Ruta: cd discoverify
+npm install cordova-sqlite-storage
+npm install @awesome-cordova-plugins/sqlite
+
+
+-- Toast visual
+npm install @ionic-native/toast
+npm install cordova-plugin-x-toast
+
+-- Capacitor para Android
+npm install @capacitor/android
+npm i -g native-run
+
+-- EJECUTAR
+npx cap open android
+
+
+-- Links de referencia
+https://stackoverflow.com/questions/42711120/how-do-i-run-an-ionic-app-in-android-studio-emulator
