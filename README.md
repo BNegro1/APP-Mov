@@ -2,7 +2,7 @@
 
 ### Plataforma para descubrir, reseñar y calificar álbumes de música.
 ### *Aplicación desarrollada para asignatura Prog. App. Móviles - 2024-02*
-#### npx cap open android !!!
+
 ---
 
 ## Índice
@@ -36,26 +36,21 @@ Para configurar y ejecutar:
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/BN/Discoverify.git
+   git clone https://github.com/BNegro1/Discoverify.git
    ```
 
-2. **Cambiar a la rama de desarrollo**:
-   ```bash
-   git checkout Dev-Discoverify
-   ```
-
-3. **Instalar dependencias**:
+2. **Instalar dependencias**:
    ```bash
    cd discoverify/src
    npm install
    ```
 
-4. **Verificar dependencias instaladas**:
+3. **Verificar dependencias instaladas**:
    ```bash
    npm list --depth=0
    ```
 
-5. **Iniciar la aplicación en modo desarrollo**:
+4. **Iniciar la aplicación en modo desarrollo**:
    ```bash
    ionic serve
    ```
@@ -68,12 +63,11 @@ Para configurar y ejecutar:
    - Portada
    - Título del álbum y nombre del artista
    - Fecha de lanzamiento
-   - Género musical
 
 2. **Aportes de Usuarios**  
    Los usuarios pueden subir álbumes mediante un formulario, proporcionando:
    - Nombre del álbum, artista, fecha de lanzamiento y género
-   - Subir una imagen del álbum desde la cámara o la galería del dispositivo
+   - Subir una imagen desde la galería del dispositivo
 
 ---
 
@@ -83,7 +77,7 @@ Para configurar y ejecutar:
    Almacena los álbumes favoritos y reseñas localmente, permitiendo acceso sin conexión.
 
 2. **Capacitor Camera**  
-   Permite tomar fotos o seleccionar imágenes de la galería para los aportes de álbumes.
+   Permite seleccionar imágenes de la galería para los aportes de álbumes.
 
 ---
 
@@ -96,8 +90,5 @@ Para configurar y ejecutar:
    ```bash
    npm list --depth=0
    ```
-5. **Explorar posibles implementaciones**:
-   - Investigar `npm i angular-spotify` para integración con Spotify.
-   - Buscar API de **Last.fm** para obtener información de álbumes.
 
-# Estar pendiente de "dependencias.txt"!!!
+# Estar pendiente del archivo "dependencias.txt"!!!
