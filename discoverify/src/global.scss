@@ -36,3 +36,81 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-content {
+    --background: #000000;
+    padding: 0 15px;
+}
+
+
+ion-card {
+    margin-bottom: 20px;
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    /* FOndo card  */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.03);
+    }
+}
+
+/* Portada album */
+.album-cover {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Card (album + artista) */
+ion-card-title {
+    font-size: 1.4em;
+    font-weight: normal;
+    color: #ffffff;
+    text-transform: capitalize; // Cap primera letra
+}
+
+ion-card-content p {
+    color: #b0b0b0;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+ion-card {
+    margin-bottom: 20px;
+}
+
+.album-cover {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+ion-card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+ion-card-content p {
+    color: #b0b0b0;
+    margin-bottom: 5px;
+}
+
+ion-menu {
+    --background: #1f1f1f;
+    --width: 250px;
+}
+
+ion-item {
+    --background: transparent;
+    --color: #ffffff;
+}
+
+ion-list-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px 0;
+    color: #ffffff;
+}
