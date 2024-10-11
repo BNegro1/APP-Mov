@@ -19,11 +19,17 @@ npm install cordova-plugin-x-toast
 npm install @capacitor/android
 npm i -g native-run
 
--- EJECUTAR
+-- EJECUTAR en android studio
 npx cap open android
+
+-- Agregar Android
+npx cap add android 
 
 -- ACTUALIZAR APK
 ionic capacitor build android
+
+-- Buildear:
+Ionic build
 
 -- Links de referencia
 https://stackoverflow.com/questions/42711120/how-do-i-run-an-ionic-app-in-android-studio-emulator

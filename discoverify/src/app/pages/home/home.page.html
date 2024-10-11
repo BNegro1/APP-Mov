@@ -7,7 +7,6 @@
           <ion-list-header>Discoverify</ion-list-header>
           <ion-menu-toggle auto-hide="false">
             <ion-item routerLink="/" routerDirection="root">
-              <!-- routerDirection permite, luego de realizar la acción, volver al root-->
               <ion-icon slot="start" name="home-outline"></ion-icon>
               <ion-label>Inicio</ion-label>
             </ion-item>
@@ -63,6 +62,7 @@
           </ion-row>
         </ion-grid>
 
+        <!-- Infinite scroll to load more albums -->
         <ion-infinite-scroll (ionInfinite)="loadMore($event)">
           <ion-infinite-scroll-content
             loadingSpinner="bubbles"

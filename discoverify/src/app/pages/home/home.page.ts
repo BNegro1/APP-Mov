@@ -1,72 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
-import { Router } from '@angular/router';
-import { addIcons } from 'ionicons';
-import { } from 'ionicons/icons';
-
-interface Album {
-  title: string;
-  artist: string;
-  releaseDate: string;
-  genre: string;
-  cover: string;
-}
+import { SpotifyAlbumService } from '../../services/spotify-album.service';
+import { Album } from '../../services/spotify-album.service'; // Importacion de la interface
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.5s ease-in', style({ opacity: 1 })),
-      ]),
-    ]),
-  ],
 })
-export class HomePage implements OnInit {
-  albums: Album[] = [];
 
-  constructor(private router: Router) {}
+export class HomePage implements OnInit {
+  albums: Album[] = []; // Declaramos array de albumes
+  loading = false;
+  error = '';
+  limit = 10; // Limite de requests
+  offset = 0; 
+
+  constructor(private spotifyAlbumService: SpotifyAlbumService) {}
 
   ngOnInit() {
-    this.loadInitialAlbums();
+    this.loadAlbums();
   }
 
-  ingresar() {
-    this.router.navigate(['/login']);
+  // Carga inciial de album
+  loadAlbums() {
+    this.loading = true;
+    this.spotifyAlbumService
+      .searchAlbums('radiohead', this.limit, this.offset)
+      .subscribe(
+        (albums) => {
+          this.albums = albums;
+          this.loading = false;
+        },
+        (error) => {
+          console.error('Error de fetching, error desc.:', error);
+          this.error = 'No se puede cargar albumes, zzz...';
+          this.loading = false;
+        }
+      );
   }
 
-  registrar() {
-    this.router.navigate(['/register']);
-  }
 
-  loadInitialAlbums() {
-    for (let i = 0; i < 10; i++) {
-      this.albums.push(this.generateRandomAlbum());
-    }
-  }
+  loadMore(event: any) {
+    this.offset += this.limit; // Incremento de offset mediadamente se scrollea
 
-  loadMore(event: CustomEvent) {
-    setTimeout(() => {
-      for (let i = 0; i < 10; i++) {
-        this.albums.push(this.generateRandomAlbum());
-      }
-      if (event.detail && typeof event.detail.complete === 'function') {
-        event.detail.complete(); // Finaliza la operación asíncrona
-      }
-    }, 1000);
-  }
+    this.spotifyAlbumService
+      .searchAlbums('radiohead', this.limit, this.offset)
+      .subscribe(
+        (albums) => {
+          this.albums = [...this.albums, ...albums]; // Agregar albumes al array 
+          event.target.complete(); //Notificación de carga
 
-  generateRandomAlbum(): Album {
-    const randomNumber = Math.floor(Math.random() * 1000);
-    return {
-      title: `Álbum ${randomNumber}`,
-      artist: `Artista ${randomNumber}`,
-      releaseDate: `202${randomNumber % 10}`,
-      genre: randomNumber % 2 === 0 ? 'Rock' : 'Pop',
-      cover: `https://picsum.photos/200/200?random=${randomNumber}`,
-    };
+          // En caso de no entregar mas albumes, desactivamos el scroll.
+          if (albums.length === 0) {
+            event.target.disabled = true;
+          }
+        },
+        (error) => {
+          console.error('ERROR AL FETCHING DE ALBUMES XD:', error);
+          event.target.complete(); // En caso de error, no carga la animación de carga.
+        }
+      );
   }
 }
