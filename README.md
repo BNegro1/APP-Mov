@@ -85,8 +85,7 @@ Para configurar y ejecutar:
 
 1. **Recordar siempre verificar e instalar dependencias dentro de**: `discoverify/src`
 2. **Recomendado**: Angular Snippets (https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)
-3. **Utilizar la rama** `Dev-Discoverify` para desarrollo (_Solo para cambios masivos_).
-4. **Ver dependencias**:
+3. **Ver dependencias**:
    ```bash
    npm list --depth=0
    ```
