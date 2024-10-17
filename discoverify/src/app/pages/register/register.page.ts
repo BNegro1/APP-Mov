@@ -38,6 +38,7 @@ export class RegisterPage implements OnInit {
           this.formData.email,
           this.formData.password
         ); // Agregamo nuevo usuario a la base de datos
+
         let navigationExtras: NavigationExtras = {
           state: { userEmail: this.formData.email },
         };
@@ -57,9 +58,9 @@ export class RegisterPage implements OnInit {
       return false;
     }
 
-    // Validación de la contraseña (mínimo 3 caracteres)
-    if (!model.password || model.password.length <= 2) {
-      this.campoContrasenna = 'La contraseña debe tener más de 2 caracteres.';
+    // Validación de la contraseña (Más de 4 caracteres)
+    if (!model.password || model.password.length > 4) {
+      this.campoContrasenna = 'La contraseña debe tener más de 4 caracteres.';
       return false;
     }
 
