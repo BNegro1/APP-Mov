@@ -14,12 +14,12 @@
               <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
               <ion-label>Realizar aporte</ion-label>
             </ion-item>
-            <ion-item routerLink="/login" routerDirection="root">
-              <ion-icon slot="start" name="home-outline"></ion-icon>
+            <ion-item *ngIf="!isAuthenticated" routerLink="/login" routerDirection="root">
+              <ion-icon slot="start" name="log-in-outline"></ion-icon>
               <ion-label>Iniciar sesión</ion-label>
             </ion-item>
-            <ion-item routerLink="/register" routerDirection="root">
-              <ion-icon slot="start" name="home-outline"></ion-icon>
+            <ion-item *ngIf="!isAuthenticated" routerLink="/register" routerDirection="root">
+              <ion-icon slot="start" name="person-add-outline"></ion-icon>
               <ion-label>Registrarse</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -35,6 +35,10 @@
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>Discoverify</ion-title>
+          <ion-buttons slot="end">
+            <ion-label *ngIf="isAuthenticated">{{ nombreUsuario }}</ion-label>
+            <ion-button *ngIf="isAuthenticated" (click)="logout()">Cerrar sesión</ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
 
@@ -43,15 +47,9 @@
           <ion-row>
             <ion-col size="12" size-md="8" offset-md="2">
               <ion-card *ngFor="let album of albums" color="medium">
-                <img
-                  [src]="album.cover"
-                  [alt]="album.title + ' - ' + album.artist"
-                  class="album-cover"
-                />
+                <img [src]="album.cover" [alt]="album.title + ' - ' + album.artist" class="album-cover" />
                 <ion-card-header>
-                  <ion-card-title
-                    >{{ album.artist }} - {{ album.title }}</ion-card-title
-                  >
+                  <ion-card-title>{{ album.artist }} - {{ album.title }}</ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
                   <p>Fecha de lanzamiento: {{ album.releaseDate }}</p>
@@ -64,10 +62,7 @@
 
         <!-- Infinite scroll to load more albums -->
         <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-          <ion-infinite-scroll-content
-            loadingSpinner="bubbles"
-            loadingText="Cargando más álbumes..."
-          >
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más álbumes...">
           </ion-infinite-scroll-content>
         </ion-infinite-scroll>
       </ion-content>

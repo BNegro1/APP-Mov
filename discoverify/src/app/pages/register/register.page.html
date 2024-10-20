@@ -15,13 +15,25 @@
         <form (submit)="registrar()">
           <!-- Nombre de usuario -->
           <ion-item>
+            <ion-label position="floating">Nombre de Usuario</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="formData.nombreUsuario"
+              name="nombreUsuario"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="campoNombreUsuario">{{ campoNombreUsuario }}</ion-text>
+
+          <!-- Correo electrónico -->
+          <ion-item>
             <ion-label position="floating">Correo electrónico</ion-label>
             <ion-input
               type="email"
               [(ngModel)]="formData.email"
               name="email"
               required
-            ></ion-input> 
+            ></ion-input>
           </ion-item>
           <ion-text color="danger" *ngIf="campoCorreo">{{ campoCorreo }}</ion-text>
 
@@ -29,18 +41,18 @@
           <ion-item>
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input
-              [type]="showPassword ? 'text' : 'password'" 
+              [type]="showPassword ? 'text' : 'password'"
               [(ngModel)]="formData.password"
               name="password"
               required
-            ></ion-input> 
+            ></ion-input>
             <ion-icon
               slot="end"
               [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
               (click)="toggleShowPassword()"
             ></ion-icon>
-          </ion-item> 
-          <ion-text color="danger" *ngIf="campoContrasenna">{{ campoContrasenna }}</ion-text> 
+          </ion-item>
+          <ion-text color="danger" *ngIf="campoContrasenna">{{ campoContrasenna }}</ion-text>
 
           <!-- Botón de registro -->
           <ion-button

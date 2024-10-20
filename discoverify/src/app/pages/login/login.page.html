@@ -41,7 +41,7 @@
               ></ion-input>
               <ion-icon
                 slot="end"
-                [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+                [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
                 (click)="toggleShowPassword()"
               ></ion-icon>
             </ion-item>
@@ -52,7 +52,7 @@
         <!-- Botones de ingreso y register (implementar 'olvide mi contraseña') -->
         <ion-row>
           <ion-col>
-            <ion-button type="submit" expand="block">Ingresar</ion-button> <!-- Fix!!! -->
+            <ion-button type="submit" expand="block">Ingresar</ion-button>
             <ion-button [routerLink]="['/register']" expand="block" color="light">Registrar</ion-button>
           </ion-col>
         </ion-row>

@@ -1,16 +1,27 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importar módulo de rutas. Para redirigir a otras páginas.
-import { AuthService } from './services/auth.service'; // Importar servicio de autenticación. Con el fin de cerrar sesión.
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { Platform } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-
-
-// Implementar el método de cerrar sesión.
-// Se encarga de cerrar sesión y redirigir a la página de inicio.
-
 export class AppComponent {
-  constructor() {}
+  constructor(private router: Router, private platform: Platform, private authService: AuthService) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      const isAuthenticated = this.authService.isAuthenticated();
+
+      if (isAuthenticated) {
+        this.router.navigate(['/home']); // Redirigir a la página de inicio si está autenticado
+      } else {
+        this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
+      }
+    });
+  }
 }

@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './services/auth.guard';
-import { DbService } from './services/dbservice.service';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-    path: '', // Ruta raíz. RECORDAR: Si es '**' aparece el error 404. !!!
-    redirectTo: 'home', // Redirige a home. Estandar.
-    pathMatch: 'full', // Redirige a home si la ruta es vacía.
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
   {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
-      canActivate: [authGuard] // Protege la ruta de home.
+    canActivate: [AuthGuard]
   },
   {
     path: 'contribute',
@@ -21,7 +20,7 @@ const routes: Routes = [
       import('./pages/contribute/contribute.module').then(
         (m) => m.ContributePageModule
       ),
-      canActivate: [authGuard] // Proteger ruta de contribute.
+    canActivate: [AuthGuard]
   },
   {
     path: 'errorview',
@@ -29,7 +28,7 @@ const routes: Routes = [
       import('./pages/errorview/errorview.module').then(
         (m) => m.ErrorviewPageModule
       ),
-      canActivate: [authGuard] // Proteger ruta de errorview.
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -48,8 +47,6 @@ const routes: Routes = [
         (m) => m.RegisterPageModule
       ),
   },
-
-
 ];
 
 @NgModule({
