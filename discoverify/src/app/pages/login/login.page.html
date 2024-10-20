@@ -1,4 +1,5 @@
 <ion-content [fullscreen]="true" class="ion-padding">
+
   <div class="login-container">
     <ion-card class="login-card ion-padding" [@fadeInAnimation]>
       <ion-card-header>
@@ -27,7 +28,6 @@
           <ion-text color="danger" *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
             <p [@shakeAnimation]>La contraseña es requerida.</p>
           </ion-text>
-
           <ion-button type="submit" expand="block" [disabled]="!loginForm.form.valid" class="ion-margin-top"
             [@pulseAnimation]>
             Ingresar
