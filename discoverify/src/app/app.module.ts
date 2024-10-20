@@ -7,9 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SplashScreenComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
