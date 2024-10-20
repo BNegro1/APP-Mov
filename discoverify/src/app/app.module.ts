@@ -4,24 +4,24 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-import { HttpClientModule } from '@angular/common/http'; // Emplear para conexión con API
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
-// Se agregó (según el último commit) el módulo HttpClientModule y SQLite
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SplashScreenComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule, // Importar el módulo HttpClientModule
-    BrowserAnimationsModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-    providers: [
+  providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    SQLite,
+    AuthService // Se añade el servicio AuthService a la lista de proveedores.
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

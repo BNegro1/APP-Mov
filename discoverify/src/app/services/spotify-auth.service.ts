@@ -9,6 +9,8 @@ import axios from 'axios';
 // https://developer.spotify.com/
 // Documentaicón: https://developer.spotify.com/documentation/web-api
 // Dashboard: https://developer.spotify.com/dashboard
+
+// Este servicio se encarga de obtener el token de acceso para la API de Spotify.
 export class SpotifyAuthService {
   private clientId = '3881fb07520a491f9090ad3ebc97ccb8';
   private clientSecret = '90bdd6d2ad06437185aa0eeda7bb1fc8';
