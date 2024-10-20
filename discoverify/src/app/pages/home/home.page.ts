@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
   loadAlbums() {
     this.loading = true;
     this.spotifyAlbumService
-      .searchAlbums('radiohead', this.limit, this.offset)
+      .searchAlbums('New Order, Oasis, The Cure, Bauhaus, Depeche Mode', this.limit, this.offset)
       .subscribe(
         (albums) => {
           this.albums = albums;
@@ -56,7 +56,7 @@ export class HomePage implements OnInit {
     this.offset += this.limit;
 
     this.spotifyAlbumService
-      .searchAlbums('radiohead', this.limit, this.offset)
+      .searchAlbums('Joy Division, New Order, The Police', this.limit, this.offset)
       .subscribe(
         (albums) => {
           this.albums = [...this.albums, ...albums];
