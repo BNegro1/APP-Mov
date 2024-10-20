@@ -2,6 +2,8 @@
   <ion-split-pane contentId="main-content">
     <!-- Menú lateral -->
     <ion-menu contentId="main-content" type="overlay">
+      <ion-header>
+      </ion-header>
       <ion-content>
         <ion-list>
           <ion-list-header>Discoverify</ion-list-header>
@@ -22,38 +24,41 @@
               <ion-icon slot="start" name="person-add-outline"></ion-icon>
               <ion-label>Registrarse</ion-label>
             </ion-item>
+            <ion-item *ngIf="isAuthenticated" (click)="logout()">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-label>Cerrar sesión</ion-label>
+            </ion-item>
           </ion-menu-toggle>
         </ion-list>
+        <!-- Nombre de usuario en el borde inferior del menú -->
+        <ion-item *ngIf="isAuthenticated" class="username-item" lines="none">
+          <ion-label>Cuenta: {{ nombreUsuario }}</ion-label>
+        </ion-item>
       </ion-content>
     </ion-menu>
 
-    <!-- Scroll de álbumes (Contenido principal) -->
+    <!-- Contenido principal (álbumes) -->
     <div class="ion-page" id="main-content">
       <ion-header>
-        <ion-toolbar color="dark">
+        <ion-toolbar>
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>Discoverify</ion-title>
-          <ion-buttons slot="end">
-            <ion-label *ngIf="isAuthenticated">{{ nombreUsuario }}</ion-label>
-            <ion-button *ngIf="isAuthenticated" (click)="logout()">Cerrar sesión</ion-button>
-          </ion-buttons>
         </ion-toolbar>
       </ion-header>
 
-      <ion-content class="ion-padding" color="dark">
+      <ion-content>
         <ion-grid>
           <ion-row>
-            <ion-col size="12" size-md="8" offset-md="2">
-              <ion-card *ngFor="let album of albums" color="medium">
+            <ion-col size="12" size-sm="6" size-md="3" *ngFor="let album of albums">
+              <ion-card>
                 <img [src]="album.cover" [alt]="album.title + ' - ' + album.artist" class="album-cover" />
                 <ion-card-header>
                   <ion-card-title>{{ album.artist }} - {{ album.title }}</ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
                   <p>Fecha de lanzamiento: {{ album.releaseDate }}</p>
-                  <p>Género: {{ album.genre }}</p>
                 </ion-card-content>
               </ion-card>
             </ion-col>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DbService } from 'src/app/services/dbservice.service';
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 // CASOS DE PRUEBA PARA LA FUNCIÓN "validarDatos":
 // Caso 1: Correo invalido
@@ -21,6 +21,37 @@ import { DbService } from 'src/app/services/dbservice.service';
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
+  animations: [
+    trigger('fadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+    ]),
+    trigger('slideInAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateY(50%)', opacity: 0 }),
+        animate('500ms', style({ transform: 'translateY(0)', opacity: 1 })),
+      ]),
+    ]),
+    trigger('pulseAnimation', [
+      state('in', style({ transform: 'scale(1)' })),
+      transition('void => *', [
+        style({ transform: 'scale(0.5)' }),
+        animate('300ms ease-in-out', style({ transform: 'scale(1.05)' })),
+        animate('200ms ease-in-out', style({ transform: 'scale(1)' })),
+      ]),
+    ]),
+    trigger('shakeAnimation', [
+      transition('* => *', [
+        style({ transform: 'translate3d(0, 0, 0)' }),
+        animate('300ms', style({ transform: 'translate3d(-10px, 0, 0)' })),
+        animate('100ms', style({ transform: 'translate3d(10px, 0, 0)' })),
+        animate('100ms', style({ transform: 'translate3d(-10px, 0, 0)' })),
+        animate('100ms', style({ transform: 'translate3d(0, 0, 0)' })),
+      ]),
+    ]),
+  ],
 })
 export class RegisterPage implements OnInit {
   formData = {

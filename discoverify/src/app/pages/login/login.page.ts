@@ -2,13 +2,44 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DbService } from 'src/app/services/dbservice.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  animations: [
+    trigger('fadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+    ]),
+    trigger('slideInAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateY(50%)', opacity: 0 }),
+        animate('500ms', style({ transform: 'translateY(0)', opacity: 1 })),
+      ]),
+    ]),
+    trigger('pulseAnimation', [
+      state('in', style({ transform: 'scale(1)' })),
+      transition('void => *', [
+        style({ transform: 'scale(0.5)' }),
+        animate('300ms ease-in-out', style({ transform: 'scale(1.05)' })),
+        animate('200ms ease-in-out', style({ transform: 'scale(1)' })),
+      ]),
+    ]),
+    trigger('shakeAnimation', [
+      transition('* => *', [
+        style({ transform: 'translate3d(0, 0, 0)' }),
+        animate('300ms', style({ transform: 'translate3d(-10px, 0, 0)' })),
+        animate('100ms', style({ transform: 'translate3d(10px, 0, 0)' })),
+        animate('100ms', style({ transform: 'translate3d(-10px, 0, 0)' })),
+        animate('100ms', style({ transform: 'translate3d(0, 0, 0)' })),
+      ]),
+    ]),
+  ],
 })
-
 
 
 
@@ -34,6 +65,9 @@ export class LoginPage implements OnInit { // Implementar OnInit para inicializa
     this.showPassword = !this.showPassword;
   }
 
+  forgotPassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   // Se define el método ingresar que se ejecuta al hacer clic en el botón de ingreso
   async ingresar() {

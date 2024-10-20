@@ -51,7 +51,6 @@ export class DbService {
       const newUser = { id: Date.now(), email, password, nombreUsuario };
       usuarios.push(newUser); // Se agrega un nuevo usuario al array de usuarios
       localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      this.presentToast(`Bienvenido, ${nombreUsuario}`);
       this.cargarUsuarios();
       resolve(); // Se resuelve la promesa
     });

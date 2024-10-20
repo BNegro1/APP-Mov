@@ -1,77 +1,103 @@
 ion-content {
-  --background: #000000;
-  padding: 0 15px;
+  --background: var(--ion-background-color);
 }
 
-
 ion-card {
-  margin-bottom: 20px;
+  margin: 10px 0;
   background-color: #1f1f1f;
-  border-radius: 12px; /* FOndo card  */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
 
-  &:hover {
-    transform: scale(1.03);
+.album-cover {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+ion-card-header {
+  padding: 10px;
+}
+
+ion-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+ion-card-content {
+  padding: 0 10px 10px;
+
+  p {
+    color: #b0b0b0;
+    margin: 5px 0;
+    font-size: 0.8rem;
   }
-}
-
-/* Portada album */
-.album-cover {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-/* Card (album + artista) */
-ion-card-title {
-  font-size: 1.4em;
-  font-weight: normal;
-  color: #ffffff;
-  text-transform: capitalize; // Cap primera letra
-}
-
-ion-card-content p {
-  color: #b0b0b0;
-  margin-bottom: 8px;
-  font-size: 1em;
-}
-
-ion-card {
-  margin-bottom: 20px;
-}
-
-.album-cover {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
-
-ion-card-title {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-ion-card-content p {
-  color: #b0b0b0;
-  margin-bottom: 5px;
 }
 
 ion-menu {
   --background: #1f1f1f;
   --width: 250px;
+
+  ion-toolbar {
+    --background: var(--ion-toolbar-background);
+    --color: var(--ion-toolbar-color);
+  }
+
+  ion-content {
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  ion-list {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  ion-list-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 20px 15px;
+    color: var(--ion-text-color);
+    background-color: var(--ion-color-primary);
+  }
+
+  ion-item {
+    --background: transparent;
+    --color: var(--ion-text-color);
+    --padding-start: 15px;
+    --padding-end: 15px;
+    --min-height: 45px;
+
+    &:hover {
+      --background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  ion-icon {
+    color: var(--ion-color-secondary);
+    margin-right: 15px;
+  }
 }
 
-ion-item {
-  --background: transparent;
-  --color: #ffffff;
+.username-item {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  --background: #1a1a1a;
+  --color: var(--ion-text-color);
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  font-size: 0.8rem;
 }
 
-ion-list-header {
-  font-size: 1.5em;
-  font-weight: bold;
-  padding: 20px 0;
-  color: #ffffff;
+ion-infinite-scroll-content {
+  color: var(--ion-color-secondary);
+}
+
+@media (min-width: 576px) {
+  ion-card {
+    margin: 10px;
+  }
 }
