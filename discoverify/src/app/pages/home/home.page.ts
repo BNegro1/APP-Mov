@@ -130,14 +130,14 @@ export class HomePage implements OnInit {
   // Este metodo está para simular la actualización de recomendaciones
   // basado en los álbumes que le gustan o no al usuario.
   // Igualmente, se puede revisar dentro de la consola que se actualizan las recomendaciones de acuerdo a los álbumes que le gustan o no al usuario.
+
+  // SIMULACION POR EL MOMENTO DE ACTUALIZACION DE RECOMENDACIONES!!! 
   updateRecommendations(album: Album) {
     if (album.liked) {
-      // Simular la actualización de recomendaciones basado en el género o artista de álbumes "liked"
       console.log(`Recomendaciones actualizadas basadas en que te gusta el álbum: ${album.title}`);
-      // Aquí podrías hacer una nueva llamada a la API de Spotify para obtener álbumes relacionados
     } else if (album.disliked) {
       console.log(`No se mostrarán álbumes similares a: ${album.title}`);
-      // Aquí podrías remover álbumes similares de las recomendaciones
+
     }
   }
 }
