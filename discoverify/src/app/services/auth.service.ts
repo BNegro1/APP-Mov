@@ -13,7 +13,7 @@ export class AuthService {
   // Claves para almacenar el token de autenticación y el nombre de usuario en SQLite
   private readonly AUTH_TOKEN_KEY = 'tokenAuth';
   private readonly NOMBRE_USUARIO_KEY = 'username';
-
+  
   private database!: SQLiteObject;
 
   // Estado de autenticación observable

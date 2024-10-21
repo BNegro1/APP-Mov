@@ -1,53 +1,70 @@
-# IDEs and editors
-.idea/
-.vscode/
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
 
-# Logs and Debug
+*~
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+
 *.log
 log.txt
-npm-debug.log
-yarn-error.log
 
-# Node.js
-/node_modules/
+
+/.sourcemaps
+/.versions
+/coverage
 
 # Ionic
 /.ionic
 /www
-/platforms/
-plugins/
+/platforms
+/plugins
 
-# Android/Gradle
-/android/.gradle
-/android/app/build/
-.android/.idea/
-/android/local.properties
-
-# Output compilado
+# Compiled output
 /dist
-/out/
-.build/
-/tmp/
-/build/
+/tmp
 /out-tsc
-/.angular/cache
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
 
 # Miscellaneous
-/sourcemaps
-.versions
+/.angular
+/.angular/cache
+.sass-cache/
+/.nx
+/.nx/cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
 .DS_Store
 Thumbs.db
-.sass-cache/
-/nx/cache
-libpeerconnection.log
-testem.log
-
-# Sistema
-$RECYCLE.BIN/
-UserInterfaceState.xcuserstate
-
-# Archivos temporales y backup
-*~
-*.sw[mnpcod]
-*.tmp
-*.tmp.*
