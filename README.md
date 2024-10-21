@@ -68,7 +68,13 @@ Para configurar y ejecutar:
    Los usuarios pueden subir álbumes mediante un formulario, proporcionando:
    - Nombre del álbum, artista, fecha de lanzamiento y género
    - Subir una imagen desde la galería del dispositivo
+     
+3. **Rating de los Usuarios**  
+   - Los usuarios pueden dar like y dislike para la recomendación de albumes.
 
+5. **Busqueda de Discografías**  
+   - Los usuarios tienen la disponibilidad de buscar los artistas y desplegar sus discografías.
+   
 ---
 
 ## Plugins Nativos Utilizados
