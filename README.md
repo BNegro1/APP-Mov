@@ -4,6 +4,23 @@
 ### *Aplicación desarrollada para asignatura Prog. App. Móviles - 2024-02*
 
 ---
+## Importante:
+Debido a que el repositorio no se descarga con la compilación y datos de Android habrá que utilizar el siguiente comando de PowerSell:
+
+```bash
+npm install; cd discoverify; npm install cordova-sqlite-storage; npm install @awesome-cordova-plugins/sqlite; npm install @ionic-native/toast; npm install cordova-plugin-x-toast; npm install @capacitor/android; npm i -g native-run; npx cap add android
+```
+
+En cambio este otro elimina los archivos y folders:
+
+```bash
+.gradle
+.idea
+build
+android
+node_modules
+www
+```
 
 ## Índice
 
