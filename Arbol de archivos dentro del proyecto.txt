@@ -1,0 +1,267 @@
+d:/Repositorios Oficial/APP-Mov/
+  ├─ .idea/
+  │  ├─ caches/
+  │  │  └─ deviceStreaming.xml
+  │  ├─ .gitignore
+  │  ├─ vcs.xml
+  │  └─]workspace.xml (ignored)
+  ├─ .vscode/
+  │  └─ settings.json
+  ├─ discoverify/
+  │  ├─].angular/ (ignored)
+  │  ├─ .vscode/
+  │  │  ├─]extensions.json (ignored)
+  │  │  └─]settings.json (ignored)
+  │  ├─ android/
+  │  │  ├─].gradle/ (ignored)
+  │  │  ├─ .idea/
+  │  │  │  ├─]caches/ (ignored)
+  │  │  │  ├─ .gitignore
+  │  │  │  ├─ compiler.xml
+  │  │  │  ├─ deploymentTargetSelector.xml
+  │  │  │  ├─]gradle.xml (ignored)
+  │  │  │  ├─ migrations.xml
+  │  │  │  ├─ misc.xml
+  │  │  │  ├─ vcs.xml
+  │  │  │  └─]workspace.xml (ignored)
+  │  │  ├─ app/
+  │  │  │  ├─ build/
+  │  │  │  │  ├─]generated/ (ignored)
+  │  │  │  │  ├─]intermediates/ (ignored)
+  │  │  │  │  ├─]outputs/ (ignored)
+  │  │  │  │  ├─]tmp/ (ignored)
+  │  │  │  │  └─ .npmkeep
+  │  │  │  ├─ src/
+  │  │  │  │  ├─ androidTest/
+  │  │  │  │  │  └─ java/
+  │  │  │  │  │     └─ com/
+  │  │  │  │  │        └─ getcapacitor/
+  │  │  │  │  │           └─ myapp/
+  │  │  │  │  │              └─ ExampleInstrumentedTest.java
+  │  │  │  │  ├─ main/
+  │  │  │  │  │  ├─ assets/
+  │  │  │  │  │  │  ├─]public/ (ignored)
+  │  │  │  │  │  │  ├─]capacitor.config.json (ignored)
+  │  │  │  │  │  │  └─]capacitor.plugins.json (ignored)
+  │  │  │  │  │  ├─ java/
+  │  │  │  │  │  │  └─ io/
+  │  │  │  │  │  │     └─ ionic/
+  │  │  │  │  │  │        └─ starter/
+  │  │  │  │  │  │           └─ MainActivity.java
+  │  │  │  │  │  ├─ res/
+  │  │  │  │  │  │  ├─ drawable/
+  │  │  │  │  │  │  │  ├─ ic_launcher_background.xml
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-land-hdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-land-mdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-land-xhdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-land-xxhdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-land-xxxhdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-port-hdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-port-mdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-port-xhdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-port-xxhdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-port-xxxhdpi/
+  │  │  │  │  │  │  │  └─ splash.png
+  │  │  │  │  │  │  ├─ drawable-v24/
+  │  │  │  │  │  │  │  └─ ic_launcher_foreground.xml
+  │  │  │  │  │  │  ├─ layout/
+  │  │  │  │  │  │  │  └─ activity_main.xml
+  │  │  │  │  │  │  ├─ mipmap-anydpi-v26/
+  │  │  │  │  │  │  │  ├─ ic_launcher_round.xml
+  │  │  │  │  │  │  │  └─ ic_launcher.xml
+  │  │  │  │  │  │  ├─ mipmap-hdpi/
+  │  │  │  │  │  │  │  ├─ ic_launcher_foreground.png
+  │  │  │  │  │  │  │  ├─ ic_launcher_round.png
+  │  │  │  │  │  │  │  └─ ic_launcher.png
+  │  │  │  │  │  │  ├─ mipmap-mdpi/
+  │  │  │  │  │  │  │  ├─ ic_launcher_foreground.png
+  │  │  │  │  │  │  │  ├─ ic_launcher_round.png
+  │  │  │  │  │  │  │  └─ ic_launcher.png
+  │  │  │  │  │  │  ├─ mipmap-xhdpi/
+  │  │  │  │  │  │  │  ├─ ic_launcher_foreground.png
+  │  │  │  │  │  │  │  ├─ ic_launcher_round.png
+  │  │  │  │  │  │  │  └─ ic_launcher.png
+  │  │  │  │  │  │  ├─ mipmap-xxhdpi/
+  │  │  │  │  │  │  │  ├─ ic_launcher_foreground.png
+  │  │  │  │  │  │  │  ├─ ic_launcher_round.png
+  │  │  │  │  │  │  │  └─ ic_launcher.png
+  │  │  │  │  │  │  ├─ mipmap-xxxhdpi/
+  │  │  │  │  │  │  │  ├─ ic_launcher_foreground.png
+  │  │  │  │  │  │  │  ├─ ic_launcher_round.png
+  │  │  │  │  │  │  │  └─ ic_launcher.png
+  │  │  │  │  │  │  ├─ values/
+  │  │  │  │  │  │  │  ├─ ic_launcher_background.xml
+  │  │  │  │  │  │  │  ├─ strings.xml
+  │  │  │  │  │  │  │  └─ styles.xml
+  │  │  │  │  │  │  └─ xml/
+  │  │  │  │  │  │     ├─]config.xml (ignored)
+  │  │  │  │  │  │     └─ file_paths.xml
+  │  │  │  │  │  └─ AndroidManifest.xml
+  │  │  │  │  └─ test/
+  │  │  │  │     └─ java/
+  │  │  │  │        └─ com/
+  │  │  │  │           └─ getcapacitor/
+  │  │  │  │              └─ myapp/
+  │  │  │  │                 └─ ExampleUnitTest.java
+  │  │  │  ├─ .gitignore
+  │  │  │  ├─ build.gradle
+  │  │  │  ├─ capacitor.build.gradle
+  │  │  │  └─ proguard-rules.pro
+  │  │  ├─]capacitor-cordova-android-plugins/ (ignored)
+  │  │  ├─ gradle/
+  │  │  │  └─ wrapper/
+  │  │  │     ├─ gradle-wrapper.jar
+  │  │  │     └─ gradle-wrapper.properties
+  │  │  ├─ .gitignore
+  │  │  ├─ build.gradle
+  │  │  ├─ capacitor.settings.gradle
+  │  │  ├─ gradle.properties
+  │  │  ├─ gradlew
+  │  │  ├─ gradlew.bat
+  │  │  ├─]local.properties (ignored)
+  │  │  ├─ settings.gradle
+  │  │  └─ variables.gradle
+  │  ├─ componentesObsoletos/
+  │  │  └─ components/
+  │  │     ├─ footer/
+  │  │     │  ├─ footer.component.html
+  │  │     │  ├─ footer.component.scss
+  │  │     │  ├─ footer.component.spec.ts
+  │  │     │  └─ footer.component.ts
+  │  │     └─ header/
+  │  │        ├─ header.component.html
+  │  │        ├─ header.component.scss
+  │  │        ├─ header.component.spec.ts
+  │  │        └─ header.component.ts
+  │  ├─ filesApiRetiradas/
+  │  ├─]node_modules/ (ignored)
+  │  ├─ resources/
+  │  │  └─ android/
+  │  ├─ src/
+  │  │  ├─ app/
+  │  │  │  ├─ pages/
+  │  │  │  │  ├─ contribute/
+  │  │  │  │  │  ├─ contribute-routing.module.ts
+  │  │  │  │  │  ├─ contribute.module.ts
+  │  │  │  │  │  ├─ contribute.page.html
+  │  │  │  │  │  ├─ contribute.page.scss
+  │  │  │  │  │  ├─ contribute.page.spec.ts
+  │  │  │  │  │  └─ contribute.page.ts
+  │  │  │  │  ├─ errorview/
+  │  │  │  │  │  ├─ errorview-routing.module.ts
+  │  │  │  │  │  ├─ errorview.module.ts
+  │  │  │  │  │  ├─ errorview.page.html
+  │  │  │  │  │  ├─ errorview.page.scss
+  │  │  │  │  │  ├─ errorview.page.spec.ts
+  │  │  │  │  │  └─ errorview.page.ts
+  │  │  │  │  ├─ home/
+  │  │  │  │  │  ├─ home-routing.module.ts
+  │  │  │  │  │  ├─ home.module.ts
+  │  │  │  │  │  ├─ home.page.html
+  │  │  │  │  │  ├─ home.page.scss
+  │  │  │  │  │  ├─ home.page.spec.ts
+  │  │  │  │  │  └─ home.page.ts
+  │  │  │  │  ├─ login/
+  │  │  │  │  │  ├─ login-routing.module.ts
+  │  │  │  │  │  ├─ login.module.ts
+  │  │  │  │  │  ├─ login.page.html
+  │  │  │  │  │  ├─ login.page.scss
+  │  │  │  │  │  ├─ login.page.spec.ts
+  │  │  │  │  │  └─ login.page.ts
+  │  │  │  │  ├─ register/
+  │  │  │  │  │  ├─ register-routing.module.ts
+  │  │  │  │  │  ├─ register.module.ts
+  │  │  │  │  │  ├─ register.page.html
+  │  │  │  │  │  ├─ register.page.scss
+  │  │  │  │  │  ├─ register.page.spec.ts
+  │  │  │  │  │  └─ register.page.ts
+  │  │  │  │  └─ reset/
+  │  │  │  │     ├─ reset-routing.module.ts
+  │  │  │  │     ├─ reset.module.ts
+  │  │  │  │     ├─ reset.page.html
+  │  │  │  │     ├─ reset.page.scss
+  │  │  │  │     ├─ reset.page.spec.ts
+  │  │  │  │     └─ reset.page.ts
+  │  │  │  ├─ services/
+  │  │  │  │  ├─ auth.guard.spec.ts
+  │  │  │  │  ├─ auth.guard.ts
+  │  │  │  │  ├─ auth.service.spec.ts
+  │  │  │  │  ├─ auth.service.ts
+  │  │  │  │  ├─ dbservice.service.spec.ts
+  │  │  │  │  ├─ dbservice.service.ts
+  │  │  │  │  ├─ spotify-album.service.spec.ts
+  │  │  │  │  ├─ spotify-album.service.ts
+  │  │  │  │  ├─ spotify-auth.service.spec.ts
+  │  │  │  │  └─ spotify-auth.service.ts
+  │  │  │  ├─ splash-screen/
+  │  │  │  │  ├─ splash-screen.component.html
+  │  │  │  │  ├─ splash-screen.component.scss
+  │  │  │  │  ├─ splash-screen.component.spec.ts
+  │  │  │  │  └─ splash-screen.component.ts
+  │  │  │  ├─ app-routing.module.ts
+  │  │  │  ├─ app.component.html
+  │  │  │  ├─ app.component.scss
+  │  │  │  ├─ app.component.spec.ts
+  │  │  │  ├─ app.component.ts
+  │  │  │  └─ app.module.ts
+  │  │  ├─ assets/
+  │  │  │  ├─ icon/
+  │  │  │  │  └─ favicon.png
+  │  │  │  ├─ images/
+  │  │  │  │  └─ logo.png
+  │  │  │  └─ shapes.svg
+  │  │  ├─ environments/
+  │  │  │  ├─ environment.prod.ts
+  │  │  │  └─ environment.ts
+  │  │  ├─ theme/
+  │  │  │  └─ variables.scss
+  │  │  ├─ angular-spotify.d.ts
+  │  │  ├─ global.scss
+  │  │  ├─ index.html
+  │  │  ├─ main.ts
+  │  │  ├─ polyfills.ts
+  │  │  ├─ test.ts
+  │  │  └─ zone-flags.ts
+  │  ├─]www/ (ignored)
+  │  ├─ .browserslistrc
+  │  ├─ .editorconfig
+  │  ├─ .eslintrc.json
+  │  ├─ .gitignore
+  │  ├─ angular.json
+  │  ├─ capacitor.config.ts
+  │  ├─ ionic.config.json
+  │  ├─ karma.conf.js
+  │  ├─ package-lock.json
+  │  ├─ package.json
+  │  ├─ tsconfig.app.json
+  │  ├─ tsconfig.json
+  │  └─ tsconfig.spec.json
+  ├─ PDF Clases/
+  │  ├─ 1.2.1 Componentes UI de Ionic.pdf
+  │  ├─ 1.2.2 Navegación Angular.pdf
+  │  ├─ 1.3.1 Angular Material.pdf
+  │  ├─ 1.3.2 Animando nuestro proyecto.pdf
+  │  ├─ Ionic_AndroidStudio.pdf
+  │  └─ Rubrica _1 (1).pdf
+  ├─ PDFs Ionic/
+  │  ├─ 2.1.1 Route y Navegación.pptx
+  │  ├─ 2.1.2 Material Routing Angular.pdf
+  │  ├─ 2.1.3 Router References.pdf
+  │  ├─ 2.2.1 Persistencia.pptx
+  │  ├─ 2.3.1 Conectándonos a una APIRest.pptx
+  │  ├─ 2.3.2 Como programar consultas asincronas.pdf
+  │  └─ PasoAPasoIonicV7ConSQLite.pdf
+  ├─ .gitattributes
+  ├─ dependencias.txt
+  ├─ package-lock.json
+  └─ README.md
