@@ -3,26 +3,27 @@ import { ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 
-// EN el codigo original, la clase se llama AuthService, pero en este caso se llama DbService
-// Esto es porque el código original ya tiene un servicio llamado AuthService, y bueno,  este código
-// es un servicio nuevo que se está creando, y se cambnio el nombre
-// para evitar conflictos con el servicio ya existente.
+  // EN el codigo original, la clase se llama AuthService, pero en este caso se llama DbService
+  // Esto es porque el código original ya tiene un servicio llamado AuthService, y bueno,  este código
+  // es un servicio nuevo que se está creando, y se cambnio el nombre
+  // para evitar conflictos con el servicio ya existente.
 
-// Suena redundante, pero este servicio se encarga de la interacción con la base de datos al fin y al cabo.
-// En este caso, la base de datos es localStorage, que se está almacenando con los datos en el navegador.
-// Este servicio se encarga de manejar los datos de los usuarios en localStorage, como agregar, eliminar
-// y actualizar usuarios, y verificar si un usuario ya existe en la base de datos.
+  // Suena redundante, pero este servicio se encarga de la interacción con la base de datos al fin y al cabo.
+  // En este caso, la base de datos es localStorage, que se está almacenando con los datos en el navegador.
+  // Este servicio se encarga de manejar los datos de los usuarios en localStorage, como agregar, eliminar
+  // y actualizar usuarios, y verificar si un usuario ya existe en la base de datos.
 
-// No se elimino el servicio AuthService original, ya que este servicio es diferente y se encarga de
-// la autenticación de los usuarios, mientras que este servicio se encarga de la interacción con la base de datos.
+  // No se elimino el servicio AuthService original, ya que este servicio es diferente y se encarga de
+  // la autenticación de los usuarios, mientras que este servicio se encarga de la interacción con la base de datos.
 
 
 export class DbService {
   private isDbReady = new BehaviorSubject<boolean>(false);
   private listaUsuarios = new BehaviorSubject<any[]>([]);
+  private likesCount = new BehaviorSubject<number>(0);
 
   constructor(private toastController: ToastController) {
     this.initStorage();
@@ -43,6 +44,47 @@ export class DbService {
   cargarUsuarios() {
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]'); // Se obtienen los usuarios almacenados en localStorage
     this.listaUsuarios.next(usuarios);
+  }
+
+  // Método para dar like a un álbum
+  likeAlbum(userId: string, albumId: string): void {
+    const likes = JSON.parse(localStorage.getItem('likes') || '{}');
+    if (!likes[userId]) {
+      likes[userId] = [];
+    }
+    if (!likes[userId].includes(albumId)) {
+      likes[userId].push(albumId);
+    }
+    localStorage.setItem('likes', JSON.stringify(likes));
+    this.updateLikesCount(userId);
+  }
+
+  // Método para dar dislike a un álbum
+  dislikeAlbum(userId: string, albumId: string): void {
+    const dislikes = JSON.parse(localStorage.getItem('dislikes') || '{}');
+    if (!dislikes[userId]) {
+      dislikes[userId] = [];
+    }
+    if (!dislikes[userId].includes(albumId)) {
+      dislikes[userId].push(albumId);
+    }
+    localStorage.setItem('dislikes', JSON.stringify(dislikes));
+    this.updateLikesCount(userId);
+  }
+
+  getLikedAlbums(userId: string): string[] {
+    const likes = JSON.parse(localStorage.getItem('likes') || '{}');
+    return likes[userId] || [];
+  }
+
+  getDislikedAlbums(userId: string): string[] {
+    const dislikes = JSON.parse(localStorage.getItem('dislikes') || '{}');
+    return dislikes[userId] || [];
+  }
+
+  updateLikesCount(userId: string): void {  // Actualizar el contador de likes
+    const likedAlbums = this.getLikedAlbums(userId);
+    this.likesCount.next(likedAlbums.length);
   }
 
   addUser(email: string, password: string, nombreUsuario: string): Promise<void> {
@@ -94,8 +136,6 @@ export class DbService {
       }
     });
   }
-  
-
 
   deleteUser(id: number): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -113,6 +153,10 @@ export class DbService {
     return this.isDbReady.asObservable();
   }
 
+  // De la misma forma de antes, aqui se define el método para los getLikesCount que devuelve un observable de tipo número.
+  getLikesCount(): Observable<number> {
+    return this.likesCount.asObservable();
+  }
 
   // Toast final para mostrar mensajes en la aplicación.
   async presentToast(mensaje: string) {

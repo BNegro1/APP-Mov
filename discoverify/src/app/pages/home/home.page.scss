@@ -96,6 +96,35 @@ ion-infinite-scroll-content {
   color: var(--ion-color-secondary);
 }
 
+.like-dislike-buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  ion-icon {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    color: var(--ion-color-secondary);
+    cursor: pointer;
+  }
+
+}
+
+.like-dislike-buttons ion-icon {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  cursor: pointer;
+  color: var(--ion-color-medium); // Color neutro por defecto
+}
+
+.like-dislike-buttons ion-icon[color="success"] {
+  color: var(--ion-color-success); // Verde cuando es "liked"
+}
+
+.like-dislike-buttons ion-icon[color="danger"] {
+  color: var(--ion-color-danger); // Rojo cuando es "disliked"
+}
+
+
 @media (min-width: 576px) {
   ion-card {
     margin: 10px;
