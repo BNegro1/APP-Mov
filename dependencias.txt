@@ -2,40 +2,51 @@ Setup!!!!!!!
 
 TL;DR:
 
-Este se ejecuta hasta el paso (6):
+Este se ejecuta hasta el paso (5):
 
-ng add @angular/common/http --defaults; npm install; cd discoverify; npm install cordova-sqlite-storage; npm install @awesome-cordova-plugins/sqlite; npm install @ionic-native/toast; npm install cordova-plugin-x-toast; npm install @capacitor/android; npm i -g native-run; npx cap add android
+npm install; cd discoverify; npm install cordova-sqlite-storage; npm install @awesome-cordova-plugins/sqlite; npm install @ionic-native/toast; npm install cordova-plugin-x-toast; npm install @capacitor/android; npm i -g native-run; npx cap add android
 
 
+En cambio este otro elimina los archivos y folders:
+
+.gradle
+.idea
+build
+android
+node_modules
+www
+
+Comando:
+
+Remove-Item -Recurse -Force (Get-ChildItem -Path "d:/Repositorios Oficial/APP-Mov/" -Include ".gradle", ".idea", "build", "android", "node_modules", "www" -Recurse)
 
 
 ---------------------------------------------------------------------------------------
-1. Agregar Angular Http Client (si no está incluido):
-   ng add @angular/common/http
 
-2. Instalar dependencias del proyecto:
+
+1. Instalar dependencias del proyecto:
    npm install
 
-3. Instalar SQLite y plugins necesarios:
+2. Instalar SQLite y plugins necesarios:
    cd discoverify
    npm install cordova-sqlite-storage
    npm install @awesome-cordova-plugins/sqlite
 
-4. Instalar Toast visual:
+3. Instalar Toast visual:
    npm install @ionic-native/toast
    npm install cordova-plugin-x-toast
 
-5. Instalar Capacitor para Android:
+4. Instalar Capacitor para Android:
    npm install @capacitor/android
    npm i -g native-run
 
-6. Agregar la plataforma Android al proyecto:
+5. Agregar la plataforma Android al proyecto:
    npx cap add android
 
-7. Ejecutar el proyecto en Android Studio:
+6. Ejecutar el proyecto en Android Studio:
    npx cap open android
 
-8. Build y generación de APK:
+7. Build y generación de APK:
    - Compilar el proyecto Ionic:
      ionic build
    - Sincronizar Capacitor:
@@ -43,12 +54,12 @@ ng add @angular/common/http --defaults; npm install; cd discoverify; npm install
    - Abrir en Android Studio:
      npx cap open android
 
-9. Actualizar APK creada:
+8. Actualizar APK creada:
    ionic build
    npx cap sync android
    npx cap open android
 
-10. En caso de problemas al build (para regenerar el entorno Android):
+9. En caso de problemas al build (para regenerar el entorno Android):
     Remove-Item -Recurse -Force ./android
     npx cap add android
     ionic build
