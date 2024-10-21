@@ -8,9 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+import { NotFoundComponenteComponent } from './components/not-found-componente/not-found-componente.component';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx'; // Importa SQLite
+
 
 @NgModule({
-  declarations: [AppComponent, SplashScreenComponent],
+  declarations: [AppComponent, SplashScreenComponent, NotFoundComponenteComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -20,7 +23,8 @@ import { SplashScreenComponent } from './splash-screen/splash-screen.component';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService // Se añade el servicio AuthService a la lista de proveedores.
+    AuthService,// Se añade el servicio AuthService a la lista de proveedores.
+    SQLite // Agrega SQLite a los proveedores
   ],
   bootstrap: [AppComponent],
 })
