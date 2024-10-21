@@ -33,3 +33,10 @@ Ionic build
 
 -- Links de referencia
 https://stackoverflow.com/questions/42711120/how-do-i-run-an-ionic-app-in-android-studio-emulator
+
+
+-- EN CASO DE NO PODER BUILDEAR 
+Remove-Item -Recurse -Force .\android; npx cap add android; ionic build; npx cap sync android; npx cap open android
+
+
+!!!
