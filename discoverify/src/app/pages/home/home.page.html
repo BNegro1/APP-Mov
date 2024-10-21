@@ -32,7 +32,10 @@
         </ion-list>
         <!-- Nombre de usuario en el borde inferior del menú -->
         <ion-item *ngIf="isAuthenticated" class="username-item" lines="none">
-          <ion-label>Cuenta: {{ nombreUsuario }}</ion-label>
+          <ion-label>
+            Cuenta: {{ nombreUsuario }} <br>
+            <small>Álbumes que te gustan: {{ likesCount }}</small> <!-- Mostrar el contador de likes -->
+          </ion-label>
         </ion-item>
       </ion-content>
     </ion-menu>
@@ -56,16 +59,25 @@
                 <img [src]="album.cover" [alt]="album.title + ' - ' + album.artist" class="album-cover" />
                 <ion-card-header>
                   <ion-card-title>{{ album.artist }} - {{ album.title }}</ion-card-title>
+                  <div class="like-dislike-buttons">
+                    <ion-icon name="thumbs-up-outline" [color]="album.liked ? 'success' : 'medium'"
+                      (click)="likeAlbum(album.id)">
+                    </ion-icon>
+                    <ion-icon name="thumbs-down-outline" [color]="album.disliked ? 'danger' : 'medium'"
+                      (click)="dislikeAlbum(album.id)">
+                    </ion-icon>
+                  </div>
                 </ion-card-header>
                 <ion-card-content>
                   <p>Fecha de lanzamiento: {{ album.releaseDate }}</p>
                 </ion-card-content>
               </ion-card>
+
             </ion-col>
           </ion-row>
         </ion-grid>
 
-        <!-- Infinite scroll to load more albums -->
+        <!-- Infinite scroll  -->
         <ion-infinite-scroll (ionInfinite)="loadMore($event)">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más álbumes...">
           </ion-infinite-scroll-content>

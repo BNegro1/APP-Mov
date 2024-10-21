@@ -11,6 +11,8 @@ export interface Album { // Interface para el álbum
   releaseDate: string;
   genre: string;
   cover: string;
+  liked?: boolean; 
+  disliked?: boolean; 
 }
 
 @Injectable({
