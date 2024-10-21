@@ -55,7 +55,6 @@ export class DbService {
       );
     `;
     this.database.executeSql(query, []).then(() => {
-      this.presentToast("Tablas creadas.");
       this.cargarUsuarios();
       this.isDbReady.next(true);
     }).catch(e => this.presentToast(`Error creando tablas: ${e}`)); // Mostrar mensaje de error si falla la creación de tablas
@@ -89,7 +88,7 @@ export class DbService {
   
     if (res.rows.length > 0) {
       const user = res.rows.item(0);
-      this.presentToast(`Bienvenido, ${user.nombreUsuario}`);
+      this.presentToast(`Bienvenido/a 🤓! ${user.nombreUsuario}`);
       return true;
     }
     return false;
