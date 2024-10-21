@@ -28,9 +28,9 @@ export class HomePage implements OnInit {
     private router: Router // Inyectar Router
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.nombreUsuario = this.authService.getNombreUsuario();
+    this.nombreUsuario = await this.authService.getNombreUsuario(); // Esperar el nombre de usuario
 
     if (this.isAuthenticated) {
       this.loadAlbums();
@@ -62,15 +62,13 @@ export class HomePage implements OnInit {
       );
   }
 
-  checkAlbumLikes() {
-    const userId = this.authService.getNombreUsuario(); // Obtener el userId del usuario actual
+  async checkAlbumLikes() {
+    const userId = await this.authService.getNombreUsuario(); // Esperar el userId
     if (userId) { // Verificar que userId no sea null
-      const likedAlbums = this.dbService.getLikedAlbums(userId);
-      const dislikedAlbums = this.dbService.getDislikedAlbums(userId);
+      const likedAlbums = await this.dbService.getLikedAlbums(userId); // Esperar a que se resuelva la promesa
 
       this.albums.forEach(album => {
-        album.liked = likedAlbums.includes(album.id);
-        album.disliked = dislikedAlbums.includes(album.id);
+        album.liked = likedAlbums.includes(album.id); // Verificar si el álbum tiene "like"
       });
     }
   }
@@ -96,27 +94,27 @@ export class HomePage implements OnInit {
       );
   }
 
-  likeAlbum(albumId: string) {
-    const userId = this.authService.getNombreUsuario(); // Obtener el userId del usuario actual
+  async likeAlbum(albumId: string) {
+    const userId = await this.authService.getNombreUsuario(); // Esperar el userId
     if (userId) { // Verificar que userId no sea null
       const album = this.albums.find(a => a.id === albumId);
       if (album) {
         album.liked = true;
         album.disliked = false;
-        this.dbService.likeAlbum(userId, albumId); // Guardar en localStorage
+        await this.dbService.likeAlbum(userId, albumId); // Guardar en SQLite
         this.updateRecommendations(album);
       }
     }
   }
 
-  dislikeAlbum(albumId: string) {
-    const userId = this.authService.getNombreUsuario(); // Obtener el userId del usuario actual
+  async dislikeAlbum(albumId: string) {
+    const userId = await this.authService.getNombreUsuario(); // Esperar el userId
     if (userId) { // Verificar que userId no sea null
       const album = this.albums.find(a => a.id === albumId);
       if (album) {
         album.liked = false;
         album.disliked = true;
-        this.dbService.dislikeAlbum(userId, albumId); // Guardar en localStorage
+        await this.dbService.dislikeAlbum(userId, albumId); // Guardar en SQLite
         this.updateRecommendations(album);
       }
     }
@@ -127,17 +125,12 @@ export class HomePage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // Este metodo está para simular la actualización de recomendaciones
-  // basado en los álbumes que le gustan o no al usuario.
-  // Igualmente, se puede revisar dentro de la consola que se actualizan las recomendaciones de acuerdo a los álbumes que le gustan o no al usuario.
-
-  // SIMULACION POR EL MOMENTO DE ACTUALIZACION DE RECOMENDACIONES!!! 
+  // Simular la actualización de recomendaciones
   updateRecommendations(album: Album) {
     if (album.liked) {
       console.log(`Recomendaciones actualizadas basadas en que te gusta el álbum: ${album.title}`);
     } else if (album.disliked) {
       console.log(`No se mostrarán álbumes similares a: ${album.title}`);
-
     }
   }
 }
