@@ -19,6 +19,7 @@ function getSupportedBrowsers(projectRoot, logger) {
         'last 2 Edge major versions',
         'last 2 Safari major versions',
         'last 2 iOS major versions',
+        'last 2 Android major versions',
         'Firefox ESR',
     ];
     // Get browsers from config or default.

@@ -314,9 +314,22 @@ function createCompilerPlugin(pluginOptions, styleOptions) {
                     // Store as the returned Uint8Array to allow caching the fully transformed code
                     typeScriptFileCache.set(request, contents);
                 }
+                let loader;
+                if (useTypeScriptTranspilation || isJS) {
+                    // TypeScript has transpiled to JS or is already JS
+                    loader = 'js';
+                }
+                else if (request.at(-1) === 'x') {
+                    // TSX and TS have different syntax rules. Only set if input is a TSX file.
+                    loader = 'tsx';
+                }
+                else {
+                    // Otherwise, directly bundle TS
+                    loader = 'ts';
+                }
                 return {
                     contents,
-                    loader: useTypeScriptTranspilation || isJS ? 'js' : 'ts',
+                    loader,
                 };
             });
             build.onLoad({ filter: /\.[cm]?js$/ }, (0, load_result_cache_1.createCachedLoad)(pluginOptions.loadResultCache, async (args) => {
