@@ -1,0 +1,112 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+log.txt
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Instrumented libs (jscoverage/JSCover)
+lib-cov
+
+# Coverage directories
+coverage
+*.lcov
+.nyc_output
+
+# Dependency directories
+bower_components
+jspm_packages/
+.web_modules/
+.yarn/cache
+.yarn/unplugged
+.npm
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Parcel & Build caches
+.cache
+.parcel-cache
+.webpack/
+.nuxt
+.next
+out
+dist
+.svelte-kit
+.vuepress/dist
+.temp
+.docusaurus
+
+# Build output
+/platforms
+/plugins
+/tmp
+/out-tsc
+/bazel-out
+/www
+
+# Optional cache & lock files
+.grunt
+.lock-wscript
+.yarn-integrity
+.stylelintcache
+.eslintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.node_repl_history
+
+# IDE/Editor config and temp files
+.idea/
+.project
+.classpath
+.c9/
+.settings/
+*.launch
+.history/*
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+# System & Miscellaneous files
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+*.sw[mnpcod]
+*~
+.sass-cache/
+.connect.lock
+.libpeerconnection.log
+testem.log
+.typings
+
+# Temporary files
+*.tmp
+*.tmp.*
+.tmp/
+
+# REPL & Debug files
+.tern-port
+.vscode-test
+.dynamodb/
+.fusebox/
+.serverless/
+npm-debug.log
+yarn-error.log
