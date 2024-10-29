@@ -1,46 +1,28 @@
 Setup!!!!!!!
 
+Tener en cuenta que:
+>  node -v; npm -v
+>    v20.18.0
+>    10.8.2
+
+
+
 TL;DR:
 
-Este se ejecuta hasta el paso (5):
-
-npm install; cd discoverify; npm install cordova-sqlite-storage; npm install @awesome-cordova-plugins/sqlite; npm install @ionic-native/toast; npm install cordova-plugin-x-toast; npm install @capacitor/android; npm i -g native-run; npx cap add android
-
-
-En cambio este otro elimina los archivos y folders:
-
-.gradle
-.idea
-build
-android
-node_modules
-www
-
-Comando:
-
-Remove-Item -Recurse -Force (Get-ChildItem -Path "d:/Repositorios Oficial/APP-Mov/" -Include ".gradle", ".idea", "build", "android", "node_modules", "www" -Recurse)
+# Instalación clean
+npm ci
 
 
 ---------------------------------------------------------------------------------------
 
+# Considerar si no está al iniciar npm ci
+npm install @capacitor/android
+npm i -g native-run
 
-1. Instalar dependencias del proyecto:
-   npm install
 
-2. Instalar SQLite y plugins necesarios:
-   cd discoverify
-   npm install cordova-sqlite-storage
-   npm install @awesome-cordova-plugins/sqlite
+Desplegar en Android:
 
-3. Instalar Toast visual:
-   npm install @ionic-native/toast
-   npm install cordova-plugin-x-toast
-
-4. Instalar Capacitor para Android:
-   npm install @capacitor/android
-   npm i -g native-run
-
-5. Agregar la plataforma Android al proyecto:
+1. Agregar la plataforma Android al proyecto:
    npx cap add android
 
 6. Ejecutar el proyecto en Android Studio:
