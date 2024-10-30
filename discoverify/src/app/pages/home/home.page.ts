@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   likesCount: number = 0; // Variable para contar los likes (Definida con 0.)
 
   constructor(
-    private dbService: DbService, // Inyectar DbService para manejar localStorage.
+    private dbService: Dbervice, // Inyectar DbService para manejar localStorage.
     private spotifyAlbumService: SpotifyAlbumService,
     private authService: AuthService, // Inyectar AuthService
     private router: Router // Inyectar Router

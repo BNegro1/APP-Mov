@@ -1,21 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { DbService } from 'src/app/services/dbservice.service';
+import { NavigationExtras, Router } from '@angular/router'
+import { FirebaseLoginService } from 'src/app/services/firebase-service/firebase-log.service'; // Importamos FirebaseLoginService desde el servicio de Firebase
 import { trigger, state, style, animate, transition } from '@angular/animations';
-
-// CASOS DE PRUEBA PARA LA FUNCIÓN "validarDatos":
-// Caso 1: Correo invalido
-// Caso 2: Correo vacio
-// Caso 3: menos de 3 caracteres en la contraseña
-
-
-
-// Datos validos:
-// Email: correo@dominio.com
-// Contraseña: pass123
-// Nombre de usuario: usuario
-// Resultado esperado: true. (No se muestran mensajes de error)
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -53,6 +40,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ]),
   ],
 })
+
 export class RegisterPage implements OnInit {
   formData = {
     email: '',
@@ -67,7 +55,12 @@ export class RegisterPage implements OnInit {
   campoNombreUsuario = '';
   showPassword = false;
 
-  constructor(private dbService: DbService, private router: Router) { }
+  // Se crea un constructor con el ToastController como mensaje, access de Firebase Login y el ruteo con Router
+  constructor(
+    private firebaseLoginService: FirebaseLoginService, // Agregar FirebaseLoginService
+    private router: Router,
+    private toastController: ToastController // Asegurarse de incluir ToastController si es necesario
+  ) { }
 
   ngOnInit() { }
 
@@ -75,28 +68,26 @@ export class RegisterPage implements OnInit {
     this.showPassword = !this.showPassword;
   } // Se define el método toggleShowPassword que cambia el valor de la variable showPassword entre true y false
 
-  async registrar() { // Se define el método registrar que se ejecuta al hacer clic en el botón de registro
+  async registrar() { 
     if (this.validarDatos(this.formData)) {
-      this.dbService.userExists(this.formData.email).then(userExists => {
-        if (userExists) {
-          this.campoCorreo = 'Este correo ya está registrado. Por favor, use otro.'; // Si el usuario ya existe, se muestra un mensaje de error en el campo de correo
-        } else {
-          this.dbService.addUser(
-            this.formData.email,
-            this.formData.password,
-            this.formData.nombreUsuario // Si el usuario no existe, se agrega a la base de datos
-          ).then(() => {
-            let navigationExtras: NavigationExtras = {
-              state: { userEmail: this.formData.email }, 
-            }; // Se crea un objeto navigationExtras con el correo electrónico del usuario
-            this.router.navigate(['/home'], navigationExtras);
-          }).catch(error => {
-            console.error('Error insertando usuario: ', error);
-          });
-        }
-      }).catch(error => {
-        console.error('Error verificando si el usuario existe: ', error);
-      }); // Se manejan los errores de la verificación y la inserción del usuario
+      try {
+        await this.firebaseLoginService.register(
+          this.formData.email,
+          this.formData.password,
+          this.formData.nombreUsuario
+        );
+        let navigationExtras: NavigationExtras = {
+          state: { userEmail: this.formData.email }, 
+        };
+        this.router.navigate(['/home'], navigationExtras);
+      } catch (error) {
+        const toast = await this.toastController.create({
+          message: 'Ocurrió un error durante el registro. Por favor, inténtelo de nuevo.',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
     }
   }
 
