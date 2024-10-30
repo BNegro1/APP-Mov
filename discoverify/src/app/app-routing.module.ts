@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './services/auth guard/auth.guard';
 import { NotFoundComponenteComponent } from './components/not-found-componente/not-found-componente.component';
 
 const routes: Routes = [
@@ -48,14 +48,18 @@ const routes: Routes = [
         (m) => m.RegisterPageModule
       ),
   },
-  {
-    path: '404', // Si se accede a la ruta /404
-    component: NotFoundComponenteComponent // ENtonces cargar el componente NotFoundComponenteComponent
+  // Si no se encuentra la ruta, redirigir a la página de error
+  {   // Además, agregamos el componente NotFoundComponenteComponent para manejar páginas no encontradas (404)
+    component: NotFoundComponenteComponent,
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
+  // SIno se encuentra la ruta, redirigir a la página de error
   {
-    path: '**', // Si no se encuentra la ruta
-    redirectTo: '/404' // Entonces redirigir a la página 404
-  }
+    path: '**', // Si no se encuentra la ruta, redirigir a la página de error
+    redirectTo: 'home' // Entonces, redirigir a la página de inicio
+  },
 ];
 
 @NgModule({

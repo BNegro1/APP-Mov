@@ -26,6 +26,7 @@
     "@awesome-cordova-plugins/core": "^6.9.0",
     "@ionic/angular": "^7.8.6",
     "@ionic/angular-toolkit": "^12.1.1",
+    "@ionic/storage-angular": "^4.0.0",
     "axios": "^1.7.7",
     "cordova-plugin-x-toast": "^2.7.3",
     "firebase": "^11.0.1",

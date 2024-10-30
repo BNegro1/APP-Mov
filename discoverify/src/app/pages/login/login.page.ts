@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { DbService } from 'src/app/services/dbservice.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { FirebaseLoginService } from 'src/app/services/firebase-auth/firebase-auth.service'; // Importar FirebaseLoginService
+import { trigger, state, style, animate, transition } from '@angular/animations'; // Aniamciones
+import { User } from 'firebase/auth';  // Importar User de firebase/auth para conseguir el usuario dsde firebase
+import { ToastController } from '@ionic/angular'; // Importar ToastController
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   animations: [
     trigger('fadeInAnimation', [
       transition(':enter', [
-        style({ opacity: 0 }),
+        style({ opacity: 0 }), 
         animate('500ms', style({ opacity: 1 })),
       ]),
     ]),
@@ -41,24 +42,24 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ],
 })
 
-
-
 export class LoginPage implements OnInit { // Implementar OnInit para inicializar el componente
   login = {
     email: '',
     contrasenna: '',
   };
 
-
   // Se inicializan los campos de error con un string vacío para que no se muestre ningún mensaje de error al principio de la página de login
   campoCorreo = '';
   campoContrasenna = '';
   showPassword = false;
 
-  constructor(private dbService: DbService, private router: Router, private authService: AuthService) { } // Inyectar DbService, Router y AuthService
+  constructor(
+    private firebaseLoginService: FirebaseLoginService, // Inyectar FirebaseLoginService
+    private router: Router,
+    private toastController: ToastController // Inyectar ToastController
+  ) { }
 
   ngOnInit() { }
-
 
   // Se define el método toggleShowPassword que cambia el valor de la variable showPassword entre true y false
   toggleShowPassword() {
@@ -69,22 +70,24 @@ export class LoginPage implements OnInit { // Implementar OnInit para inicializa
     this.showPassword = !this.showPassword;
   }
 
+
   // Se define el método ingresar que se ejecuta al hacer clic en el botón de ingreso
   async ingresar() {
     if (this.validarDatos(this.login)) {
-      const isValidUser = await this.dbService.validateUser(
-        this.login.email,
-        this.login.contrasenna
-      ); // Se valida el usuario con el correo electrónico y la contraseña ingresados
-
-      if (isValidUser) {
-        this.authService.login('token', this.login.email); // Se inicia sesión con el correo electrónico del usuario
+      try {
+        await this.firebaseLoginService.login(this.login.email, this.login.contrasenna);
         let navigationExtras: NavigationExtras = {
           state: { userEmail: this.login.email },
         };
         this.router.navigate(['/home'], navigationExtras);
-      } else {
-        this.campoCorreo = 'El correo o la contraseña son incorrectos.'; // Si el usuario no es válido, se muestra un mensaje de error en el campo de correo
+      } catch (error) {
+        this.campoCorreo = 'El correo o la contraseña son incorrectos.';
+        const toast = await this.toastController.create({
+          message: 'El correo o la contraseña son incorrectos.',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
       }
     }
   }
@@ -101,8 +104,8 @@ export class LoginPage implements OnInit { // Implementar OnInit para inicializa
       return false;
     }
 
-    if (!model.contrasenna || model.contrasenna.length < 6) { // Si la contraseña no está presente o tiene menos de 6 caracteres se muestra un mensaje de error en el campo de contraseña
-      this.campoContrasenna = 'La contraseña debe tener al menos 6 caracteres.';
+    if (!model.contrasenna || model.contrasenna.length < 4) { // Si la contraseña no está presente o tiene menos de 6 caracteres se muestra un mensaje de error en el campo de contraseña
+      this.campoContrasenna = 'La contraseña debe tener al menos 4 caracteres.';
       return false;
     }
 

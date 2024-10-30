@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyAlbumService } from '../../services/spotify-album.service';
-import { Album } from '../../services/spotify-album.service';
-import { AuthService } from 'src/app/services/auth.service'; // Importar AuthService
+import { SpotifyAlbumService, Album } from '../../services/spotify-api/spotify-album.service'; // Importar SpotifyAlbumService
+import { FirebaseLoginService } from 'src/app/services/firebase-auth/firebase-auth.service'; // Importar FirebaseLoginService
 import { Router } from '@angular/router'; // Importar Router
-import { DbService } from 'src/app/services/dbservice.service'; // Importar DbService para interactuar con la base de datos de likes
 
 @Component({
   selector: 'app-home',
@@ -22,15 +20,19 @@ export class HomePage implements OnInit {
   likesCount: number = 0; // Variable para contar los likes (Definida con 0.)
 
   constructor(
-    private dbService: Dbervice, // Inyectar DbService para manejar localStorage.
+    private dbService: DbService, // Corregir Dbervice a DbService
     private spotifyAlbumService: SpotifyAlbumService,
-    private authService: AuthService, // Inyectar AuthService
+    private firebaseLoginService: FirebaseLoginService, // Inyectar FirebaseLoginService
     private router: Router // Inyectar Router
   ) { }
 
   async ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.nombreUsuario = await this.authService.getNombreUsuario(); // Esperar el nombre de usuario
+    this.isAuthenticated = await this.firebaseLoginService.isAuthenticated(); // Esperar el resultado
+
+    const userData = await this.firebaseLoginService.getUserData(); // Obtener datos del usuario
+    if (userData) {
+      this.nombreUsuario = userData.usuario; // Asignar el nombre de usuario
+    }
 
     if (this.isAuthenticated) {
       this.loadAlbums();
@@ -38,9 +40,9 @@ export class HomePage implements OnInit {
       this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
     }
 
-    // Hacer subscribe al contador de likes
+    // Suscribirse al contador de likes
     this.dbService.getLikesCount().subscribe((count) => {
-      this.likesCount = count; // Actualizar el contador de likes en el navbar
+      this.likesCount = count;
     });
   }
 
@@ -63,9 +65,9 @@ export class HomePage implements OnInit {
   }
 
   async checkAlbumLikes() {
-    const userId = await this.authService.getNombreUsuario(); // Esperar el userId
+    const userId = await this.firebaseLoginService.getUserData(); // Esperar el userId
     if (userId) { // Verificar que userId no sea null
-      const likedAlbums = await this.dbService.getLikedAlbums(userId); // Esperar a que se resuelva la promesa
+      const likedAlbums = await this.dbService.getLikedAlbums(userId.uid); // Esperar a que se resuelva la promesa
 
       this.albums.forEach(album => {
         album.liked = likedAlbums.includes(album.id); // Verificar si el álbum tiene "like"
@@ -95,33 +97,35 @@ export class HomePage implements OnInit {
   }
 
   async likeAlbum(albumId: string) {
-    const userId = await this.authService.getNombreUsuario(); // Esperar el userId
-    if (userId) { // Verificar que userId no sea null
+    const userData = await this.firebaseLoginService.getUserData();
+    if (userData) {
+      const userId = userData.uid;
       const album = this.albums.find(a => a.id === albumId);
       if (album) {
         album.liked = true;
         album.disliked = false;
-        await this.dbService.likeAlbum(userId, albumId); // Guardar en SQLite
+        await this.dbService.likeAlbum(userId, albumId);
         this.updateRecommendations(album);
       }
     }
   }
 
   async dislikeAlbum(albumId: string) {
-    const userId = await this.authService.getNombreUsuario(); // Esperar el userId
-    if (userId) { // Verificar que userId no sea null
+    const userData = await this.firebaseLoginService.getUserData();
+    if (userData) {
+      const userId = userData.uid;
       const album = this.albums.find(a => a.id === albumId);
       if (album) {
         album.liked = false;
         album.disliked = true;
-        await this.dbService.dislikeAlbum(userId, albumId); // Guardar en SQLite
+        await this.dbService.dislikeAlbum(userId, albumId);
         this.updateRecommendations(album);
       }
     }
   }
 
   logout() {
-    this.authService.logout();
+    this.firebaseLoginService.logout(); // Utilizar FirebaseLoginService para logout
     this.router.navigate(['/login']);
   }
 

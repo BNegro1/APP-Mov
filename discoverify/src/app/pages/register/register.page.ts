@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router'
-import { FirebaseLoginService } from 'src/app/services/firebase-service/firebase-log.service'; // Importamos FirebaseLoginService desde el servicio de Firebase
+import { FirebaseLoginService } from 'src/app/services/firebase-auth/firebase-auth.service'; // Importamos FirebaseLoginService desde el servicio de Firebase
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ToastController } from '@ionic/angular';
 
