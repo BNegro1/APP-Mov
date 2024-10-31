@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './services/auth guard/auth.guard';
+import { AuthGuard } from './services/auth-guard/auth.guard';
 import { NotFoundComponenteComponent } from './components/not-found-componente/not-found-componente.component';
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'contribute',
@@ -21,7 +21,7 @@ const routes: Routes = [
       import('./pages/contribute/contribute.module').then(
         (m) => m.ContributePageModule
       ),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'errorview',
@@ -29,7 +29,7 @@ const routes: Routes = [
       import('./pages/errorview/errorview.module').then(
         (m) => m.ErrorviewPageModule
       ),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: 'reset',
     loadChildren: () =>
-      import('./pages/reset/reset.module').then(m => m.ResetPageModule)
+      import('./pages/reset/reset.module').then((m) => m.ResetPageModule),
   },
   {
     path: 'register',
@@ -48,17 +48,10 @@ const routes: Routes = [
         (m) => m.RegisterPageModule
       ),
   },
-  // Si no se encuentra la ruta, redirigir a la página de error
-  {   // Además, agregamos el componente NotFoundComponenteComponent para manejar páginas no encontradas (404)
-    component: NotFoundComponenteComponent,
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  // SIno se encuentra la ruta, redirigir a la página de error
+  // 404 - Not Found route
   {
-    path: '**', // Si no se encuentra la ruta, redirigir a la página de error
-    redirectTo: 'home' // Entonces, redirigir a la página de inicio
+    path: '**',
+    component: NotFoundComponenteComponent,
   },
 ];
 

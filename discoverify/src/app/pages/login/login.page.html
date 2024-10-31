@@ -1,24 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true" class="ion-padding">
-
-  <div class="login-container">
-    <ion-card class="login-card ion-padding" [@fadeInAnimation]>
+  <div class="ion-text-center">
+    <ion-card>
       <ion-card-header>
-        <ion-card-title class="ion-text-center">
-          <h1 [@pulseAnimation]>Inicia Sesión</h1>
-        </ion-card-title>
+        <ion-card-title>Bienvenido</ion-card-title>
       </ion-card-header>
-
       <ion-card-content>
         <form (ngSubmit)="ingresar()" #loginForm="ngForm">
-          <ion-item [@slideInAnimation] class="ion-margin-bottom">
-            <ion-label position="floating">Correo</ion-label>
+          <ion-item>
+            <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input type="email" [(ngModel)]="login.email" name="email" required #emailInput="ngModel"></ion-input>
           </ion-item>
           <ion-text color="danger" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-            <p [@shakeAnimation]>Por favor, ingrese un correo válido.</p>
+            <p>El correo electrónico es requerido.</p>
           </ion-text>
 
-          <ion-item [@slideInAnimation] class="ion-margin-bottom">
+          <ion-item>
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="login.contrasenna" name="contrasenna"
               required #passwordInput="ngModel"></ion-input>
@@ -26,8 +28,9 @@
               (click)="toggleShowPassword()" class="password-toggle"></ion-icon>
           </ion-item>
           <ion-text color="danger" *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
-            <p [@shakeAnimation]>La contraseña es requerida.</p>
+            <p>La contraseña es requerida.</p>
           </ion-text>
+
           <ion-button type="submit" expand="block" [disabled]="!loginForm.form.valid" class="ion-margin-top"
             [@pulseAnimation]>
             Ingresar
@@ -36,7 +39,7 @@
         </form>
 
         <div class="additional-options ion-margin-top" [@fadeInAnimation]>
-          <ion-button fill="clear" size="small" (click)="forgotPassword()">
+          <ion-button fill="clear" size="small" [routerLink]="['/reset']">
             ¿Olvidaste tu contraseña?
           </ion-button>
           <ion-button fill="clear" size="small" [routerLink]="['/register']">

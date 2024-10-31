@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
 
 interface UserData {
@@ -11,11 +10,18 @@ interface UserData {
   uid: string;
 }
 
+interface LikeData {
+  count: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class FirebaseLoginService {
+  changePassword(oldPassword: string, newPassword: string) {
+    throw new Error('Method not implemented.');
+  }
   
 
   constructor(
@@ -24,8 +30,12 @@ export class FirebaseLoginService {
     private db: AngularFirestore,
     private router: Router
 
-  ) { }
+  ) { 
+    // Definir la colección 'likes' con el tipo LikeData
+    this.likesCollection = this.db.collection<LikeData>('likes');
+  }
 
+  private likesCollection;
 
   // Metodo de login 
   login(email: string, password: string) {
@@ -72,7 +82,7 @@ export class FirebaseLoginService {
   async getUserData() {
     const user = await firstValueFrom(this.auth.authState);
     if (user) {
-      const doc = await this.db.collection('usuarios').doc(user.uid).get().toPromise();
+      const doc = await firstValueFrom(this.db.collection('usuarios').doc(user.uid).get());
       if (doc && doc.exists) {
         return doc.data() as UserData;
       } else {
@@ -80,6 +90,32 @@ export class FirebaseLoginService {
       }
     } else {
       return null;
+    }
+  }
+
+  // Incrementar likes para un ítem de forma segura usando transacción
+  async addLike(itemId: string) {
+    const likeRef = this.likesCollection.doc(itemId).ref;
+    await this.db.firestore.runTransaction(async (transaction) => {
+      const doc = await transaction.get(likeRef);
+      if (doc.exists) {
+        const data = doc.data() as LikeData;
+        const currentLikes = data.count || 0;
+        transaction.update(likeRef, { count: currentLikes + 1 });
+      } else {
+        transaction.set(likeRef, { count: 1 });
+      }
+    });
+  }
+
+  // Obtener conteo de likes para un ítem usando firstValueFrom
+  async getLikes(itemId: string): Promise<number> {
+    const doc = await firstValueFrom(this.likesCollection.doc(itemId).get());
+    if (doc.exists) {
+      const data = doc.data() as LikeData;
+      return data.count || 0;
+    } else {
+      return 0;
     }
   }
 

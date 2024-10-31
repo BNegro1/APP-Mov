@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './services/auth guard/auth.guard';
+import { FirebaseLoginService } from './services/firebase/firebase-ser.service';
 import { Platform } from '@ionic/angular';
+import { StorageService } from './services/storage/storage.service'; // Importar StorageService
 
 @Component({
   selector: 'app-root',
@@ -10,21 +11,26 @@ import { Platform } from '@ionic/angular';
 })
 export class AppComponent {
   showSplash = true;
-  constructor(private router: Router, private platform: Platform, private authService: AuthService) {
+
+  constructor(
+    private router: Router,
+    private platform: Platform,
+    private authService: FirebaseLoginService,
+    private storageService: StorageService // Inyectar StorageService
+  ) {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      const isAuthenticated = this.authService.isAuthenticated();
-      setTimeout(() => {
-        this.showSplash = false;
-      }, 2000);
-      if (isAuthenticated) {
-        this.router.navigate(['/home']); // Redirigir a la página de inicio si está autenticado
-      } else {
-        this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
-      }
-    });
+  async initializeApp() {
+    await this.platform.ready();
+
+    // Eliminar lógica de recuperación de datos de usuario y autenticación
+
+    setTimeout(() => {
+      this.showSplash = false;
+    }, 2000); // Ocultar la pantalla de inicio después de 2 segundos
+
+    // Si el usuario está autenticado, redirigir a la página de inicio.
+    this.router.navigate(['/home']);
   }
 }

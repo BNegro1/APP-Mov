@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router'
-import { FirebaseLoginService } from 'src/app/services/firebase-auth/firebase-auth.service'; // Importamos FirebaseLoginService desde el servicio de Firebase
+import { FirebaseLoginService } from 'src/app/services/firebase/firebase-ser.service'; // Importamos FirebaseLoginService desde el servicio de Firebase
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ToastController } from '@ionic/angular';
 
@@ -41,7 +41,7 @@ import { ToastController } from '@ionic/angular';
   ],
 })
 
-export class RegisterPage implements OnInit {
+export class RegisterPage implements OnInit { // Se define la clase RegisterPage.
   formData = {
     email: '',
     password: '',
@@ -68,21 +68,26 @@ export class RegisterPage implements OnInit {
     this.showPassword = !this.showPassword;
   } // Se define el método toggleShowPassword que cambia el valor de la variable showPassword entre true y false
 
-  async registrar() { 
-    if (this.validarDatos(this.formData)) {
-      try {
-        await this.firebaseLoginService.register(
+  async registrar() { // Se define el método registrar como async
+    if (this.validarDatos(this.formData)) { // sI los datos son válidos, se procede a registrar al usuario
+      try { // Entonces ...
+        await this.firebaseLoginService.register( // Se llama al método register del servicio FirebaseLoginService
+
+          // Entonces: Se pasan los datos del formulario al método register del servicio FirebaseLoginService
           this.formData.email,
           this.formData.password,
           this.formData.nombreUsuario
         );
-        let navigationExtras: NavigationExtras = {
-          state: { userEmail: this.formData.email }, 
+
+        
+        // Navegar a la página de inicio después del registro exitoso
+        let navigationExtras: NavigationExtras = { // Se define el objeto navigationExtras con el correo electrónico del usuario
+          state: { userEmail: this.formData.email },
         };
-        this.router.navigate(['/home'], navigationExtras);
-      } catch (error) {
+        this.router.navigate(['/home'], navigationExtras); // FInaliza con la redirección a la página de inicio
+      } catch (error) { // De lo contrario, si ocurre un error durante el registro, se muestra un mensaje de error
         const toast = await this.toastController.create({
-          message: 'Ocurrió un error durante el registro. Por favor, inténtelo de nuevo.',
+          message: 'Ocurrió un error durante el registro. Por favor, inténtelo de nuevo.', // Entonces tiene un mensaje de error
           duration: 3000,
           position: 'bottom'
         });

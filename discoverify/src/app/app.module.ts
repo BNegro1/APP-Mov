@@ -6,24 +6,34 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { NotFoundComponenteComponent } from './components/not-found-componente/not-found-componente.component';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { firebaseConfig } from '../environments/environment'; // Importa la configuración de Firebase
 
 @NgModule({
-  declarations: [AppComponent, SplashScreenComponent, NotFoundComponenteComponent],
+  declarations: [
+    AppComponent,
+    SplashScreenComponent,
+    NotFoundComponenteComponent
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig), // Inicializa Firebase
+    AngularFireAuthModule, // Módulo para autenticación con Firebase
+    AngularFirestoreModule, // Módulo para Firestore
+    IonicStorageModule.forRoot(), // Inicializa el módulo de almacenamiento de Ionic
     HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService,// Se añade el servicio AuthService a la lista de proveedores.
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyAlbumService, Album } from '../../services/spotify-api/spotify-album.service'; // Importar SpotifyAlbumService
-import { FirebaseLoginService } from 'src/app/services/firebase-auth/firebase-auth.service'; // Importar FirebaseLoginService
+import { FirebaseLoginService } from 'src/app/services/firebase/firebase-ser.service'; // Importar FirebaseLoginService
 import { Router } from '@angular/router'; // Importar Router
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importar AngularFirestore
 
 @Component({
   selector: 'app-home',
@@ -15,14 +16,17 @@ export class HomePage implements OnInit {
   error = '';
   limit = 10;
   offset = 0;
-  isAuthenticated: boolean = false;
+  isAuthenticated: boolean = false; // Definir isAuthenticated como booleano, sino se asigna un valor, se asume que es "undefined".
   nombreUsuario: string | null = ''; // Definir nombreUsuario como string o null para evitar errores, se usa "/" para indicar que puede ser null o string.
   likesCount: number = 0; // Variable para contar los likes (Definida con 0.)
 
+
+  // Se utiliza SpotifyAlbumService, FirebaseLoginService, AngularFirestore y Router.
+  // Spotify es la API de Spotify -> Check: Implementada :) !!!
   constructor(
-    private dbService: DbService, // Corregir Dbervice a DbService
     private spotifyAlbumService: SpotifyAlbumService,
     private firebaseLoginService: FirebaseLoginService, // Inyectar FirebaseLoginService
+    private firestore: AngularFirestore, // Inyectar AngularFirestore
     private router: Router // Inyectar Router
   ) { }
 
@@ -40,15 +44,17 @@ export class HomePage implements OnInit {
       this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
     }
 
-    // Suscribirse al contador de likes
-    this.dbService.getLikesCount().subscribe((count) => {
-      this.likesCount = count;
+    // Obtener el conteo de likes para cada álbum
+    this.albums.forEach(async (album) => {
+      this.likesCount = await this.firebaseLoginService.getLikes(album.id);
     });
   }
 
   loadAlbums() {
     this.loading = true;
-    this.spotifyAlbumService
+    this.spotifyAlbumService 
+      // Acontinuación, se llama al método searchAlbums del servicio SpotifyAlbumService
+      // Esto sirve para buscar álbumes de los artistas especificados en la cadena de texto.
       .searchAlbums('New Order, Oasis, The Cure, Bauhaus, Depeche Mode', this.limit, this.offset)
       .subscribe(
         (albums) => {
@@ -65,12 +71,16 @@ export class HomePage implements OnInit {
   }
 
   async checkAlbumLikes() {
-    const userId = await this.firebaseLoginService.getUserData(); // Esperar el userId
-    if (userId) { // Verificar que userId no sea null
-      const likedAlbums = await this.dbService.getLikedAlbums(userId.uid); // Esperar a que se resuelva la promesa
-
+    const userData = await this.firebaseLoginService.getUserData();
+    if (userData) {
+      const likesSnapshot = await this.firestore.collection('likes', ref => ref.where('userId', '==', userData.uid)).get().toPromise();
+      const likedAlbums: string[] = [];
+      likesSnapshot?.forEach(doc => {
+        const data = doc.data() as { albumId: string }; // Asegurarse de que data es del tipo correcto
+        likedAlbums.push(data.albumId);
+      });
       this.albums.forEach(album => {
-        album.liked = likedAlbums.includes(album.id); // Verificar si el álbum tiene "like"
+        album.liked = likedAlbums.includes(album.id);
       });
     }
   }
@@ -80,9 +90,10 @@ export class HomePage implements OnInit {
 
     this.spotifyAlbumService
       .searchAlbums('Joy Division, New Order, The Police', this.limit, this.offset)
-      .subscribe(
+      .subscribe( // SUbscribirse al observable para obtener los álbumes
         (albums) => {
-          this.albums = [...this.albums, ...albums];
+          this.albums = [...this.albums, ...albums]; // Concatenar los nuevos álbumes.. (Usar spread operator) 
+                                                     // (Spread operator = ..., hacen que los elementos de un array se expandan)
           event.target.complete();
 
           if (albums.length === 0) {
@@ -90,35 +101,38 @@ export class HomePage implements OnInit {
           }
         },
         (error) => {
-          console.error('ERROR AL FETCHING DE ALBUMES XD:', error);
+          console.error('Error realizando el fecth de albumes:', error);
           event.target.complete();
         }
       );
   }
 
   async likeAlbum(albumId: string) {
-    const userData = await this.firebaseLoginService.getUserData();
+    const userData = await this.firebaseLoginService.getUserData(); // Obtener datos del usuario mediante FirebaseLoginService
     if (userData) {
-      const userId = userData.uid;
-      const album = this.albums.find(a => a.id === albumId);
+      const album = this.albums.find(a => a.id === albumId); // Si el álbum existe en la lista de álbumes
       if (album) {
         album.liked = true;
         album.disliked = false;
-        await this.dbService.likeAlbum(userId, albumId);
-        this.updateRecommendations(album);
+        await this.firestore.collection('likes').add({ userId: userData.uid, albumId });
+        this.updateRecommendations(album); // Entonces, actualizar las recomendaciones.
       }
     }
   }
 
-  async dislikeAlbum(albumId: string) {
+  async dislikeAlbum(albumId: string) { // Método para "dislike" un álbum (async/await y promesas).
     const userData = await this.firebaseLoginService.getUserData();
     if (userData) {
-      const userId = userData.uid;
-      const album = this.albums.find(a => a.id === albumId);
-      if (album) {
+      const album = this.albums.find(a => a.id === albumId); // Buscar el álbum en la lista de álbumes (si existe)
+      if (album) { 
         album.liked = false;
         album.disliked = true;
-        await this.dbService.dislikeAlbum(userId, albumId);
+        // Eliminar el like del álbum si ya existe !!!
+        const likesRef = this.firestore.collection('likes', ref => ref.where('userId', '==', userData.uid).where('albumId', '==', albumId));
+        const likes = await likesRef.get().toPromise(); // Obtener los likes (está pendiente de resolver) 
+        if (likes) {
+          likes.forEach(doc => doc.ref.delete());
+        }
         this.updateRecommendations(album);
       }
     }
@@ -130,6 +144,7 @@ export class HomePage implements OnInit {
   }
 
   // Simular la actualización de recomendaciones
+  // !!! Fixear !!!
   updateRecommendations(album: Album) {
     if (album.liked) {
       console.log(`Recomendaciones actualizadas basadas en que te gusta el álbum: ${album.title}`);
