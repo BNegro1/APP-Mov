@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
     const userData = await this.firebaseLoginService.getUserData(); // Obtener datos del usuario
     if (userData) {
       this.nombreUsuario = userData.usuario; // Asignar el nombre de usuario
+      this.likesCount = await this.firebaseLoginService.getUserLikesCount(userData.uid);
     }
 
     if (this.isAuthenticated) {
@@ -44,10 +45,10 @@ export class HomePage implements OnInit {
       this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
     }
 
-    // Obtener el conteo de likes para cada álbum
-    this.albums.forEach(async (album) => {
+    // Eliminar este bloque que usa el método getLikes que ya no existe
+    /* this.albums.forEach(async (album) => {
       this.likesCount = await this.firebaseLoginService.getLikes(album.id);
-    });
+    }); */
   }
 
   loadAlbums() {
@@ -73,15 +74,10 @@ export class HomePage implements OnInit {
   async checkAlbumLikes() {
     const userData = await this.firebaseLoginService.getUserData();
     if (userData) {
-      const likesSnapshot = await this.firestore.collection('likes', ref => ref.where('userId', '==', userData.uid)).get().toPromise();
-      const likedAlbums: string[] = [];
-      likesSnapshot?.forEach(doc => {
-        const data = doc.data() as { albumId: string }; // Asegurarse de que data es del tipo correcto
-        likedAlbums.push(data.albumId);
-      });
-      this.albums.forEach(album => {
-        album.liked = likedAlbums.includes(album.id);
-      });
+      // Verificar likes para cada álbum
+      for (const album of this.albums) {
+        album.liked = await this.firebaseLoginService.hasUserLikedAlbum(album.id, userData.uid);
+      }
     }
   }
 
@@ -111,11 +107,14 @@ export class HomePage implements OnInit {
     const userData = await this.firebaseLoginService.getUserData(); // Obtener datos del usuario mediante FirebaseLoginService
     if (userData) {
       const album = this.albums.find(a => a.id === albumId); // Si el álbum existe en la lista de álbumes
-      if (album) {
-        album.liked = true;
-        album.disliked = false;
-        await this.firestore.collection('likes').add({ userId: userData.uid, albumId });
-        this.updateRecommendations(album); // Entonces, actualizar las recomendaciones.
+      if (album && !album.liked) {
+        const success = await this.firebaseLoginService.addLike(albumId, userData.uid);
+        if (success) {
+          album.liked = true;
+          album.disliked = false;
+          this.likesCount = await this.firebaseLoginService.getUserLikesCount(userData.uid);
+          this.updateRecommendations(album); // Entonces, actualizar las recomendaciones.
+        }
       }
     }
   }
@@ -124,16 +123,14 @@ export class HomePage implements OnInit {
     const userData = await this.firebaseLoginService.getUserData();
     if (userData) {
       const album = this.albums.find(a => a.id === albumId); // Buscar el álbum en la lista de álbumes (si existe)
-      if (album) { 
-        album.liked = false;
-        album.disliked = true;
-        // Eliminar el like del álbum si ya existe !!!
-        const likesRef = this.firestore.collection('likes', ref => ref.where('userId', '==', userData.uid).where('albumId', '==', albumId));
-        const likes = await likesRef.get().toPromise(); // Obtener los likes (está pendiente de resolver) 
-        if (likes) {
-          likes.forEach(doc => doc.ref.delete());
+      if (album && album.liked) { 
+        const success = await this.firebaseLoginService.removeLike(albumId, userData.uid);
+        if (success) {
+          album.liked = false;
+          album.disliked = true;
+          this.likesCount = await this.firebaseLoginService.getUserLikesCount(userData.uid);
+          this.updateRecommendations(album);
         }
-        this.updateRecommendations(album);
       }
     }
   }

@@ -11,6 +11,8 @@ interface UserData {
   email: string;
   usuario: string;
   uid: string;
+  likedAlbums?: string[]; // Array para almacenar IDs de álbumes con like
+  likesCount?: number;    // Contador de likes del usuario
 }
 
 interface LikeData {
@@ -127,6 +129,89 @@ export class FirebaseLoginService {
     }
   }
 
+  // Método para dar like a un álbum
+  async addLike(albumId: string, userId: string): Promise<boolean> {
+    try {
+      const userRef = this.db.collection('usuarios').doc(userId);
+      const userDoc = await firstValueFrom(userRef.get());
+      
+      if (userDoc.exists) {
+        const userData = userDoc.data() as UserData;
+        const likedAlbums = userData.likedAlbums || [];
+        
+        // Verificar si el álbum ya tiene like
+        if (!likedAlbums.includes(albumId)) {
+          // Actualizar el documento del usuario
+          await userRef.update({
+            likedAlbums: [...likedAlbums, albumId],
+            likesCount: (userData.likesCount || 0) + 1
+          });
+          return true;
+        }
+      }
+      return false;
+    } catch (error) {
+      console.error('Error al dar like:', error);
+      return false;
+    }
+  }
+
+  // Método para quitar like de un álbum
+  async removeLike(albumId: string, userId: string): Promise<boolean> {
+    try {
+      const userRef = this.db.collection('usuarios').doc(userId);
+      const userDoc = await firstValueFrom(userRef.get());
+      
+      if (userDoc.exists) {
+        const userData = userDoc.data() as UserData;
+        const likedAlbums = userData.likedAlbums || [];
+        
+        if (likedAlbums.includes(albumId)) {
+          const updatedLikes = likedAlbums.filter(id => id !== albumId);
+          await userRef.update({
+            likedAlbums: updatedLikes,
+            likesCount: Math.max((userData.likesCount || 0) - 1, 0)
+          });
+          return true;
+        }
+      }
+      return false;
+    } catch (error) {
+      console.error('Error al quitar like:', error);
+      return false;
+    }
+  }
+
+  // Método para obtener el contador de likes del usuario
+  async getUserLikesCount(userId: string): Promise<number> {
+    try {
+      const userDoc = await firstValueFrom(this.db.collection('usuarios').doc(userId).get());
+      if (userDoc.exists) {
+        const userData = userDoc.data() as UserData;
+        return userData.likesCount || 0;
+      }
+      return 0;
+    } catch (error) {
+      console.error('Error al obtener likes:', error);
+      return 0;
+    }
+  }
+
+  // Método para verificar si un álbum tiene like del usuario
+  async hasUserLikedAlbum(albumId: string, userId: string): Promise<boolean> {
+    try {
+      const userDoc = await firstValueFrom(this.db.collection('usuarios').doc(userId).get());
+      if (userDoc.exists) {
+        const userData = userDoc.data() as UserData;
+        return (userData.likedAlbums || []).includes(albumId);
+      }
+      return false;
+    } catch (error) {
+      console.error('Error al verificar like:', error);
+      return false;
+    }
+  }
+
   // Método para verificar el estado de autenticación y redirigir al inicio si no está autenticado
   async isAuthenticated() {
     const user = await firstValueFrom(this.auth.authState);
@@ -149,32 +234,6 @@ export class FirebaseLoginService {
       }
     } else {
       return null;
-    }
-  }
-
-  // Incrementar likes para un elemento de forma segura usando transacción
-  async addLike(itemId: string) {
-    const likeRef = this.likesCollection.doc(itemId).ref;
-    await this.db.firestore.runTransaction(async (transaction) => {
-      const doc = await transaction.get(likeRef);
-      if (doc.exists) {
-        const data = doc.data() as LikeData;
-        const currentLikes = data.count || 0;
-        transaction.update(likeRef, { count: currentLikes + 1 });
-      } else {
-        transaction.set(likeRef, { count: 1 });
-      }
-    });
-  }
-
-  // Obtener contador de likes para un elemento usando firstValueFrom
-  async getLikes(itemId: string): Promise<number> {
-    const doc = await firstValueFrom(this.likesCollection.doc(itemId).get());
-    if (doc.exists) {
-      const data = doc.data() as LikeData;
-      return data.count || 0;
-    } else {
-      return 0;
     }
   }
 
