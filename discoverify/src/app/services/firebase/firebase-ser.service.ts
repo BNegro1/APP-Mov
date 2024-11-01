@@ -117,15 +117,6 @@ export class FirebaseLoginService {
           createdAt: new Date()
         });
 
-        // Crear documento en la colección 'users' (si es necesario)
-        const userRef = this.db.collection('users').doc(uid).ref;
-        batch.set(userRef, {
-          email: email,
-          usuario: usuario,
-          uid: uid,
-          createdAt: new Date()
-        });
-
         await batch.commit();
         return true;
       }
