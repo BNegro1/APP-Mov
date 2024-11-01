@@ -15,6 +15,7 @@ import { RegisterPage } from './register.page';
     IonicModule,
     RegisterPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage],
+  exports: [RegisterPage]  // Agregamos la exportación (Recordar que se debe agregar la exportación en el módulo de la página)
 })
-export class RegisterPageModule {}
+export class RegisterPageModule { }

@@ -16,13 +16,19 @@
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
-export const firebaseConfig = {
-  apiKey: "AIzaSyB7LukVZgX952mGbLUN0ecnXoM0j08DMDs",
-  authDomain: "discoverify-app.firebaseapp.com",
-  databaseURL: "https://discoverify-app-default-rtdb.firebaseio.com",
-  projectId: "discoverify-app",
-  storageBucket: "discoverify-app.firebasestorage.app",
-  messagingSenderId: "233031717062",
-  appId: "1:233031717062:web:ed79817d3ee54dc35987c7"
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyB7LukVZgX952mGbLUN0ecnXoM0j08DMDs",
+    authDomain: "discoverify-app.firebaseapp.com",
+    databaseURL: "https://discoverify-app-default-rtdb.firebaseio.com",
+    projectId: "discoverify-app",
+    storageBucket: "discoverify-app.firebasestorage.app",
+    messagingSenderId: "233031717062",
+    appId: "1:233031717062:web:ed79817d3ee54dc35987c7"
+  }
 };
+
+// Exportar también firebaseConfig para compatibilidad
+export const firebaseConfig = environment.firebase;
 

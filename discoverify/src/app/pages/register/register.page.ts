@@ -110,10 +110,11 @@ export class RegisterPage implements OnInit { // Se define la clase RegisterPage
       return false;
     } // Si el campo de correo electrónico está vacío o no contiene el carácter '@', se muestra un mensaje de error en el campo de correo electrónico
 
-    if (!model.password || model.password.length <= 2) {
-      this.campoContrasenna = 'La contraseña debe tener más de 2 caracteres.';
-      return false; // Si el campo de contraseña está vacío o tiene menos de 3 caracteres, se muestra un mensaje de error en el campo de contraseña
+    if (!model.password || model.password.length < 6) {
+      this.campoContrasenna = 'La contraseña debe tener al menos 6 caracteres.';
+      return false; // Si el campo de contraseña está vacío o tiene menos de 6 caracteres, se muestra un mensaje de error en el campo de contraseña
     }
+
  
     const nombreUsuarioPattern = /^[a-zA-Z0-9 .]+$/; // IMPORTANTE: Se define una expresión regular para validar el nombre de usuario!!! IMPORTANTE !!!
     if (!model.nombreUsuario || !nombreUsuarioPattern.test(model.nombreUsuario)) {
