@@ -41,87 +41,103 @@ import { ToastController } from '@ionic/angular';
   ],
 })
 
-export class RegisterPage implements OnInit { // Se define la clase RegisterPage.
+export class RegisterPage implements OnInit {
+  // Modelo de datos del formulario
   formData = {
     email: '',
     password: '',
     nombreUsuario: ''
-  }; // Se inicializa el objeto formData con los campos email, password y nombreUsuario vacíos
+  };
 
-
-  // Se inicializan los campos de error con un string vacío para que no se muestre ningún mensaje de error al principio de la página de registro
+  // Variables para manejo de errores y UI
   campoCorreo = '';
   campoContrasenna = '';
   campoNombreUsuario = '';
   showPassword = false;
 
-  // Se crea un constructor con el ToastController como mensaje, access de Firebase Login y el ruteo con Router
   constructor(
-    private firebaseLoginService: FirebaseLoginService, // Agregar FirebaseLoginService
+    private firebaseLoginService: FirebaseLoginService,
     private router: Router,
-    private toastController: ToastController // Asegurarse de incluir ToastController si es necesario
+    private toastController: ToastController
   ) { }
 
   ngOnInit() { }
 
+  // Alternar visibilidad de la contraseña
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
-  } // Se define el método toggleShowPassword que cambia el valor de la variable showPassword entre true y false
+  }
 
-  async registrar() { // Se define el método registrar como async
-    if (this.validarDatos(this.formData)) { // sI los datos son válidos, se procede a registrar al usuario
-      try { // Entonces ...
-        await this.firebaseLoginService.register( // Se llama al método register del servicio FirebaseLoginService
 
-          // Entonces: Se pasan los datos del formulario al método register del servicio FirebaseLoginService
+  // Método principal para el registro de usuarios
+  // Valida los datos y maneja el proceso de registro con Firebase
+
+  async registrar() {
+    if (this.validarDatos(this.formData)) {
+      try {
+        // Intenta registrar al usuario con Firebase
+        const result = await this.firebaseLoginService.register(
           this.formData.email,
           this.formData.password,
           this.formData.nombreUsuario
         );
 
-        
-        // Navegar a la página de inicio después del registro exitoso
-        let navigationExtras: NavigationExtras = { // Se define el objeto navigationExtras con el correo electrónico del usuario
-          state: { userEmail: this.formData.email },
-        };
-        this.router.navigate(['/home'], navigationExtras); // FInaliza con la redirección a la página de inicio
-      } catch (error) { // De lo contrario, si ocurre un error durante el registro, se muestra un mensaje de error
-        const toast = await this.toastController.create({
-          message: 'Ocurrió un error durante el registro. Por favor, inténtelo de nuevo.', // Entonces tiene un mensaje de error
-          duration: 3000,
-          position: 'bottom'
-        });
-        toast.present();
+        if (typeof result === 'string') {
+          // Muestra mensaje de error si el registro falla
+          await this.mostrarToast(result, 'danger');
+        } else {
+          // Registro exitoso: navega a la página principal
+          let navigationExtras: NavigationExtras = {
+            state: { userEmail: this.formData.email },
+          };
+          this.router.navigate(['/home'], navigationExtras);
+        }
+      } catch (error) {
+        // Manejo de errores inesperados
+        await this.mostrarToast('Ocurrió un error durante el registro. Por favor, inténtelo de nuevo.', 'danger');
       }
     }
   }
 
-  validarDatos(model: any): boolean { // Se define el método validarDatos que recibe un objeto model y devuelve un valor booleano
 
-    // Se inicializan los campos de error con un string vacío
+  // Valida los datos del formulario de registro
+
+  validarDatos(model: any): boolean {
+    // Reinicia mensajes de error
     this.campoCorreo = '';
     this.campoContrasenna = '';
     this.campoNombreUsuario = '';
 
-
-    // Se valida el campo de correo electrónico
+    // Validación del correo electrónico
     if (!model.email || !model.email.includes('@')) {
       this.campoCorreo = 'Por favor ingrese un correo electrónico válido.';
       return false;
-    } // Si el campo de correo electrónico está vacío o no contiene el carácter '@', se muestra un mensaje de error en el campo de correo electrónico
-
-    if (!model.password || model.password.length < 6) {
-      this.campoContrasenna = 'La contraseña debe tener al menos 6 caracteres.';
-      return false; // Si el campo de contraseña está vacío o tiene menos de 6 caracteres, se muestra un mensaje de error en el campo de contraseña
     }
 
- 
-    const nombreUsuarioPattern = /^[a-zA-Z0-9 .]+$/; // IMPORTANTE: Se define una expresión regular para validar el nombre de usuario!!! IMPORTANTE !!!
+    // Validación de la contraseña
+    if (!model.password || model.password.length < 6) {
+      this.campoContrasenna = 'La contraseña debe tener al menos 6 caracteres.';
+      return false;
+    }
+
+    // Validación del nombre de usuario
+    const nombreUsuarioPattern = /^[a-zA-Z0-9._]+$/;
     if (!model.nombreUsuario || !nombreUsuarioPattern.test(model.nombreUsuario)) {
       this.campoNombreUsuario = 'El nombre de usuario solo puede contener letras, espacios, puntos y números.';
       return false;
     }
 
     return true;
+  }
+
+  // Método auxiliar para mostrar mensajes Toast
+  private async mostrarToast(mensaje: string, color: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'bottom',
+      color: color
+    });
+    await toast.present();
   }
 }

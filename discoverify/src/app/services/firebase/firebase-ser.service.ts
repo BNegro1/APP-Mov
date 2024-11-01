@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom, Observable, throwError } from 'rxjs';
 import { FirebaseAuthService } from './firebase-auth.service';
 import { catchError } from 'rxjs/operators';
+import { Storage } from '@ionic/storage-angular';
 
 interface UserData {
   email: string;
@@ -24,26 +25,28 @@ export class FirebaseLoginService {
   changePassword(oldPassword: string, newPassword: string) {
 
   }
-  
+
 
   constructor(
-    
+
     private auth: AngularFireAuth,
     private db: AngularFirestore,
     private router: Router,
-    private firebaseAuthService: FirebaseAuthService
+    private firebaseAuthService: FirebaseAuthService,
+    private storage: Storage
 
-  ) { 
+  ) {
+    this.storage.create();
     // Definir la colección 'likes' con el tipo LikeData
     this.likesCollection = this.db.collection<LikeData>('likes');
   }
 
   private likesCollection;
 
-  private handleFirebaseError(error: any) {
+  private handleFirebaseError(error: any): string {
     console.error('Error en Firebase:', error);
     let errorMessage = 'Ocurrió un error desconocido';
-    
+
     if (error.code) {
       switch (error.code) {
         case 'auth/email-already-in-use':
@@ -62,23 +65,38 @@ export class FirebaseLoginService {
           errorMessage = error.message;
       }
     }
-    
-    return throwError(() => errorMessage);
+
+    return errorMessage;
   }
 
-  // Método de inicio de sesión
-  login(email: string, password: string) {
-    return this.auth.signInWithEmailAndPassword(email, password);
+  // Método mejorado de login con mejor manejo de errores
+  async login(email: string, password: string) {
+    try {
+      // Intenta autenticar con Firebase
+      const result = await this.auth.signInWithEmailAndPassword(email, password);
+      if (result.user) {
+        return result;
+      }
+      throw new Error('No se pudo iniciar sesión');
+    } catch (error: any) {
+      // Manejo específico de errores de autenticación
+      let errorMessage = 'Error al iniciar sesión';
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        errorMessage = 'Correo o contraseña incorrectos';
+      }
+      throw new Error(errorMessage);
+    }
   }
 
-  // Cerrar sesión y redirigir al inicio
-  logout() {
-    this.auth.signOut();
-    this.router.navigate(['/']);
+  // Método mejorado de logout que también limpia el storage
+  async logout() {
+    await this.auth.signOut(); // Cierra sesión en Firebase
+    await this.storage.remove('SessionId'); // Limpia el storage local
+    this.router.navigate(['/login'], { replaceUrl: true }); // Redirige evitando retorno
   }
 
   // Crear usuario en firebase, tanto en autenticación como en base de datos
-  async register(email: string, password: string, usuario: string): Promise<true | Observable<never>> {
+  async register(email: string, password: string, usuario: string): Promise<true | string> {
     try {
       const existingUser = await this.auth.fetchSignInMethodsForEmail(email);
       if (existingUser.length > 0) {
@@ -86,10 +104,10 @@ export class FirebaseLoginService {
       }
       const credentials = await this.auth.createUserWithEmailAndPassword(email, password);
       const uid = credentials.user?.uid;
-      
+
       if (uid) {
         const batch = this.db.firestore.batch();
-        
+
         // Crear documento en la colección 'usuarios'
         const usuarioRef = this.db.collection('usuarios').doc(uid).ref;
         batch.set(usuarioRef, {
