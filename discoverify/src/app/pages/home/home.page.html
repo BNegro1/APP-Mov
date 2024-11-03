@@ -22,10 +22,12 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-        <!-- Nombre de usuario en el borde inferior del menú -->
-        <ion-item *ngIf="isAuthenticated" class="username-item" lines="none">
+        <ion-item routerLink="/profile" class="username-item" lines="none" detail>
+          <ion-avatar slot="start">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-avatar>
           <ion-label>
-            Cuenta: {{ nombreUsuario }} <br>
+            {{ nombreUsuario }} <br>
             <small>Álbumes que te gustan: {{ likesCount }}</small>
           </ion-label>
         </ion-item>
@@ -43,7 +45,7 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content #content> <!-- NO borrar content.-->
+      <ion-content #content> <!-- NO borrar constent.-->
         <ion-grid>
           <ion-row>
             <ion-col size="12" size-sm="6" size-md="3" *ngFor="let album of albums">

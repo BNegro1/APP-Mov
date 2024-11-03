@@ -237,4 +237,20 @@ export class FirebaseLoginService {
     }
   }
 
+  // Método para guardar un álbum en Firestore
+  saveAlbum(album: any): Promise<void> {
+    const albumsCollection = this.db.collection('albums');
+    return albumsCollection.add(album)
+      .then(() => {
+        console.log('Álbum guardado exitosamente');
+      })
+      .catch(error => {
+        console.error('Error al guardar el álbum:', error);
+      });
+  }
+
+  getAlbums(): Observable<any[]> {
+    return this.db.collection('albums').valueChanges({ idField: 'id' });
+  }
+
 }

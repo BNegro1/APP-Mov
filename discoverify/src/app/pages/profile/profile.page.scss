@@ -1,0 +1,11 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  ion-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}

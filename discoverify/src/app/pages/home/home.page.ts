@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
   @ViewChild('content', { static: false }) content!: IonContent; // Referencia -> 'content' 
                                                                  // (Esta se encarga de manejar el contenido de la página)
 
-  albums: Album[] = [];
+  albums: any[] = [];
   loading = false;
   error = '';
   limit = 10;
@@ -48,6 +48,14 @@ export class HomePage implements OnInit {
     } else {
       this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
     }
+  /**  
+   * 
+   *  Modificar para que se carguen los álbumes desde Firebase.
+   * 
+    this.firebaseLoginService.getAlbums().subscribe(albums => {
+      this.albums = albums;
+    });
+    */
   }
 
   loadAlbums() {

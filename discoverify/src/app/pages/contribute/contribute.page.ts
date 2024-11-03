@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { FirebaseLoginService } from '../../services/firebase/firebase-ser.service';
 
 @Component({
   selector: 'app-contribute',
@@ -10,16 +11,30 @@ export class ContributePage {
   album = {
     title: '',
     artist: '',
-    releaseDate: '',
-    genre: '',
+    cover: '' 
   };
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private firebaseLoginService: FirebaseLoginService) {}
+
+  onFileChange(event: any) {
+    const reader = new FileReader();
+    if(event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.album.cover = reader.result as string;
+      };
+    }
+  }
 
   submitForm() {
-    const albumJson = JSON.stringify(this.album); // Convertir el objeto album a una cadena JSON
-    localStorage.setItem('album', albumJson); // Guardar la cadena JSON en localStorage con la clave 'album'
-    console.log('Nuevo álbum:', this.album); // Imprimir el álbum en la consola
-    this.navCtrl.navigateBack('/home'); // Imprimir el álbum en la consola
+    this.firebaseLoginService.saveAlbum(this.album)
+      .then(() => {
+        console.log('Nuevo álbum guardado:', this.album);
+        this.navCtrl.navigateBack('/home');
+      })
+      .catch(error => {
+        console.error('Error al guardar el álbum:', error);
+      });
   }
 }

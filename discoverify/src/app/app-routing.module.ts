@@ -29,17 +29,23 @@ const routes: Routes = [
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'register',
     loadChildren: () =>
       import('./pages/register/register.module').then(
         (m) => m.RegisterPageModule
       ),
   },
-  // 404 - Not Found route
+  // 404 - Not Found (ruta)
   {
     path: '**',
     component: NotFoundComponenteComponent,
   },
+ 
 ];
 
 @NgModule({

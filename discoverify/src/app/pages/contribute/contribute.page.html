@@ -15,12 +15,8 @@
       <ion-input type="text" required [(ngModel)]="album.artist" name="artist"></ion-input> <!-- Campo para el nombre del artista -->
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Fecha de Lanzamiento</ion-label>
-      <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="album.releaseDate" name="releaseDate"></ion-datetime> <!-- Campo para la fecha de lanzamiento del álbum -->
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Género</ion-label>
-      <ion-input type="text" required [(ngModel)]="album.genre" name="genre"></ion-input> <!-- Campo para el género del álbum -->
+      <ion-label position="floating">Portada del Álbum</ion-label>
+      <input type="file" accept="image/*" (change)="onFileChange($event)" required />
     </ion-item>
 
     <!-- Botón para enviar el formulario -->
