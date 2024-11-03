@@ -1,0 +1,42 @@
+ flowchart TD
+    A[User] -->|Navigates to| B[Register Page]
+    B -->|Fills form and submits| C{Validate Form}
+    C -->|Valid| D[Call Firebase Register]
+    C -->|Invalid| E[Show Error]
+    D -->|Success| F[Redirect to Home Page]
+    D -->|Failure| E
+    F --> G[Home Page]
+    G -->|Displays Albums| H[User Interacts]
+    H -->|Likes Album| I[Update Firebase - Add Like]
+    H -->|Dislikes Album| J[Update Firebase - Remove Like]
+    G -->|Scrolls| O[Load More Albums]
+    O --> G
+
+    A -->|Navigates to| K[Login Page]
+    K -->|Fills form and submits| L{Validate Form}
+    L -->|Valid| M[Call Firebase Login]
+    L -->|Invalid| N[Show Error]
+    M -->|Success| F
+    M -->|Failure| N
+
+    G -->|Logout| P[Call Firebase Logout]
+    G -->|Check Likes| Q[Check Album Likes]
+    G -->|Load Albums| R[Load Albums]
+
+    click B call linkCallback("src/app/pages/register/register.page.html")
+    click C call linkCallback("src/app/pages/register/register.page.ts#L71")
+    click D call linkCallback("src/app/services/firebase/firebase-ser.service.ts#L100")
+    click E call linkCallback("src/app/pages/register/register.page.ts#L138")
+    click F call linkCallback("src/app/pages/home/home.page.html")
+    click G call linkCallback("src/app/pages/home/home.page.ts")
+    click H call linkCallback("src/app/pages/home/home.page.html#L47")
+    click I call linkCallback("src/app/services/firebase/firebase-ser.service.ts#L132")
+    click J call linkCallback("src/app/services/firebase/firebase-ser.service.ts#L159")
+    click K call linkCallback("src/app/pages/login/login.page.html")
+    click L call linkCallback("src/app/pages/login/login.page.ts#L103")
+    click M call linkCallback("src/app/services/firebase/firebase-ser.service.ts")
+    click N call linkCallback("src/app/pages/login/login.page.ts#L103")
+    click O call linkCallback("src/app/pages/home/home.page.ts#L78")
+    click P call linkCallback("src/app/services/firebase/firebase-ser.service.ts#L92")
+    click Q call linkCallback("src/app/pages/home/home.page.ts#L68")
+    click R call linkCallback("src/app/pages/home/home.page.ts#L48")

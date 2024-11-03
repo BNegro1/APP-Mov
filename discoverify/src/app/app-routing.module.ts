@@ -24,22 +24,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'errorview',
-    loadChildren: () =>
-      import('./pages/errorview/errorview.module').then(
-        (m) => m.ErrorviewPageModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'login',
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
-  },
-  {
-    path: 'reset',
-    loadChildren: () =>
-      import('./pages/reset/reset.module').then((m) => m.ResetPageModule),
   },
   {
     path: 'register',

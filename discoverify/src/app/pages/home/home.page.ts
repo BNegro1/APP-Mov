@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 import { SpotifyAlbumService, Album } from '../../services/spotify-api/spotify-album.service'; // Importar SpotifyAlbumService
 import { FirebaseLoginService } from 'src/app/services/firebase/firebase-ser.service'; // Importar FirebaseLoginService
 import { Router } from '@angular/router'; // Importar Router
@@ -11,6 +12,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importar A
 })
 
 export class HomePage implements OnInit {
+  @ViewChild('content', { static: false }) content!: IonContent; // Referencia -> 'content' 
+                                                                 // (Esta se encarga de manejar el contenido de la página)
+
   albums: Album[] = [];
   loading = false;
   error = '';
@@ -44,11 +48,6 @@ export class HomePage implements OnInit {
     } else {
       this.router.navigate(['/login']); // Redirigir a la página de login si no está autenticado
     }
-
-    // Eliminar este bloque que usa el método getLikes que ya no existe
-    /* this.albums.forEach(async (album) => {
-      this.likesCount = await this.firebaseLoginService.getLikes(album.id);
-    }); */
   }
 
   loadAlbums() {
@@ -113,7 +112,6 @@ export class HomePage implements OnInit {
           album.liked = true;
           album.disliked = false;
           this.likesCount = await this.firebaseLoginService.getUserLikesCount(userData.uid);
-          this.updateRecommendations(album); // Entonces, actualizar las recomendaciones.
         }
       }
     }
@@ -129,24 +127,17 @@ export class HomePage implements OnInit {
           album.liked = false;
           album.disliked = true;
           this.likesCount = await this.firebaseLoginService.getUserLikesCount(userData.uid);
-          this.updateRecommendations(album);
         }
       }
     }
   }
 
+  scrollToTop() {
+    this.content.scrollToTop(550); // Scrollear hacia arriba (Back to top)
+  }
+
   logout() {
     this.firebaseLoginService.logout(); // Utilizar FirebaseLoginService para logout
     this.router.navigate(['/login']);
-  }
-
-  // Simular la actualización de recomendaciones
-  // !!! Fixear !!!
-  updateRecommendations(album: Album) {
-    if (album.liked) {
-      console.log(`Recomendaciones actualizadas basadas en que te gusta el álbum: ${album.title}`);
-    } else if (album.disliked) {
-      console.log(`No se mostrarán álbumes similares a: ${album.title}`);
-    }
   }
 }
