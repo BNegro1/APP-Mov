@@ -23,7 +23,7 @@ import { Storage } from '@ionic/storage-angular'; // Importar Storage
   animations: [
     trigger('fadeInAnimation', [
       transition(':enter', [
-        style({ opacity: 0 }), 
+        style({ opacity: 0 }),
         animate('500ms', style({ opacity: 1 })),
       ]),
     ]),
@@ -54,43 +54,50 @@ import { Storage } from '@ionic/storage-angular'; // Importar Storage
 })
 
 
-// ENtonces, se define la clase LoginPage que implementa OnInit:
-export class LoginPage implements OnInit { // Implementar OnInit para inicializar el componente
+export class LoginPage implements OnInit {
   login = {
     email: '',
     contrasenna: '',
   };
-  
-  // Se inicializan los campos de error con un string vacío para que no se muestre ningún mensaje de error al principio de la página de login
+
   campoCorreo = '';
   campoContrasenna = '';
   showPassword = false;
+  isLoading = false; // Control de "carga"
 
   constructor(
-    private firebaseLoginService: FirebaseLoginService, // Inyectar FirebaseLoginService
+    private firebaseLoginService: FirebaseLoginService,
     private router: Router,
-    private toastController: ToastController, // Inyectar ToastController
-    private storage: Storage // Agregar Storage
+    private toastController: ToastController,
+    private storage: Storage
   ) {
     this.initStorage();
+    this.checkExistingSession(); // Verificar sesión existente al iniciar
   }
 
   async initStorage() {
     await this.storage.create();
   }
 
+  async checkExistingSession() {
+    const sessionId = await this.storage.get('SessionId');
+    if (sessionId) {
+      this.router.navigate(['/home'], { // Si existe una sesión, navegar directamente al home
+        replaceUrl: true // Esto previene que el usuario pueda volver atrás al login
+      });
+    }
+  }
+
   ngOnInit() { }
 
-  // Se define el método toggleShowPassword que cambia el valor de la variable showPassword entre true y false
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
 
-
-  // Método mejorado de login con manejo de sesión y feedback
   async ingresar() {
+    if (this.isLoading) return; // Evitar múltiples logins simultáneos
+
     if (!this.validarDatos(this.login)) {
-      // Muestra errores de validación
       const toast = await this.toastController.create({
         message: this.campoCorreo || this.campoContrasenna,
         duration: 2000,
@@ -102,14 +109,16 @@ export class LoginPage implements OnInit { // Implementar OnInit para inicializa
     }
 
     try {
-      // Intenta hacer login con Firebase
-      const result = await this.firebaseLoginService.login(this.login.email, this.login.contrasenna);
-      
-      // Si el login es exitoso, guarda la sesión
+      this.isLoading = true; // Activar "estado de carga""
+
+      const result = await this.firebaseLoginService.login(
+        this.login.email,
+        this.login.contrasenna
+      );
+
       if (result.user?.uid) {
         await this.storage.set('SessionId', result.user.uid);
-        
-        // Muestra mensaje de éxito
+
         const toast = await this.toastController.create({
           message: '¡Bienvenido!',
           duration: 2000,
@@ -117,40 +126,51 @@ export class LoginPage implements OnInit { // Implementar OnInit para inicializa
           color: 'success'
         });
         await toast.present();
-        
-        // Asegurar navegación. VERIFICAR TIEMPO DE DEMORA!!!!!!!!!!!!!!!!!
-        setTimeout(() => {
-          this.router.navigate(['/home'], {
-            replaceUrl: true
-          });
+
+        // Navegar inmediatamente después del login exitoso
+        await this.router.navigate(['/home'], {
+          replaceUrl: true // Esto reemplaza la página actual 
         });
       }
     } catch (error: any) {
-      // Maneja errores mostrando toast
       const toast = await this.toastController.create({
-        message: error.message,
+        message: this.getErrorMessage(error.code) || error.message,
         duration: 3000,
         position: 'bottom',
         color: 'danger'
       });
       await toast.present();
+    } finally {
+      this.isLoading = false; // Desactivar estado de carga SIEMPRE Y CUANDO ocurra un error.
     }
   }
 
-  // Se valida el correo electrónico y la contraseña y se redirige al usuario a la página de "home" si los datos son correctos
-  validarDatos(model: any): boolean {
+  // Manejo de errores especificos.
+  private getErrorMessage(errorCode: string): string {
+    switch (errorCode) {
+      case 'auth/user-not-found':
+        return 'Usuario no encontrado';
+      case 'auth/wrong-password':
+        return 'Contraseña incorrecta';
+      case 'auth/invalid-email':
+        return 'Correo electrónico inválido';
+      case 'auth/user-disabled':
+        return 'Usuario deshabilitado';
+      default:
+        return 'Error al iniciar sesión';
+    }
+  }
 
-    // Se inicializan los campos de error con un string vacío
+  validarDatos(model: any): boolean {
     this.campoCorreo = '';
     this.campoContrasenna = '';
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!model.email || !emailRegex.test(model.email)) {
       this.campoCorreo = 'Por favor ingrese un correo electrónico válido';
       return false;
     }
 
-    // Validación de la contraseña consistente con el registro
     if (!model.contrasenna || model.contrasenna.length < 6) {
       this.campoContrasenna = 'La contraseña debe tener al menos 6 caracteres.';
       return false;

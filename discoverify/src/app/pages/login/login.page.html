@@ -1,45 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Iniciar sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="ion-text-center">
-    <ion-card>
+    <ion-card [@slideInAnimation]>
       <ion-card-header>
         <ion-card-title>Bienvenido</ion-card-title>
+        <ion-card-subtitle>Ingresa tus credenciales</ion-card-subtitle>
       </ion-card-header>
+
       <ion-card-content>
         <form (ngSubmit)="ingresar()" #loginForm="ngForm">
+          <!-- Email Input -->
           <ion-item>
             <ion-label position="floating">Correo Electrónico</ion-label>
-            <ion-input type="email" [(ngModel)]="login.email" name="email" required #emailInput="ngModel"></ion-input>
+            <ion-input type="email" [(ngModel)]="login.email" name="email" required #emailInput="ngModel"
+              [disabled]="isLoading" autocomplete="email"></ion-input>
           </ion-item>
-          <ion-text color="danger" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-            <p>El correo electrónico es requerido.</p>
+
+          <!-- Email Validation Messages -->
+          <ion-text color="danger" class="ion-padding-start"
+            *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+            <small *ngIf="emailInput.errors?.['required']">El correo electrónico es requerido.</small>
+            <small *ngIf="campoCorreo">{{ campoCorreo }}</small>
           </ion-text>
 
-          <ion-item>
+          <!-- Password Input -->
+          <ion-item class="ion-margin-top">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="login.contrasenna" name="contrasenna"
-              required #passwordInput="ngModel"></ion-input>
-            <ion-icon slot="end" [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
-              (click)="toggleShowPassword()" class="password-toggle"></ion-icon>
+              required #passwordInput="ngModel" [disabled]="isLoading" autocomplete="current-password"></ion-input>
+            <ion-button fill="clear" slot="end" (click)="toggleShowPassword()" class="password-toggle"
+              [disabled]="isLoading">
+              <ion-icon slot="icon-only" [name]="showPassword ? 'eye-off-outline' : 'eye-outline'">
+              </ion-icon>
+            </ion-button>
           </ion-item>
-          <ion-text color="danger" *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
-            <p>La contraseña es requerida.</p>
+
+          <!-- Password Validation Messages -->
+          <ion-text color="danger" class="ion-padding-start"
+            *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
+            <small *ngIf="passwordInput.errors?.['required']">La contraseña es requerida.</small>
+            <small *ngIf="campoContrasenna">{{ campoContrasenna }}</small>
           </ion-text>
 
-          <ion-button type="submit" expand="block" [disabled]="!loginForm.form.valid" class="ion-margin-top"
-            [@pulseAnimation]>
-            Ingresar
-            <ion-icon name="log-in-outline" slot="end"></ion-icon>
+          <!-- Login Button -->
+          <ion-button type="submit" expand="block" class="ion-margin-top"
+            [disabled]="!loginForm.form.valid || isLoading" [@pulseAnimation]>
+            <ion-label *ngIf="!isLoading">Ingresar</ion-label>
+            <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+            <ion-icon *ngIf="!isLoading" name="log-in-outline" slot="end"></ion-icon>
           </ion-button>
         </form>
 
+        <!-- Additional Options -->
         <div class="additional-options ion-margin-top" [@fadeInAnimation]>
-          <ion-button fill="clear" size="small" [routerLink]="['/register']">
+          <ion-button fill="clear" size="small" [routerLink]="['/register']" [disabled]="isLoading">
             ¿No tienes cuenta? Regístrate
           </ion-button>
         </div>
