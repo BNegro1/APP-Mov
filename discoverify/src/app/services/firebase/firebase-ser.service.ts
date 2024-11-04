@@ -90,7 +90,7 @@ export class FirebaseLoginService {
     }
   }
 
-  // Método mejorado de logout que también limpia el storage
+  // Limpiar storage
   async logout() {
     await this.auth.signOut(); // Cierra sesión en Firebase
     await this.storage.remove('SessionId'); // Limpia el storage local
@@ -212,13 +212,13 @@ export class FirebaseLoginService {
     }
   }
 
-  // Método para verificar el estado de autenticación y redirigir al inicio si no está autenticado
+  // Método para verificar el estado de autenticación y redirigir al login si no está autenticado
   async isAuthenticated() {
     const user = await firstValueFrom(this.auth.authState);
     if (user) {
       return true;
     } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       return false;
     }
   }
@@ -251,6 +251,11 @@ export class FirebaseLoginService {
 
   getAlbums(): Observable<any[]> {
     return this.db.collection('albums').valueChanges({ idField: 'id' });
+  }
+
+  // Método para observar el estado de autenticación
+  getAuthState() {
+    return this.auth.authState;
   }
 
 }

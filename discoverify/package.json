@@ -30,6 +30,7 @@
     "axios": "^1.7.7",
     "cordova-plugin-x-toast": "^2.7.3",
     "firebase": "^11.0.1",
+    "firebase-admin": "^12.7.0",
     "ionicons": "^7.0.0",
     "npm": "^10.9.0",
     "symbol-observable": "^4.0.0",

@@ -22,7 +22,9 @@ import { environment } from '../environments/environment'; // Importa la configu
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'md' // Forzar Material Design!!!!
+    }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, // Módulo para autenticación con Firebase

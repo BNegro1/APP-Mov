@@ -4,16 +4,39 @@ import { AuthGuard } from './services/auth-guard/auth.guard';
 import { NotFoundComponenteComponent } from './components/not-found-componente/not-found-componente.component';
 
 const routes: Routes = [
+  // Ruta por defecto
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
+
+  // Rutas públicas (sin autenticación)
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./pages/register/register.module').then(
+        (m) => m.RegisterPageModule
+      ),
+  },
+
+  // Rutas protegidas (requieren autenticación)
   {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    loadChildren: () => 
+      import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'contribute',
@@ -23,29 +46,12 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginPageModule),
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'register',
-    loadChildren: () =>
-      import('./pages/register/register.module').then(
-        (m) => m.RegisterPageModule
-      ),
-  },
-  // 404 - Not Found (ruta)
+
+  // 404 not found
   {
     path: '**',
     component: NotFoundComponenteComponent,
   },
- 
 ];
 
 @NgModule({

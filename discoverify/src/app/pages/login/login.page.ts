@@ -108,21 +108,23 @@ export class LoginPage implements OnInit { // Implementar OnInit para inicializa
       // Si el login es exitoso, guarda la sesión
       if (result.user?.uid) {
         await this.storage.set('SessionId', result.user.uid);
+        
+        // Muestra mensaje de éxito
+        const toast = await this.toastController.create({
+          message: '¡Bienvenido!',
+          duration: 2000,
+          position: 'bottom',
+          color: 'success'
+        });
+        await toast.present();
+        
+        // Asegurar navegación. VERIFICAR TIEMPO DE DEMORA!!!!!!!!!!!!!!!!!
+        setTimeout(() => {
+          this.router.navigate(['/home'], {
+            replaceUrl: true
+          });
+        });
       }
-      
-      // Muestra mensaje de éxito
-      const toast = await this.toastController.create({
-        message: '¡Bienvenido!',
-        duration: 2000,
-        position: 'bottom',
-        color: 'success'
-      });
-      await toast.present();
-      
-      // Navega al home sin posibilidad de retorno
-      this.router.navigate(['/home'], {
-        replaceUrl: true
-      });
     } catch (error: any) {
       // Maneja errores mostrando toast
       const toast = await this.toastController.create({
