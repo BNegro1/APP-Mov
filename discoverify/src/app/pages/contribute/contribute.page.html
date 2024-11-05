@@ -3,7 +3,7 @@
     <!-- Contenido principal -->
     <div class="ion-page" id="main-content">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
@@ -12,25 +12,33 @@
       </ion-header>
 
       <ion-content>
-        <form (ngSubmit)="submitForm()" #albumForm="ngForm">
-          <ion-item>
-            <ion-label position="floating">Título del Álbum</ion-label>
-            <ion-input type="text" required [(ngModel)]="album.title" name="title"></ion-input>
-            <!-- Campo para el título del álbum -->
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Artista</ion-label>
-            <ion-input type="text" required [(ngModel)]="album.artist" name="artist"></ion-input>
-            <!-- Campo para el nombre del artista -->
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Portada del Álbum</ion-label>
-            <input type="file" accept="image/*" (change)="onFileChange($event)" required />
-          </ion-item>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Subir Álbum</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form (ngSubmit)="submitForm()" #albumForm="ngForm">
+              <ion-item>
+                <ion-label position="floating">Título del Álbum</ion-label>
+                <ion-input type="text" required [(ngModel)]="album.title" name="title"></ion-input>
+                <!-- Campo para el título del álbum -->
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Artista</ion-label>
+                <ion-input type="text" required [(ngModel)]="album.artist" name="artist"></ion-input>
+                <!-- Campo para el nombre del artista -->
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Portada del Álbum</ion-label>
+                <br />
+                <input type="file" accept="image/*" capture="camera" (change)="onFileChange($event)" required />
+              </ion-item>
 
-          <!-- Botón para enviar el formulario -->
-          <ion-button expand="block" type="submit">Subir Álbum</ion-button>
-        </form>
+              <!-- Botón para enviar el formulario -->
+              <ion-button expand="block" type="submit">Subir Álbum</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
       </ion-content>
     </div>
   </ion-split-pane>

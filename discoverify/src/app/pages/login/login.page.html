@@ -8,46 +8,44 @@
   <div class="ion-text-center">
     <ion-card [@slideInAnimation]>
       <ion-card-header>
-        <ion-card-title>Bienvenido</ion-card-title>
-        <ion-card-subtitle>Ingresa tus credenciales</ion-card-subtitle>
+        <ion-card-title>¡Bienvenido!</ion-card-title>
+        <ion-card-subtitle>Discoverify a tu mano</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
         <form (ngSubmit)="ingresar()" #loginForm="ngForm">
-          <!-- Email Input -->
           <ion-item>
             <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input type="email" [(ngModel)]="login.email" name="email" required #emailInput="ngModel"
               [disabled]="isLoading" autocomplete="email"></ion-input>
           </ion-item>
 
-          <!-- Email Validation Messages -->
+
           <ion-text color="danger" class="ion-padding-start"
             *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
             <small *ngIf="emailInput.errors?.['required']">El correo electrónico es requerido.</small>
             <small *ngIf="campoCorreo">{{ campoCorreo }}</small>
           </ion-text>
 
-          <!-- Password Input -->
+
           <ion-item class="ion-margin-top">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="login.contrasenna" name="contrasenna"
               required #passwordInput="ngModel" [disabled]="isLoading" autocomplete="current-password"></ion-input>
             <ion-button fill="clear" slot="end" (click)="toggleShowPassword()" class="password-toggle"
               [disabled]="isLoading">
-              <ion-icon slot="icon-only" [name]="showPassword ? 'eye-off-outline' : 'eye-outline'">
-              </ion-icon>
+              <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
             </ion-button>
           </ion-item>
 
-          <!-- Password Validation Messages -->
+
           <ion-text color="danger" class="ion-padding-start"
             *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
             <small *ngIf="passwordInput.errors?.['required']">La contraseña es requerida.</small>
             <small *ngIf="campoContrasenna">{{ campoContrasenna }}</small>
           </ion-text>
 
-          <!-- Login Button -->
+
           <ion-button type="submit" expand="block" class="ion-margin-top"
             [disabled]="!loginForm.form.valid || isLoading" [@pulseAnimation]>
             <ion-label *ngIf="!isLoading">Ingresar</ion-label>
@@ -56,10 +54,10 @@
           </ion-button>
         </form>
 
-        <!-- Additional Options -->
+
         <div class="additional-options ion-margin-top" [@fadeInAnimation]>
           <ion-button fill="clear" size="small" [routerLink]="['/register']" [disabled]="isLoading">
-            ¿No tienes cuenta? Regístrate
+            ¿No tienes cuenta? ¡Regístrate!
           </ion-button>
         </div>
       </ion-card-content>

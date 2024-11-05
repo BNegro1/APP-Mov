@@ -13,6 +13,7 @@ export class ContributePage {
     artist: '',
     cover: '' 
   };
+  userAlbums: { title: string; artist: string; cover: string; }[] = [];
 
   constructor(private navCtrl: NavController, private firebaseLoginService: FirebaseLoginService) {}
 
@@ -31,6 +32,7 @@ export class ContributePage {
     this.firebaseLoginService.saveAlbum(this.album)
       .then(() => {
         console.log('Nuevo álbum guardado:', this.album);
+        this.userAlbums.push(this.album);
         this.navCtrl.navigateBack('/home');
       })
       .catch(error => {

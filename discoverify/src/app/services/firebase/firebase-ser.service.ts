@@ -249,13 +249,26 @@ export class FirebaseLoginService {
       });
   }
 
-  getAlbums(): Observable<any[]> {
-    return this.db.collection('albums').valueChanges({ idField: 'id' });
-  }
-
   // Método para observar el estado de autenticación
   getAuthState() {
     return this.auth.authState;
   }
 
+  // Método para obtener los álbumes contribuidos por el usuario
+  async getUserAlbums(uid: string): Promise<{ title: string; artist: string; cover: string; }[]> {
+    try {
+      const albumsSnapshot = await firstValueFrom(
+        this.db.collection('albums', ref => ref.where('uid', '==', uid)).get()
+      );
+      if (albumsSnapshot) {
+        const albums = albumsSnapshot.docs.map(doc => doc.data() as { title: string; artist: string; cover: string; });
+        console.log('Álbumes obtenidos:', albums); // Verificar los álbumes obtenidos
+        return albums;
+      }
+      return [];
+    } catch (error) {
+      console.error('Error al obtener los álbumes del usuario:', error);
+      return [];
+    }
+  }
 }

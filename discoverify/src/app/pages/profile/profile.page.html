@@ -3,7 +3,7 @@
     <!-- Contenido principal -->
     <div class="ion-page" id="main-content">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
@@ -15,8 +15,8 @@
         <div class="profile-container">
           <ion-card>
             <ion-card-header>
-              <ion-card-title>{{ nombreUsuario }}</ion-card-title>
-              <ion-card-subtitle>{{ email }}</ion-card-subtitle>
+              <ion-card-title>Hola, {{ nombreUsuario }}</ion-card-title>
+
             </ion-card-header>
             <ion-card-content>
               <ion-list>
@@ -27,6 +27,28 @@
                 <ion-item>
                   <ion-label>Correo Electrónico</ion-label>
                   <ion-text>{{ email }}</ion-text>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Cantidad de likes</ion-label>
+                  <ion-text>{{ likesCount }}</ion-text>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Álbumes contribuidos</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let album of userAlbums">
+                  <ion-thumbnail slot="start">
+                    <img [src]="album.cover" />
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h2>{{ album.title }}</h2>
+                    <p>{{ album.artist }}</p>
+                  </ion-label>
                 </ion-item>
               </ion-list>
             </ion-card-content>
