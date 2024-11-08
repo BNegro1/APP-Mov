@@ -28,7 +28,3 @@ export const environment = {
     appId: "1:233031717062:web:ed79817d3ee54dc35987c7"
   }
 };
-
-// Exportar también firebaseConfig para compatibilidad
-export const firebaseConfig = environment.firebase;
-
