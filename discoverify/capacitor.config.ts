@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'ds.discovery.fy',
+  appId: 'io.ionic.starter',
   appName: 'Discoverify',
-  webDir: 'www/browser'
+  webDir: 'www'
 };
 
 export default config;

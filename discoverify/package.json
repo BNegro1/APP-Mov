@@ -17,7 +17,7 @@
     "@angular/animations": "^18.2.6",
     "@angular/common": "^18.0.0",
     "@angular/compiler": "^18.0.0",
-    "@angular/core": "^18.2.13",
+    "@angular/core": "^18.0.0",
     "@angular/fire": "^18.0.1",
     "@angular/forms": "^18.0.0",
     "@angular/platform-browser": "^18.0.0",
@@ -39,16 +39,5 @@
     "symbol-observable": "^4.0.0",
     "toast": "^0.5.4"
   },
-  "description": "An Ionic project",
-  "devDependencies": {
-    "@angular/cli": "19.0.2"
-  },
-  "browserslist": [
-    "Chrome >=79",
-    "ChromeAndroid >=79",
-    "Firefox >=70",
-    "Edge >=79",
-    "Safari >=14",
-    "iOS >=14"
-  ]
+  "description": "An Ionic project"
 }
